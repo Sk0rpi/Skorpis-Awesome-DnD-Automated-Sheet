@@ -114,10 +114,15 @@ let currentCharacterData: CharacterData | null = null;
 let activeCategoryFilter: string = 'skills';
 
 const fileInput = document.querySelector<HTMLInputElement>('#file-input');
+const fileInputMain = document.querySelector<HTMLInputElement>('#file-input-main');
 const fileName = document.querySelector<HTMLElement>('#file-name');
 const newCharBtn = document.querySelector<HTMLButtonElement>('#new-character-btn');
+const newCharBtnMain = document.querySelector<HTMLButtonElement>('#new-character-btn-main');
+
+// UI-Sektionen für den Wechsel
+const welcomeContainer = document.querySelector<HTMLElement>('#welcome-container');
 const detailsSection = document.querySelector<HTMLElement>('#character-details-section');
-const characterCardWrapper = document.querySelector<HTMLElement>('#character-card-wrapper');
+const characterCardWrapperSub = document.querySelector<HTMLElement>('#character-card-wrapper-sub');
 
 const infosContainer = document.querySelector<HTMLElement>('#infos-container');
 const statusContainer = document.querySelector<HTMLElement>('#status-container');
@@ -135,7 +140,16 @@ const exportBtn = document.querySelector<HTMLButtonElement>('#export-json-btn');
 
 function showCharacterInterface(): void {
   detailsSection?.classList.remove('is-hidden');
-  characterCardWrapper?.classList.remove('is-hidden');
+  characterCardWrapperSub?.classList.remove('is-hidden');
+
+  setTimeout(() => {
+    document.body.classList.add('has-character');
+  }, 20);
+
+  setTimeout(() => {
+    const welcomeContainer = document.getElementById('welcome-container');
+    welcomeContainer?.classList.add('is-completely-gone');
+  }, 200); 
 }
 
 function cleanName(key: string): string {
@@ -236,28 +250,31 @@ function createStatusBoxTemplate(
   if (total > 0) colorClass = 'has-text-success';
   if (total < 0) colorClass = 'has-text-danger';
 
+  const readonlyStyle = isReadOnlyBase ? 'background-color: rgba(255, 255, 255, 0.04); cursor: not-allowed; opacity: 0.8;' : '';
+
   return `
     <div class="column is-6-tablet is-3-desktop">
       <div class="box has-text-centered p-3">
         <label class="label mb-1">${title}</label>
         
         <div class="columns is-mobile is-gapless mb-1">
-          <div class="column is-5"><span class="is-size-7 has-text-grey-light">Base</span></div>
+          <div class="column"><span class="is-size-7 has-text-grey-light">Base</span></div>
           <div class="column is-2"></div>
-          <div class="column is-5"><span class="is-size-7 has-text-grey-light">Mod</span></div>
+          <div class="column"><span class="is-size-7 has-text-grey-light">Mod</span></div>
         </div>
 
-        <div class="field is-grouped is-grouped-centered mb-2">
-          <div class="control" style="width: 45%;">
+        <div class="is-flex is-align-items-center is-justify-content-center mb-2" style="gap: 8px;">
+          <div style="width: 42%;">
             <input class="input has-text-centered is-size-4 has-text-weight-bold status-input" 
                    type="number" 
                    data-key="${prefixKey}-base" 
                    value="${baseVal}" 
                    ${isReadOnlyBase ? 'readonly' : ''} 
+                   style="${readonlyStyle}"
                    title="Base" />
           </div>
-          <span class="is-size-5 align-self-center px-1">+</span>
-          <div class="control" style="width: 45%;">
+          <span class="is-size-5">+</span>
+          <div style="width: 42%;">
             <input class="input has-text-centered is-size-4 has-text-weight-bold status-input" 
                    type="number" 
                    data-key="${prefixKey}-mod" 
@@ -283,21 +300,21 @@ function createHpAndNotesTemplate(hpMax: number, hpCurrent: number, hpTemp: numb
         <label class="label mb-1">Hit Points <span class="has-text-grey-light" style="font-weight: normal;">(Max: ${hpMax})</span></label>
         
         <div class="columns is-mobile is-gapless mb-1">
-          <div class="column is-5"><span class="is-size-7 has-text-grey-light">Current HP</span></div>
+          <div class="column"><span class="is-size-7 has-text-grey-light">Current HP</span></div>
           <div class="column is-2"></div>
-          <div class="column is-5"><span class="is-size-7 has-text-grey-light">Temp HP</span></div>
+          <div class="column"><span class="is-size-7 has-text-grey-light">Temp HP</span></div>
         </div>
 
-        <div class="field is-grouped is-grouped-centered align-items-center mb-2">
-          <div class="control" style="width: 40%;">
+        <div class="is-flex is-align-items-center is-justify-content-center mb-2" style="gap: 12px;">
+          <div style="width: 42%;">
             <input class="input has-text-centered is-size-4 has-text-weight-bold status-input" 
                    type="number" 
                    data-key="hp-current" 
                    value="${hpCurrent}" 
                    title="Current HP" />
           </div>
-          <span class="is-size-4 mx-3 align-self-center">+</span>
-          <div class="control" style="width: 40%;">
+          <span class="is-size-4">+</span>
+          <div style="width: 42%;">
             <input class="input has-text-centered is-size-4 has-text-weight-bold status-input ${tempColorClass}" 
                    type="number" 
                    data-key="hp-temp" 
@@ -575,7 +592,7 @@ function createWeaponDashboard(data: CharacterData): void {
           ${formatMod(damageBonusTotal)}
         </td>
         <td class="has-text-centered">
-          <button class="button is-danger is-dark remove-weapon-btn" data-weapon="${weaponName}" title="Waffe löschen">
+          <button class="button is-danger is-dark remove-weapon-btn" data-weapon="${weaponName}" title="Waffe löschen" type="button">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </td>
@@ -615,7 +632,7 @@ function createWeaponDashboard(data: CharacterData): void {
       </td>
       <td class="has-text-centered">-</td>
       <td class="has-text-centered">
-        <button class="button is-success" id="add-weapon-btn" title="Waffe hinzufügen">
+        <button class="button is-success" id="add-weapon-btn" title="Waffe hinzufügen" type="button">
           <i class="fa-solid fa-check"></i>
         </button>
       </td>
@@ -779,6 +796,8 @@ function renderStatus(data: CharacterData): void {
   const acBase = status['ac-base'] ?? 10;
   const acMod = status['ac-mod'] ?? 0;
 
+  // Initiative Base zieht sich den DEX-Modifikator
+  const initBase = dexMod;
   const initMod = status['initiative-mod'] ?? 0;
 
   const hpMaxBase = status['hp-max-base'] ?? 10;
@@ -792,7 +811,7 @@ function renderStatus(data: CharacterData): void {
   statusContainer.innerHTML = `
     ${createStatusBoxTemplate('AC', 'ac', acBase, acMod)}
     ${createStatusBoxTemplate('Speed', 'speed', speedBase, speedMod)}
-    ${createStatusBoxTemplate('Initiative', 'initiative', dexMod, initMod, true)}
+    ${createStatusBoxTemplate('Initiative', 'initiative', initBase, initMod, true)}
     ${createStatusBoxTemplate('HP Max', 'hp-max', hpMaxBase, hpMaxMod)}
     ${createHpAndNotesTemplate(hpMaxTotal, hpCurrent, hpTemp, quickNotes)}
   `;
@@ -1006,13 +1025,112 @@ document.addEventListener('input', (e) => {
     }
   }
 
-  // Live-Speicherung für Quicknotes
+  if (target.classList.contains('attr-input')) {
+    const input = target as HTMLInputElement;
+    const abi = input.getAttribute('data-abi');
+    const val = parseInt(input.value, 10) || 0;
+
+    if (currentCharacterData && abi) {
+      if (!currentCharacterData.attributes) currentCharacterData.attributes = {};
+      currentCharacterData.attributes[abi] = val;
+
+      const mod = calculateAbilityMod(val);
+      const lowerAbi = abi.toLowerCase();
+      const modContainer = document.querySelector<HTMLElement>(`#mod-${lowerAbi}`);
+      
+      if (modContainer) {
+        modContainer.textContent = formatMod(mod);
+        modContainer.className = 'is-size-4 has-text-weight-bold my-1';
+        if (mod > 0) modContainer.classList.add('has-text-success');
+        if (mod < 0) modContainer.classList.add('has-text-danger');
+      }
+
+      if (abi === 'DEX') {
+        const initBaseInput = document.querySelector<HTMLInputElement>('[data-key="initiative-base"]');
+        const initModInput = document.querySelector<HTMLInputElement>('[data-key="initiative-mod"]');
+        const initTotalContainer = document.querySelector<HTMLElement>('#status-total-initiative');
+        
+        if (initBaseInput) initBaseInput.value = mod.toString();
+        if (initBaseInput && initModInput && initTotalContainer) {
+          const initTotal = mod + (parseInt(initModInput.value, 10) || 0);
+          initTotalContainer.textContent = initTotal.toString();
+          initTotalContainer.className = 'is-size-4 has-text-weight-bold my-1';
+          if (initTotal > 0) initTotalContainer.classList.add('has-text-success');
+          if (initTotal < 0) initTotalContainer.classList.add('has-text-danger');
+        }
+      }
+
+      const currentLevel = currentCharacterData.infos?.level ?? currentCharacterData.level ?? 1;
+      const profBonus = calculateProficiencyBonus(currentLevel);
+      const savesData = currentCharacterData.proficiencies?.['saving-throws'] || currentCharacterData.saves || {};
+      const saveItem = savesData[abi] || savesData[lowerAbi];
+      const isSaveProficient = saveItem ? saveItem.proficient > 0 : false;
+      const saveVal = mod + (isSaveProficient ? profBonus : 0);
+
+      const saveValContainer = document.querySelector<HTMLElement>(`#save-${lowerAbi}-val`);
+      if (saveValContainer) {
+        saveValContainer.textContent = formatMod(saveVal);
+      }
+
+      // === NEU HINZUFÜGEN, DAMIT SICH DIE SKILLS LIVE AKTUALISIEREN ===
+      renderActiveProficienciesSummary(currentCharacterData);
+      buildProficienciesDashboard(currentCharacterData, searchInput?.value || '');
+      // ==============================================================
+
+      renderActiveProficienciesSummary(currentCharacterData);
+      createWeaponDashboard(currentCharacterData);
+    }
+  }
+
   if (target.classList.contains('status-input') || target.tagName.toLowerCase() === 'textarea') {
     const input = target as HTMLInputElement | HTMLTextAreaElement;
     const key = input.getAttribute('data-key');
-    if (currentCharacterData && key === 'quick-notes') {
-      if (!currentCharacterData.status) currentCharacterData.status = {};
-      currentCharacterData.status['quick-notes'] = input.value;
+    
+    if (currentCharacterData) {
+      if (!currentCharacterData.status) {
+        currentCharacterData.status = {};
+      }
+
+      if (key === 'quick-notes') {
+        currentCharacterData.status['quick-notes'] = input.value;
+      } else if (key) {
+        const numVal = parseInt(input.value, 10) || 0;
+        currentCharacterData.status[key] = numVal;
+
+        let prefix = '';
+        if (key.startsWith('hp-max')) {
+          prefix = 'hp-max';
+        } else {
+          const parts = key.split('-');
+          if (parts.length >= 2) {
+            prefix = parts[0];
+          }
+        }
+
+        if (prefix) {
+          const baseInput = document.querySelector<HTMLInputElement>(`[data-key="${prefix}-base"]`);
+          const modInput = document.querySelector<HTMLInputElement>(`[data-key="${prefix}-mod"]`);
+          const totalContainer = document.querySelector<HTMLElement>(`#status-total-${prefix}`);
+
+          if (baseInput && modInput && totalContainer) {
+            const bVal = parseInt(baseInput.value, 10) || 0;
+            const mVal = parseInt(modInput.value, 10) || 0;
+            const total = bVal + mVal;
+
+            totalContainer.textContent = total.toString();
+            totalContainer.className = 'is-size-4 has-text-weight-bold my-1';
+            if (total > 0) totalContainer.classList.add('has-text-success');
+            if (total < 0) totalContainer.classList.add('has-text-danger');
+
+            if (prefix === 'hp-max') {
+              const hpLabelSpan = document.querySelector<HTMLElement>('#status-container .box label .has-text-grey-light');
+              if (hpLabelSpan) {
+                hpLabelSpan.textContent = `(Max: ${total})`;
+              }
+            }
+          }
+        }
+      }
     }
   }
 });
@@ -1201,50 +1319,70 @@ document.addEventListener('change', (e) => {
   }
 });
 
+function handleFileSelection(file: File) {
+  if (fileName) fileName.textContent = file.name;
+
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    try {
+      const jsonText = event.target?.result as string;
+      const parsedData = JSON.parse(jsonText);
+      
+      currentCharacterData = parsedData;
+      showCharacterInterface();
+      updateWholeDashboard(currentCharacterData!);
+    } catch (err) {
+      console.error("Fehler beim Parsen der JSON-Datei:", err);
+      alert("Die ausgewählte Datei ist keine gültige JSON-Datei!");
+    }
+  };
+  reader.readAsText(file);
+}
+
 if (fileInput) {
   fileInput.addEventListener('change', (e) => {
     const target = e.target as HTMLInputElement;
     if (target.files && target.files.length > 0) {
-      const file = target.files[0];
-      if (fileName) fileName.textContent = file.name;
-
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        try {
-          const jsonText = event.target?.result as string;
-          const parsedData = JSON.parse(jsonText);
-          
-          currentCharacterData = parsedData;
-          showCharacterInterface();
-          updateWholeDashboard(currentCharacterData!);
-        } catch (err) {
-          console.error("Fehler beim Parsen der JSON:", err);
-        }
-      };
-      reader.readAsText(file);
+      handleFileSelection(target.files[0]);
     }
   });
 }
 
-if (newCharBtn) {
-  newCharBtn.addEventListener('click', () => {
-    currentCharacterData = {
-      infos: { name: 'Neuer Held', level: 1, class: 'Fighter' },
-      status: { 'speed-base': 30, 'ac-base': 10, 'hp-max-base': 10, 'hp-current': 10, 'quick-notes': '' },
-      attributes: { STR: 10, DEX: 10, CON: 10, INT: 10, WIS: 10, CHA: 10 },
-      currency: { cp: 0, sp: 0, gp: 0, pp: 0 },
-      weapons: {},
-      proficiencies: { skills: {}, languages: {}, armor: {}, weapons: {} },
-      equipment: '',
-      features: '',
-      inventory: '',
-      notes: ''
-    };
-
-    if (fileName) fileName.textContent = 'Neuer Charakter';
-    showCharacterInterface();
-    updateWholeDashboard(currentCharacterData);
+if (fileInputMain) {
+  fileInputMain.addEventListener('change', (e) => {
+    const target = e.target as HTMLInputElement;
+    if (target.files && target.files.length > 0) {
+      handleFileSelection(target.files[0]);
+    }
   });
+}
+
+async function loadNewCharacterTemplate() {
+  try {
+    const response = await fetch('./new_character.json');
+    if (!response.ok) {
+      throw new Error('new_character.json konnte nicht geladen werden.');
+    }
+    const data = await response.json();
+
+    currentCharacterData = data;
+
+    if (fileName) fileName.textContent = 'new_character.json (Template)';
+    showCharacterInterface();
+    updateWholeDashboard(currentCharacterData!);
+
+  } catch (error) {
+    console.error('Fehler beim Einlesen der new_character.json:', error);
+    alert('Die Datei new_character.json konnte im Server-Verzeichnis nicht gefunden werden.');
+  }
+}
+
+if (newCharBtn) {
+  newCharBtn.addEventListener('click', loadNewCharacterTemplate);
+}
+
+if (newCharBtnMain) {
+  newCharBtnMain.addEventListener('click', loadNewCharacterTemplate);
 }
 
 if (exportBtn) {

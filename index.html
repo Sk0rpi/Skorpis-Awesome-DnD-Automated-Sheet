@@ -3,222 +3,267 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>D&D Character Sheet Auto-Fill</title>
+    <title>Skorpi's Awesome D&D Character Automation Sheet</title>
+    <!-- Bulma CSS CDN & FontAwesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <section class="section pb-4">
-      <div class="container" style="max-width: 1300px;">
-        <h1 class="title has-text-centered mb-2">D&D Charakterblatt Importer</h1>
-        <p class="subtitle has-text-centered mb-4">Lade deine Datei hoch, um die Werte auszulesen.</p>
 
-        <!-- Upload & Neuer Charakter Bereich -->
-        <div class="field is-grouped mb-5">
-          <div class="file has-name is-fullwidth is-primary control is-expanded">
-            <label class="file-label">
-              <input class="file-input" type="file" id="file-input" accept=".json,.txt" />
-              <span class="file-cta">
-                <span class="file-label">Datei auswählen…</span>
-              </span>
-              <span class="file-name" id="file-name">Keine Datei gewählt</span>
-            </label>
-          </div>
-          <div class="control">
-            <button class="button is-info" id="new-character-btn" type="button">
-              <span class="icon"><i class="fas fa-plus"></i></span>
-              <span>Neu erstellen</span>
-            </button>
-          </div>
-        </div>
+    <!-- ========================================== -->
+    <!-- GEMEINSAMER WRAPPER FÜR BEIDE BEREICHE       -->
+    <!-- ========================================== -->
+    <div id="app-wrapper">
 
-        <!-- Charakter Card (Standardmäßig versteckt) -->
-        <div class="card" id="character-card-wrapper">
-          <header class="card-header style-header-flex" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 0.5rem;">
-            <p class="card-header-title mb-0">Charakter Übersicht</p>
-            
-            <div class="is-flex" style="gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-right: 1rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
-              <button class="button is-small is-dark has-text-weight-bold" id="btn-equipment" type="button">
-                <span class="icon is-small"><i class="fas fa-box"></i></span>
-                <span>Equipment</span>
-              </button>
-              <button class="button is-small is-dark has-text-weight-bold" id="btn-features" type="button">
-                <span class="icon is-small"><i class="fas fa-star"></i></span>
-                <span>Features & Abilities</span>
-              </button>
-              <button class="button is-small is-dark has-text-weight-bold" id="btn-inventory" type="button">
-                <span class="icon is-small"><i class="fas fa-briefcase"></i></span>
-                <span>Inventory</span>
-              </button>
-              <button class="button is-small is-dark has-text-weight-bold" id="btn-notes" type="button">
-                <span class="icon is-small"><i class="fas fa-book-open"></i></span>
-                <span>Notes</span>
-              </button>
-              <button class="button is-small is-success" id="export-json-btn" type="button">
-                <span class="icon is-small"><i class="fas fa-download"></i></span>
-                <span>JSON Speichern</span>
-              </button>
+      <!-- START- / UPLOAD-BEREICH -->
+      <div id="welcome-container" class="is-flex is-align-items-center is-justify-content-center">
+        <section class="section pb-4" style="width: 100%; max-width: 700px;">
+          <div class="container has-text-centered">
+            <br>
+            <h1 class="title mb-2" style="font-family: 'Mostean', sans-serif; letter-spacing: 1px;">Skorpi's Awesome D&D Character Automation Sheet</h1>
+            <br>
+
+            <!-- Upload & Neuer Charakter Bereich (Willkommen) -->
+            <div class="field is-grouped is-grouped-centered mb-5">
+              <div class="file has-name is-fullwidth is-info control is-expanded">
+                <label class="file-label">
+                  <input class="file-input" type="file" id="file-input" accept=".json,.txt" />
+                  <span class="file-cta">
+                    <span class="file-label">Datei auswählen…</span>
+                  </span>
+                  <span class="file-name" id="file-name">Keine Datei gewählt</span>
+                </label>
+              </div>
+              <div class="control">
+                <button class="button is-success" id="new-character-btn" type="button">
+                  <span class="icon"><i class="fas fa-plus"></i></span>
+                  <span>Neu erstellen</span>
+                </button>
+              </div>
             </div>
-          </header>
-
-          <div class="card-content">
-            <!-- DYNAMISCHER INFOS-CONTAINER -->
-            <div class="columns is-multiline mb-4" id="infos-container"></div>
-
-            <!-- DYNAMISCHER STATUS-CONTAINER -->
-            <div class="columns is-multiline mb-4" id="status-container"></div>
-
-            <div id="status-container" class="columns is-multiline"></div>
-
-            <!-- DYNAMISCHER ATTRIBUT-CONTAINER -->
-            <div class="columns is-multiline" id="attributes-container"></div>
           </div>
-        </div>
+        </section>
       </div>
-    </section>
 
-    <!-- SECTION MIT PROFICIENCIES & TAB-MENÜ (Standardmäßig versteckt) -->
-    <section class="section pt-0 is-hidden" id="character-details-section">
-      <div class="container" style="max-width: 1300px;">  
-        <!-- Head Banner: Proficiency Bonus, Passive Perception & Currency nebeneinander -->
-        <div class="level box has-background-dark has-text-white mb-5" style="padding: 1rem 1.5rem;">
-          <div class="level-left" style="gap: 2rem; align-items: center; flex-wrap: wrap;">
-            
-            <!-- Proficiency Bonus -->
-            <div class="level-item">
-              <div class="is-flex" style="align-items: center; gap: 1rem;">
-                <span class="is-size-5 has-text-weight-bold has-text-grey-light">Proficiency Bonus</span>
-                <span class="tag is-primary is-large has-text-weight-bold" id="prof-bonus-tag">+0</span>
-              </div>
-            </div>
 
-            <!-- Passive Perception -->
-            <div class="level-item">
-              <div class="is-flex" style="align-items: center; gap: 1rem;">
-                <span class="is-size-5 has-text-weight-bold has-text-grey-light">Passive Perception</span>
-                <span class="tag is-success is-large has-text-weight-bold" id="passive-perception-tag">10</span>
-              </div>
-            </div>
+      <!-- ========================================== -->
+      <!-- CHARAKTER DASHBOARD (Body)                 -->
+      <!-- ========================================== -->
 
-            <!-- Currency Grid -->
-            <div class="level-item">
-              <div class="is-flex" style="align-items: center; gap: 1rem;">
+      <!-- Hauptbereich mit Charakter-Übersicht -->
+      <section class="section pb-4 is-hidden" id="character-details-section">
+        <div class="container" style="max-width: 1300px;">
+
+          <!-- Charakter Card -->
+          <div class="card" id="character-card-wrapper">
+            <header class="card-header style-header-flex" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 0.5rem 1rem;">
+              
+              <!-- Titel links mit Mostean Font -->
+              <p class="card-header-title mb-0 has-text-white has-text-weight-bold is-size-4" style="font-family: 'Mostean', sans-serif; letter-spacing: 1px;">
+                Skorpi's Awesome D&D Character Automation Sheet
+              </p>
+              
+              <!-- Alle Aktions-Buttons rechts in einer Reihe -->
+              <div class="is-flex" style="gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 0.5rem; margin-bottom: 0.5rem; margin-left: 0.5rem;">
                 
-                <!-- CP -->
-                <div class="is-flex" style="align-items: center; gap: 0.4rem;">
-                  <span class="has-text-weight-bold has-text-grey-light is-size-5">CP</span>
-                  <input class="input has-text-centered has-text-weight-bold has-text-white is-size-5 currency-no-spinner" type="number" data-currency="cp" id="currency-cp-input" value="0" style="width: 100px; height: 48px; background: #cd7f32; border: none; border-radius: 6px; box-shadow: none;" />
+                <!-- Datei wählen Button (Technisch funktionsfähig im Button-Look) -->
+                <div style="display: inline-flex; margin-bottom: 0;">
+                  <label class="button is-small is-info" style="cursor: pointer; margin-bottom: 0;">
+                    <span class="icon is-small"><i class="fas fa-upload"></i></span>
+                    <span>Datei wählen…</span>
+                    <input type="file" id="file-input-main" accept=".json,.txt" style="display: none;" />
+                  </label>
                 </div>
 
-                <!-- SP -->
-                <div class="is-flex" style="align-items: center; gap: 0.4rem;">
-                  <span class="has-text-weight-bold has-text-grey-light is-size-5">SP</span>
-                  <input class="input has-text-centered has-text-weight-bold has-text-white is-size-5 currency-no-spinner" type="number" data-currency="sp" id="currency-sp-input" value="0" style="width: 100px; height: 48px; background: #a8a8a8; border: none; border-radius: 6px; box-shadow: none;" />
-                </div>
+                <!-- Neu erstellen Button -->
+                <button class="button is-small is-info" id="new-character-btn-main" type="button">
+                  <span class="icon is-small"><i class="fas fa-plus"></i></span>
+                  <span>Neu erstellen</span>
+                </button>
 
-                <!-- GP -->
-                <div class="is-flex" style="align-items: center; gap: 0.4rem;">
-                  <span class="has-text-weight-bold has-text-grey-light is-size-5">GP</span>
-                  <input class="input has-text-centered has-text-weight-bold has-text-white is-size-5 currency-no-spinner" type="number" data-currency="gp" id="currency-gp-input" value="0" style="width: 100px; height: 48px; background: #d4af37; border: none; border-radius: 6px; box-shadow: none;" />
-                </div>
-
-                <!-- PP -->
-                <div class="is-flex" style="align-items: center; gap: 0.4rem;">
-                  <span class="has-text-weight-bold has-text-grey-light is-size-5">PP</span>
-                  <input class="input has-text-centered has-text-weight-bold has-text-white is-size-5 currency-no-spinner" type="number" data-currency="pp" id="currency-pp-input" value="0" style="width: 100px; height: 48px; background: #b0c4de; border: none; border-radius: 6px; box-shadow: none;" />
-                </div>
+                <!-- Vorhandene Tab- & Speicher-Buttons -->
+                <button class="button is-small is-dark has-text-weight-bold" id="btn-equipment" type="button">
+                  <span class="icon is-small"><i class="fas fa-box"></i></span>
+                  <span>Equipment</span>
+                </button>
+                <button class="button is-small is-dark has-text-weight-bold" id="btn-features" type="button">
+                  <span class="icon is-small"><i class="fas fa-star"></i></span>
+                  <span>Features & Abilities</span>
+                </button>
+                <button class="button is-small is-dark has-text-weight-bold" id="btn-inventory" type="button">
+                  <span class="icon is-small"><i class="fas fa-briefcase"></i></span>
+                  <span>Inventory</span>
+                </button>
+                <button class="button is-small is-dark has-text-weight-bold" id="btn-notes" type="button">
+                  <span class="icon is-small"><i class="fas fa-book-open"></i></span>
+                  <span>Notes</span>
+                </button>
+                
+                <!-- JSON Speichern Button -->
+                <button class="button is-small is-info" id="export-json-btn" type="button">
+                  <span class="icon is-small"><i class="fas fa-download"></i></span>
+                  <span>JSON Speichern</span>
+                </button>
 
               </div>
+            </header>
+
+            <div class="card-content">
+              <!-- DYNAMISCHER INFOS-CONTAINER -->
+              <div class="columns is-multiline mb-4" id="infos-container"></div>
+
+              <!-- DYNAMISCHER STATUS-CONTAINER -->
+              <div class="columns is-multiline mb-4" id="status-container"></div>
+
+              <!-- DYNAMISCHER ATTRIBUT-CONTAINER -->
+              <div class="columns is-multiline" id="attributes-container"></div>
             </div>
-
           </div>
         </div>
+      </section>
 
-        <!-- WAFFEN DASHBOARD CONTAINER -->
-        <div class="columns is-multiline mb-5" id="weapons-dashboard-container">
-          <!-- Wird dynamisch gefüllt -->
-        </div>
+      <!-- SECTION MIT PROFICIENCIES & TAB-MENÜ -->
+      <section class="section pt-0 is-hidden" id="character-card-wrapper-sub">
+        <div class="container" style="max-width: 1300px;">  
+          <!-- Head Banner: Proficiency Bonus, Passive Perception & Currency nebeneinander -->
+          <div class="level box has-background-dark has-text-white mb-5" style="padding: 1rem 1.5rem;">
+            <div class="level-left" style="gap: 2rem; align-items: center; flex-wrap: wrap;">
+              
+              <!-- Proficiency Bonus -->
+              <div class="level-item">
+                <div class="is-flex" style="align-items: center; gap: 1rem;">
+                  <span class="is-size-5 has-text-weight-bold has-text-grey-light">Proficiency Bonus</span>
+                  <span class="tag is-primary is-large has-text-weight-bold" id="prof-bonus-tag">+0</span>
+                </div>
+              </div>
 
-        <!-- Übersicht für aktive Proficiencies -->
-        <div class="mb-5">
-          <h4 class="title is-5 mb-3">Active Proficiencies & Languages</h4>
-          <div id="active-proficiencies-summary" class="columns is-multiline">
-            <!-- Hier werden die aktiven Cards dynamisch gerendert -->
+              <!-- Passive Perception -->
+              <div class="level-item">
+                <div class="is-flex" style="align-items: center; gap: 1rem;">
+                  <span class="is-size-5 has-text-weight-bold has-text-grey-light">Passive Perception</span>
+                  <span class="tag is-success is-large has-text-weight-bold" id="passive-perception-tag">10</span>
+                </div>
+              </div>
+
+              <!-- Currency Grid -->
+              <div class="level-item">
+                <div class="is-flex" style="align-items: center; gap: 1rem;">
+                  
+                  <!-- CP -->
+                  <div class="is-flex" style="align-items: center; gap: 0.4rem;">
+                    <span class="has-text-weight-bold has-text-grey-light is-size-5">CP</span>
+                    <input class="input has-text-centered has-text-weight-bold has-text-white is-size-5 currency-no-spinner" type="number" data-currency="cp" id="currency-cp-input" value="0" style="width: 100px; height: 48px; background: #cd7f32; border: none; border-radius: 6px; box-shadow: none;" />
+                  </div>
+
+                  <!-- SP -->
+                  <div class="is-flex" style="align-items: center; gap: 0.4rem;">
+                    <span class="has-text-weight-bold has-text-grey-light is-size-5">SP</span>
+                    <input class="input has-text-centered has-text-weight-bold has-text-white is-size-5 currency-no-spinner" type="number" data-currency="sp" id="currency-sp-input" value="0" style="width: 100px; height: 48px; background: #a8a8a8; border: none; border-radius: 6px; box-shadow: none;" />
+                  </div>
+
+                  <!-- GP -->
+                  <div class="is-flex" style="align-items: center; gap: 0.4rem;">
+                    <span class="has-text-weight-bold has-text-grey-light is-size-5">GP</span>
+                    <input class="input has-text-centered has-text-weight-bold has-text-white is-size-5 currency-no-spinner" type="number" data-currency="gp" id="currency-gp-input" value="0" style="width: 100px; height: 48px; background: #d4af37; border: none; border-radius: 6px; box-shadow: none;" />
+                  </div>
+
+                  <!-- PP -->
+                  <div class="is-flex" style="align-items: center; gap: 0.4rem;">
+                    <span class="has-text-weight-bold has-text-grey-light is-size-5">PP</span>
+                    <input class="input has-text-centered has-text-weight-bold has-text-white is-size-5 currency-no-spinner" type="number" data-currency="pp" id="currency-pp-input" value="0" style="width: 100px; height: 48px; background: #b0c4de; border: none; border-radius: 6px; box-shadow: none;" />
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
           </div>
-        </div>
 
-        <hr class="has-background-grey-dark my-5" />
-
-        <!-- TAB-MENÜ FÜR ALLE KATEGORIEN -->
-        <div class="tabs is-boxed is-medium mb-4">
-          <ul id="prof-tabs">
-            <li data-category="skills" class="is-active">
-              <a>
-                <span class="icon is-small"><i class="fas fa-running"></i></span>
-                <span>Skills</span>
-              </a>
-            </li>
-            <li data-category="artisans-tools">
-              <a>
-                <span class="icon is-small"><i class="fas fa-tools"></i></span>
-                <span>Artisan's Tools</span>
-              </a>
-            </li>
-            <li data-category="gaming-sets">
-              <a>
-                <span class="icon is-small"><i class="fas fa-dice"></i></span>
-                <span>Gaming Sets</span>
-              </a>
-            </li>
-            <li data-category="musical-instruments">
-              <a>
-                <span class="icon is-small"><i class="fas fa-music"></i></span>
-                <span>Musical Instruments</span>
-              </a>
-            </li>
-            <li data-category="vehicles">
-              <a>
-                <span class="icon is-small"><i class="fas fa-shuttle-van"></i></span>
-                <span>Vehicles</span>
-              </a>
-            </li>
-            <li data-category="languages">
-              <a>
-                <span class="icon is-small"><i class="fas fa-language"></i></span>
-                <span>Languages</span>
-              </a>
-            </li>
-            <li data-category="armor">
-              <a>
-                <span class="icon is-small"><i class="fas fa-shield-alt"></i></span>
-                <span>Armor Proficiencies</span>
-              </a>
-            </li>
-            <li data-category="weapons">
-              <a>
-                <span class="icon is-small"><i class="fas fa-fist-raised"></i></span>
-                <span>Weapon Proficiencies</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Suchfeld für die Tabs -->
-        <div class="field mb-4">
-          <div class="control has-icons-left">
-            <input class="input prof-search-input" type="text" id="prof-search-input" placeholder="Suchen in Kacheln... (z. B. Stealth, Athletics)" />
-            <span class="icon is-small is-left">
-              <i class="fas fa-search"></i>
-            </span>
+          <!-- WAFFEN DASHBOARD CONTAINER -->
+          <div class="columns is-multiline mb-5" id="weapons-dashboard-container">
+            <!-- Wird dynamisch gefüllt -->
           </div>
-        </div>
 
-        <!-- Haupt-Container für die gefilterten Kacheln -->
-        <div id="proficiencies-container" class="columns is-multiline">
-          <!-- Hier landen die einzelnen Karten je nach aktivem Tab -->
-        </div>
+          <!-- Übersicht für aktive Proficiencies -->
+          <div class="mb-5">
+            <h4 class="title is-5 mb-3">Active Proficiencies & Languages</h4>
+            <div id="active-proficiencies-summary" class="columns is-multiline"></div>
+          </div>
 
-      </div>
-    </section>
+          <hr class="has-background-grey-dark my-5" />
+
+          <!-- TAB-MENÜ FÜR ALLE KATEGORIEN -->
+          <div class="tabs is-boxed is-medium mb-4">
+            <ul id="prof-tabs">
+              <li data-category="skills" class="is-active">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-running"></i></span>
+                  <span>Skills</span>
+                </a>
+              </li>
+              <li data-category="artisans-tools">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-tools"></i></span>
+                  <span>Artisan's Tools</span>
+                </a>
+              </li>
+              <li data-category="gaming-sets">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-dice"></i></span>
+                  <span>Gaming Sets</span>
+                </a>
+              </li>
+              <li data-category="musical-instruments">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-music"></i></span>
+                  <span>Musical Instruments</span>
+                </a>
+              </li>
+              <li data-category="vehicles">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-shuttle-van"></i></span>
+                  <span>Vehicles</span>
+                </a>
+              </li>
+              <li data-category="languages">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-language"></i></span>
+                  <span>Languages</span>
+                </a>
+              </li>
+              <li data-category="armor">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-shield-alt"></i></span>
+                  <span>Armor Proficiencies</span>
+                </a>
+              </li>
+              <li data-category="weapons">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-fist-raised"></i></span>
+                  <span>Weapon Proficiencies</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Suchfeld für die Tabs -->
+          <div class="field mb-4">
+            <div class="control has-icons-left">
+              <input class="input prof-search-input" type="text" id="prof-search-input" placeholder="Suchen in Kacheln... (z. B. Stealth, Athletics)" />
+              <span class="icon is-small is-left">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+          </div>
+
+          <!-- Haupt-Container für die gefilterten Kacheln -->
+          <div id="proficiencies-container" class="columns is-multiline"></div>
+
+        </div>
+      </section>
+
+    </div> <!-- Ende von #app-wrapper -->
 
     <!-- Universelles Modal (Overlay) für die Notizfelder -->
     <div class="modal" id="note-modal">
@@ -247,6 +292,7 @@
       </div>
     </div>
 
+    <!-- TypeScript / JavaScript Einbindung -->
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

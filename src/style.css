@@ -397,3 +397,80 @@ code {
   -webkit-appearance: none;
   margin: 0;
 }
+
+#app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Willkommens-Container */
+#welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease-in-out;
+  opacity: 1;
+}
+
+/* Wenn ausgeblendet: Nur Opacity auf 0 und Klicks sperren */
+body.has-character #welcome-container {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Wenn die Klasse .is-completely-gone aktiv ist, fliegt es endgültig aus dem Weg */
+body.has-character #welcome-container.is-completely-gone {
+  display: none !important;
+}
+
+/* Body / Sektionen faden weich ein */
+#character-details-section,
+#character-card-wrapper-sub {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+body.has-character #character-details-section,
+body.has-character #character-card-wrapper-sub {
+  opacity: 1;
+}
+
+/* Der Haupt-Container für die Zeile */
+.character-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Titel links, Buttons rechts - oder nutze 'center'/'flex-start' für engen Abstand */
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px; /* Passt sich deiner Charakter-Übersicht an */
+  margin: 0 auto 2rem auto; /* Zentriert und macht Abstand nach unten zur Übersicht */
+  padding: 0 1rem;
+}
+
+/* Stil für den Titel in der Reihe */
+.character-header-row .header-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+  white-space: nowrap; /* Verhindert, dass der Titel unschön umbricht */
+}
+
+/* Container für die Buttons in einer Reihe */
+.character-header-row .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Abstand zwischen den einzelnen Buttons */
+  flex-wrap: wrap; /* Falls es auf kleineren Bildschirmen eng wird, bricht es sauber um */
+}
+@font-face {
+  font-family: 'Mostean';
+  src: url('./Mostean.ttf') format('truetype'); /* Falls es .otf ist, hier 'opentype' und Dateinamen anpassen */
+  font-weight: normal;
+  font-style: normal;
+}
