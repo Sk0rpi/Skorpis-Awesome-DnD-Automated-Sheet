@@ -1,0 +1,339 @@
+{
+    "infos": {
+        "name": "Frostfeder",
+        "level": "5",
+        "background": "Der gefallene Nestling",
+        "species": "Owlin",
+        "class": "Artificer",
+        "alignment": "True Neutral"
+    },
+    "status": {
+        "speed-base": 35,
+        "speed-mod": 0,
+        "ac-base": 12,
+        "ac-mod": 1,
+        "initiative-mod": 0,
+        "hp-max-base": 50,
+        "hp-max-mod": 0,
+        "hp-current": 50,
+        "hp-temp": 0
+    },
+    "attributes": {
+        "STR": 6,
+        "DEX": 7,
+        "CON": 20,
+        "INT": 20,
+        "WIS": 16,
+        "CHA": 14
+    },
+    "currency": {
+    "cp": 15,
+    "sp": 50,
+    "gp": 120,
+    "pp": 2
+    },
+    "weapons": {
+        "Lightning Launcher": {
+            "weapon-type": "Simple",
+            "mod": "INT",
+            "effect": 1,
+            "enhancement": 1,
+            "damage-die": "2d6"
+        },
+        "Light Hammer": {
+            "weapon-type": "Simple",
+            "mod": "STR",
+            "effect": 0,
+            "enhancement": 0,
+            "damage-die": "1d4"
+        },
+        "Javelin": {
+            "weapon-type": "Simple",
+            "mod": "STR",
+            "effect": 0,
+            "enhancement": 0,
+            "damage-die": "1d6"
+        },
+        "Light Crossbow": {
+            "weapon-type": "Simple",
+            "mod": "DEX",
+            "effect": 0,
+            "enhancement": 0,
+            "damage-die": "1d8"
+        }
+    },
+    "proficiencies": {
+        "skills": {
+            "acrobatics": {
+                "proficient": 0,
+                "mod-type": "DEX"
+            },
+            "animal-handling": {
+                "proficient": 0,
+                "mod-type": "WIS"
+            },
+            "arcana": {
+                "proficient": 0,
+                "mod-type": "INT"
+            },
+            "atheletics": {
+                "proficient": 0,
+                "mod-type": "STR"
+            },
+            "deception": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "history": {
+                "proficient": 0,
+                "mod-type": "INT"
+            },
+            "insight": {
+                "proficient": 0,
+                "mod-type": "WIS"
+            },
+            "intimidation": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "investigation": {
+                "proficient": 2,
+                "mod-type": "INT"
+            },
+            "medice": {
+                "proficient": 0,
+                "mod-type": "WIS"
+            },
+            "nature": {
+                "proficient": 0,
+                "mod-type": "INT"
+            },
+            "perception": {
+                "proficient": 1,
+                "mod-type": "WIS"
+            },
+            "performance": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "persuasion": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "religon": {
+                "proficient": 0,
+                "mod-type": "INT"
+            },
+            "sleight-of-hand": {
+                "proficient": 0,
+                "mod-type": "DEX"
+            },
+            "stealth": {
+                "proficient": 1,
+                "mod-type": "DEX"
+            },
+            "survival": {
+                "proficient": 1,
+                "mod-type": "WIS"
+            }
+        },
+        "languages": {
+            "common": 1,
+            "dwarvish": 1,
+            "elvish": 0,
+            "giant": 0,
+            "gnomish": 0,
+            "goblin": 0,
+            "halfling": 0,
+            "orc": 0,
+            "abyssal": 0,
+            "celestial": 0,
+            "draconic": 0,
+            "deep-speech": 0,
+            "infernal": 0,
+            "primordial": 0,
+            "sylvan": 0,
+            "undercommon": 0,
+            "cant": 0,
+            "druidic": 0
+        },
+        "armor": {
+            "light-armor": 1,
+            "medium-armor": 1,
+            "heavy-armor": 1,
+            "shields": 1
+        },
+        "weapons": {
+            "simple-weapons": 1,
+            "martial-weapons": 0
+        },
+        "artisans-tools": {
+            "alchemists-supplies": {
+                "proficient": 0,
+                "mod-type": "INT"
+            },
+            "brewers-supplies": {
+                "proficient": 0,
+                "mod-type": "INT"
+            },
+            "calligraphers-supplies": {
+                "proficient": 0,
+                "mod-type": "INT"
+            },
+            "carpenters-tools": {
+                "proficient": 0,
+                "mod-type": "STR"
+            },
+            "cartographers-tools": {
+                "proficient": 0,
+                "mod-type": "INT"
+            },
+            "cobblers-tools": {
+                "proficient": 0,
+                "mod-type": "DEX"
+            },
+            "cooks-utensils": {
+                "proficient": 0,
+                "mod-type": "WIS"
+            },
+            "glassblowers-tools": {
+                "proficient": 0,
+                "mod-type": "DEX"
+            },
+            "jewelers-kits": {
+                "proficient": 1,
+                "mod-type": "DEX"
+            },
+            "leatherworkers-tools": {
+                "proficient": 0,
+                "mod-type": "DEX"
+            },
+            "masons-tools": {
+                "proficient": 0,
+                "mod-type": "STR"
+            },
+            "painters-supplies": {
+                "proficient": 0,
+                "mod-type": "DEX"
+            },
+            "potters-tools": {
+                "proficient": 0,
+                "mod-type": "DEX"
+            },
+            "smiths-tools": {
+                "proficient": 1,
+                "mod-type": "STR"
+            },
+            "tinkers-tools": {
+                "proficient": 1,
+                "mod-type": "INT"
+            },
+            "weavers-tools": {
+                "proficient": 0,
+                "mod-type": "DEX"
+            },
+            "woodcarvers-tools": {
+                "proficient": 0,
+                "mod-type": "DEX"
+            },
+            "disguise-kit": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "forgery-kit": {
+                "proficient": 0,
+                "mod-type": "INT"
+            },
+            "herbalism-kit": {
+                "proficient": 0,
+                "mod-type": "WIS"
+            },
+            "navigators-tools": {
+                "proficient": 0,
+                "mod-type": "WIS"
+            },
+            "poisoners-kit": {
+                "proficient": 0,
+                "mod-type": "INT"
+            },
+            "thieves-tools": {
+                "proficient": 1,
+                "mod-type": "DEX"
+            }
+        },
+        "gaming-sets": {
+            "dice-sets": {
+                "proficient": 0,
+                "mod-type": "INT"
+            },
+            "dragonchess-set": {
+                "proficient": 0,
+                "mod-type": "INT"
+            },
+            "playing-card-set": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "three-dragon-ante-set": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            }
+        },
+        "musical-instruments": {
+            "bagpipes": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "drum": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "dulcimer": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "flute": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "lute": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "lyre": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "horn": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "pan-flute": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "shawm": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            },
+            "viol": {
+                "proficient": 0,
+                "mod-type": "CHA"
+            }
+        },
+        "vehicles": {
+            "land": {
+                "proficient": 0,
+                "mod-type": "DEX"
+            },
+            "water": {
+                "proficient": 0,
+                "mod-type": "DEX"
+            },
+            "air": {
+                "proficient": 0,
+                "mod-type": "DEX"
+            }
+        }
+    }
+}
