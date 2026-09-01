@@ -1,0 +1,162 @@
+{
+  "inspiration": true,
+
+  "info": {
+    "name": "Valeros der Kühne",
+    "level": 3,
+    "background": "Soldat",
+    "species": "Mensch",
+    "primary_class": "Kämpfer",
+    "secondary_class": "",
+    "alignment": "Neutral Gut",
+    "character_appearance": "Ein von Narben gezeichneter Krieger in glänzender Plattenrüstung.",
+    "height": 185,
+    "age": 28,
+    "weight": 90,
+    "ideals": "Mut und Ehre.",
+    "bonds": "Mein altes Regiment bedeutet mir alles.",
+    "flaws": "Ich kann keiner Herausforderung widerstehen.",
+    "allies": "Die Stadtwache von Tiefwasser"
+  },
+
+  "attributes": {
+    "STR": { "type": "STR", "base": 16, "effect": 2, "isSafe": true },
+    "DEX": { "type": "DEX", "base": 14, "effect": 0, "isSafe": false },
+    "CON": { "type": "CON", "base": 15, "effect": 0, "isSafe": true },
+    "INT": { "type": "INT", "base": 9, "effect": 0, "isSafe": false },
+    "WIS": { "type": "WIS", "base": 11, "effect": 0, "isSafe": false },
+    "CHA": { "type": "CHA", "base": 13, "effect": 0, "isSafe": false }
+  },
+
+  "status": {
+    "ac_base": 16,
+    "ac_effect": 0,
+    "current_hit_die": "2d10",
+    "death_save_failure": 0,
+    "death_save_success": 0,
+    "hp_current": 24,
+    "hp_max_base": 28,
+    "hp_max_effect": 0,
+    "hp_temp": 5,
+    "initiative_effect": 1,
+    "maximum_hit_die": "3d10",
+    "speed_base": 30,
+    "speed_effect": 0
+  },
+
+  "currency": {
+    "gold": {
+      "name": "Goldmünzen",
+      "amount": 120,
+      "color": "#FFD700"
+    },
+    "silver": {
+      "name": "Silberlinge",
+      "amount": 45,
+      "color": "#C0C0C0"
+    }
+  },
+
+  "weapons": {
+    "langschwert_01": {
+      "name": "Langschwert",
+      "damage_dice": "1d8",
+      "effect": 0,
+      "enhancement": 1,
+      "mod": "STR",
+      "weapon_type": "martial",
+      "weapon_properties": {
+        "prop_1": "Versatile"
+      }
+    },
+    "armbrust_01": {
+      "name": "Leichte Armbrust",
+      "damage_dice": "1d8",
+      "effect": 0,
+      "enhancement": 0,
+      "mod": "DEX",
+      "weapon_type": "simple",
+      "weapon_properties": {
+        "prop_1": "Ammunition",
+        "prop_2": "Loading",
+        "prop_3": "Range"
+      }
+    }
+  },
+
+  "spell_casting": {
+    "concentrating": false,
+    "spell_slots": {
+      "1": {
+        "level": 1,
+        "max": 2,
+        "unlocked": 2,
+        "used": 1
+      }
+    }
+  },
+
+  "spells": {
+    "shield_spell": {
+      "name": "Schild",
+      "level": 1,
+      "casting_time": "1 Reaktion",
+      "range": "Selbst",
+      "concentration": false,
+      "notes": "Erhöht die Rüstungsklasse temporär um +5.",
+      "verbal": true,
+      "somatic": true,
+      "material": false
+    }
+  },
+
+  "entities": {
+    "pferd_01": {
+      "name": "Sturm",
+      "hp": 19,
+      "ac": 11,
+      "speed": 60,
+      "notes": "Treues Schlachtross des Helden.",
+      "max_capacity": 480,
+      "current_capacity": 50,
+      "inventory": "Zelt, Schlafsack, Seil"
+    }
+  },
+
+  "proficiencies": {
+    "athletics_skill": {
+      "name": "Athletics",
+      "type": "SKILL",
+      "proficient": 1,
+      "mod_type": "STR"
+    },
+    "perception_skill": {
+      "name": "Perception",
+      "type": "SKILL",
+      "proficient": 0,
+      "mod_type": "WIS"
+    }
+  },
+
+  "notes": {
+    "active_effects": "Keine aktiven Debuffs.",
+    "age": 28,
+    "allies": "Die Stadtwache",
+    "bonds": "Das alte Regiment.",
+    "character_appearance_base64": "",
+    "equipment": "Kettenhemd, Rucksack",
+    "features": "Aktionsschub (Second Wind)",
+    "flaws": "Stolz.",
+    "height": 185,
+    "ideals": "Ehre.",
+    "inventory": "Abenteurerausrüstung",
+    "items": {
+      "Heiltrank": 2,
+      "Fackel": 5,
+      "Rationen": 10
+    },
+    "notes": "Wichtige Quest: Finde das verlorene Banner.",
+    "quick_notes": "Nächste Rast im Wirtshaus planen.",
+    "weight": 90
+  }
+}
