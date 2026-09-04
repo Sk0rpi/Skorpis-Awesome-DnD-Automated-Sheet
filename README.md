@@ -13,6 +13,10 @@ This project originally started as a quick, AI-assisted "Vibe Coding" prototype.
 * **Homebrew-Friendly:** No rigid databases restricting you. Since you input all texts yourself (and the data models in the source code are kept simple), you can easily use official classes, the Artificer, or your very own custom homebrew creations.
 * **100% Client-Side:** Your data is yours. Everything runs completely inside your browser.
 
+## 🌐 Live Demo
+You can try out the fully functional web application directly in your browser here:  
+👉 [Skorpi's Awesome D&D Automation Sheet](https://hkk-entertainment.de/Skorpis-Awesome-DnD-Automated-Sheet/)
+
 ## 🚀 Tech Stack
 * **Frontend:** Vanilla JS / TypeScript
 * **Styling:** Bulma CSS
