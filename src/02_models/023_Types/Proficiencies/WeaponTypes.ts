@@ -1,10 +1,10 @@
 import {AttributeType} from "../Attributes/AttributeTypes";
 
 export const ALL_WEAPONS = {
-    'simple-melee': 'NONE',
-    'simple-ranged': 'NONE',
-    'martial-melee': 'NONE',
-    'martial-ranged': 'NONE',
+    'simple': 'NONE',
+    'martial': 'NONE',
+    'melee': 'NONE',
+    'ranged': 'NONE',
 
     // Simple Melee Weapons (Einfache Nahkampfwaffen)
     'club': 'NONE',

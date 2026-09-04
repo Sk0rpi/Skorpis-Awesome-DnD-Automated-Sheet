@@ -18,17 +18,11 @@ import {ICharacterStatus} from "../02_models/021_Interfaces/Character/ICharacter
 import {SpellCasting} from "../02_models/022_Classes/Spells/SpellCasting";
 import {ALL_SPELL_SLOT_TYPES, SpellSlotType} from "../02_models/023_Types/Spells/SpellSlotTypes";
 import {SpellSlot} from "../02_models/022_Classes/Spells/SpellSlot";
-import {calculateSizeByHeight, convertFileToBase64, isNumeric} from "../07_services/Util";
-import {WeaponPropertyType} from "../02_models/023_Types/Weapons/WeaponPropertyTypes";
-import {WeaponType} from "../02_models/023_Types/Proficiencies/WeaponTypes";
-import {Weapon} from "../02_models/022_Classes/Weapons/Weapon";
-import {Spell} from "../02_models/022_Classes/Spells/Spell";
-import {Entity} from "../02_models/022_Classes/Entities/Entity";
+import {convertFileToBase64} from "../07_services/Util";
 
 export class CharacterSheetViewModel {
     private _character: Character | null = null;
     private _onUpdateListeners: ((char: Character | null) => void)[] = [];
-    public tempProperties: WeaponPropertyType[] = [];
 
     get character(): Character | null {
         return this._character;
@@ -95,6 +89,21 @@ export class CharacterSheetViewModel {
         this.notifyListeners();
     }
 
+    public async importCharacterFromFile(file: File): Promise<void> {
+        try {
+            const jsonString = await file.text();
+
+            const rawCharacter = await importFromJson(jsonString);
+
+            this._character = this.processCalculations(rawCharacter);
+
+            this.notifyListeners();
+        }
+        catch (error) {
+            console.error("Error importing character:", error);
+        }
+    }
+
     private processCalculations(character: Character): Character {
         const proficiencyBonus = calculateProficiencyBonus(character.info.level);
 
@@ -132,11 +141,17 @@ export class CharacterSheetViewModel {
             }
         );
 
+        let proficientWeaponArray: string[] = [];
+        Object.entries(character.proficiencies).forEach(([key, proficiency]) => {
+            if(proficiency.type === 'Weapons') {
+                proficientWeaponArray.push(proficiency.name)
+            }
+        })
+
         Object.entries(character.weapons).forEach(([key, weapon]) => {
+            weapon.proficient = proficientWeaponArray.includes(weapon.type);
+            weapon.proficiency_bonus = weapon.proficient ? proficiencyBonus : 0;
             weapon.mod = character.attributes[weapon.mod_type].mod;
-            if (!character.proficiencies[weapon.type]) return;
-            weapon.proficient = character.proficiencies[weapon.type].proficient > 0;
-            weapon.proficiency_bonus = character.proficiencies[weapon.type].proficient * proficiencyBonus;
         })
 
         let prof_bonus = 0;
@@ -155,8 +170,6 @@ export class CharacterSheetViewModel {
         character.status["Initiative"].read_only_base = true;
         character.status["Initiative"].color = character.status["Initiative"].total == 0 ? "is-dark" : character.status["Initiative"].total > 0 ? "is-success" : "is-danger";
         character.status["Initiative"].pre_total_extra = character.status["Initiative"].total > 0 ? "+" : "";
-
-        character.notes.size = calculateSizeByHeight(character.notes.height);
 
         return character;
     }
@@ -179,10 +192,6 @@ export class CharacterSheetViewModel {
 
         if(targetType === "Current-HP") {
             newStatusBase = newStatusBase > this._character.status["Max-HP"].total ? this._character.status["Max-HP"].total : newStatusBase;
-        }
-
-        if(targetType === "Max-HP") {
-            this._character.status["Current-HP"].base = newStatusBase < this._character.status["Current-HP"].base ? newStatusBase : this._character.status["Current-HP"].base;
         }
 
         this._character.status[targetType].base = newStatusBase;
@@ -437,10 +446,6 @@ export class CharacterSheetViewModel {
             case "info-inspiration-checkbox":
                 this._character.inspiration = !this._character.inspiration;
                 break;
-
-            case "info-appearance-button":
-                this._character.info.character_appearance = "";
-                break;
         }
 
         this._character = this.processCalculations(this._character);
@@ -535,489 +540,5 @@ export class CharacterSheetViewModel {
                 break;
         }
 
-    }
-
-    public handleNoteInput(
-        id: string,
-        value: string
-    ) {
-        if(!this._character) return;
-        let promisedNumber = value.split(" ")[0];
-
-        switch (id) {
-            case 'notes-height-input':
-                if(!isNumeric(promisedNumber)) break;
-                this._character.notes.height = Number(promisedNumber);
-                break;
-            case 'notes-age-input':
-                if(!isNumeric(promisedNumber)) break;
-                this._character.notes.age = Number(promisedNumber);
-                break;
-            case 'notes-weight-input':
-                if(!isNumeric(promisedNumber)) break;
-                this._character.notes.weight = Number(promisedNumber);
-                break;
-            case 'notes-equipment-textarea':
-                this._character.notes.equipment = value;
-                break;
-            case 'notes-features-and-abilities-textarea':
-                this._character.notes.features = value;
-                break;
-            case 'notes-notes-textarea':
-                this._character.notes.notes = value;
-                break;
-            case 'notes-ideals-textarea':
-                this._character.notes.ideals = value;
-                break;
-            case 'notes-bonds-textarea':
-                this._character.notes.bonds = value;
-                break;
-            case 'notes-flaws-textarea':
-                this._character.notes.flaws = value;
-                break;
-            case 'notes-allies-textarea':
-                this._character.notes.allies = value;
-                break;
-        }
-
-        if(id.includes("notes-inventory-textarea")) {
-            let arrayIDRaw = id.split("-").at(-1);
-            let arrayID = Number(arrayIDRaw);
-            this._character.notes.inventory[arrayID] = value;
-        }
-
-        this._character = this.processCalculations(this._character);
-
-        this.saveCharacterToCache();
-
-        this.notifyListeners();
-    }
-
-    public handleSpellCastingEvent(
-        id: string,
-        val: string
-    ) {
-        if(!this._character) return;
-        switch(id) {
-            case "spell-casting-mod-type-input":
-                this._character.spell_casting.spell_mod_type = val as AttributeType;
-                break;
-            case "spell-casting-concentrating-checkbox":
-                this._character.spell_casting.concentrating = !this._character.spell_casting.concentrating;
-                break;
-        }
-
-        this._character = this.processCalculations(this._character);
-
-        this.saveCharacterToCache();
-
-        this.notifyListeners();
-    }
-
-    public handleNewWeapon(
-        name: string,
-        type: WeaponType,
-        mod_type: AttributeType,
-        effect: string,
-        enhancement: string,
-        damage_dice: string
-    ) {
-        if(!this._character) return;
-
-        let effectNum = isNumeric(effect) ? Number(effect): 0;
-        let enhancementNum = isNumeric(enhancement) ? Number(enhancement) : 0;
-        let namePlaceholder = name === "" ? "empty" : name;
-
-        while(this._character.weapons[namePlaceholder]){
-            if(!namePlaceholder.includes("clone")) {
-                namePlaceholder += " clone";
-                continue;
-            }
-
-            if(!namePlaceholder.includes("please")) {
-                namePlaceholder += " please";
-                continue;
-            }
-
-            if(!namePlaceholder.includes("get")) {
-                namePlaceholder += " get";
-                continue;
-            }
-
-            if(!namePlaceholder.includes("creative")) {
-                namePlaceholder += " creative";
-                continue;
-            }
-
-            namePlaceholder = "The Codewriter's Fury";
-            damage_dice = "";
-            effectNum = -100;
-            enhancementNum = -100;
-            break;
-        }
-
-        let properties: Record<string, WeaponPropertyType> = {}
-        this.tempProperties.forEach((property) => {
-            properties[property] = property;
-        })
-
-        let weapon = new Weapon({
-            name: namePlaceholder,
-            damage_dice,
-            effect: effectNum,
-            enhancement: enhancementNum,
-            mod_type,
-            properties,
-            type
-        });
-
-        this._character.weapons[namePlaceholder] = weapon;
-
-        this._character = this.processCalculations(this._character);
-
-        this.saveCharacterToCache();
-
-        this.notifyListeners();
-    }
-
-    public handleAddNewTempProperty(
-        id: string,
-        val: string
-    ) {
-        if (!this._character) return;
-        this.tempProperties.push(val as WeaponPropertyType);
-        this.notifyListeners();
-    }
-
-    public handleRemoveProperty(
-        id: string
-    ) {
-        if (!this._character) return;
-        let val = id.split("-").at(-1) as WeaponPropertyType;
-
-        if (id.includes("temp")) {
-            this.tempProperties = this.tempProperties.filter(property => property !== val);
-
-            this.notifyListeners();
-
-            return;
-        }
-
-        let name = id.split("-").at(-2) as string;
-
-        delete this._character.weapons[name].properties[val];
-
-        this._character = this.processCalculations(this._character);
-
-        this.saveCharacterToCache();
-
-        this.notifyListeners();
-    }
-
-    handleWeaponInput(
-        id: string,
-        val: string
-    ) {
-        if(!this._character) return;
-
-        const idType = id.replace(/-[^-]+$/, "");
-        const weaponName = id.split("-").at(-1);
-
-        if(!weaponName) return;
-
-        switch(idType) {
-            case "weapons-name-input":
-                this._character.weapons[weaponName].name = val;
-                break;
-
-            case "weapons-type-input":
-                this._character.weapons[weaponName].type = val as WeaponType;
-                break;
-
-            case "weapons-mod-type-input":
-                this._character.weapons[weaponName].mod_type = val as AttributeType;
-                break;
-
-            case "weapons-effect-input":
-                let newEffect = isNumeric(val) ? Number(val) : this._character.weapons[weaponName].effect;
-                this._character.weapons[weaponName].effect = newEffect;
-                break;
-
-            case "weapons-enhancement-input":
-                let newEnhancement = isNumeric(val) ? Number(val) : this._character.weapons[weaponName].enhancement;
-                this._character.weapons[weaponName].enhancement = newEnhancement;
-                break;
-
-            case "weapons-damage-dice-input":
-                this._character.weapons[weaponName].damage_dice = val;
-                break;
-
-            case "weapons-add-property":
-                this._character.weapons[weaponName].properties[val] = val as WeaponPropertyType;
-                break;
-        }
-
-        this._character = this.processCalculations(this._character);
-
-        this.saveCharacterToCache();
-
-        this.notifyListeners();
-    }
-
-    public handleRemoveWeapon(id: string) {
-        if(!this._character) return;
-
-        let val = id.split("-").at(-1);
-
-        delete this._character.weapons[val as string];
-
-        this._character = this.processCalculations(this._character);
-
-        this.saveCharacterToCache();
-
-        this.notifyListeners();
-    }
-
-    public handleNewSpell(
-        level: string,
-        name: string,
-        casting_time: string,
-        range: string,
-        concentration: boolean,
-        verbal: boolean,
-        somatic: boolean,
-        material: boolean,
-        notes: string
-    ) {
-        if (!this._character) return;
-
-        let namePlaceholder = name === "" ? "empty spell" : name;
-
-        while (this._character.spells[namePlaceholder]) {
-            namePlaceholder += " clone";
-        }
-
-        let levelNum = isNumeric(level) ? Number(level) : 0;
-
-        let spell = new Spell({
-            level: levelNum,
-            name: namePlaceholder,
-            casting_time,
-            range,
-            concentration,
-            verbal,
-            somatic,
-            material,
-            notes
-        });
-
-        this._character.spells[namePlaceholder] = spell;
-
-        this._character = this.processCalculations(this._character);
-        this.saveCharacterToCache();
-        this.notifyListeners();
-    }
-
-    public handleSpellInput(
-        id: string,
-        val: string
-    ) {
-        if (!this._character) return;
-
-        const idType = id.replace(/-[^-]+$/, "");
-        const spellName = id.split("-").at(-1);
-
-        if (!spellName || !this._character.spells[spellName]) return;
-
-        switch (idType) {
-            case "spells-level-input":
-                val = val === "CT" ? "0" : val;
-                let valNum = isNumeric(val) ? Number(val) : this._character.spells[spellName].level;
-                this._character.spells[spellName].level = valNum;
-                break;
-            case "spells-name-input":
-                this._character.spells[spellName].name = val;
-                break;
-            case "spells-casting-time-input":
-                this._character.spells[spellName].casting_time = val;
-                break;
-            case "spells-range-input":
-                this._character.spells[spellName].range = val;
-                break;
-            case "spells-notes-input":
-                this._character.spells[spellName].notes = val;
-                break;
-        }
-
-        this._character = this.processCalculations(this._character);
-        this.saveCharacterToCache();
-        this.notifyListeners();
-    }
-
-    public handleRemoveSpell(id: string) {
-        if (!this._character) return;
-
-        let val = id.split("-").at(-1);
-
-        if (val && this._character.spells[val]) {
-            delete this._character.spells[val];
-        }
-
-        this._character = this.processCalculations(this._character);
-        this.saveCharacterToCache();
-        this.notifyListeners();
-    }
-
-    public handleSpellCheckboxChange(id: string, checked: boolean) {
-        if (!this._character) return;
-
-        const idType = id.replace(/-[^-]+$/, "");
-        const spellName = id.split("-").at(-1);
-
-        if (!spellName || !this._character.spells[spellName]) return;
-
-        switch (idType) {
-            case "spells-conc-checkbox":
-                this._character.spells[spellName].concentration = checked;
-                break;
-            case "spells-v-checkbox":
-                this._character.spells[spellName].verbal = checked;
-                break;
-            case "spells-s-checkbox":
-                this._character.spells[spellName].somatic = checked;
-                break;
-            case "spells-m-checkbox":
-                this._character.spells[spellName].material = checked;
-                break;
-        }
-
-        this._character = this.processCalculations(this._character);
-        this.saveCharacterToCache();
-        this.notifyListeners();
-    }
-
-    public handleNewEntity(
-        name: string,
-        ac: string,
-        hp_current: string,
-        hp_max: string,
-        capacity_current: string,
-        capacity_max: string,
-        notes: string,
-        inventory: string,
-        speed: string
-    ) {
-        if (!this._character) return;
-
-        let namePlaceholder = name === "" ? "empty" : name;
-
-        while (this._character.entities[namePlaceholder]) {
-            namePlaceholder += " clone";
-        }
-
-        let entity = new Entity({
-            ac: isNumeric(ac) ? Number(ac) : 0,
-            current_capacity: isNumeric(capacity_current) ? Number(capacity_current) : 0,
-            hp_max: isNumeric(hp_max) ? Number(hp_max) : 0,
-            hp_current: isNumeric(hp_current) ? Number(hp_current) : 0,
-            inventory: inventory,
-            max_capacity: isNumeric(capacity_max) ? Number(capacity_max) : 0,
-            name: namePlaceholder,
-            notes: notes,
-            speed: speed
-        });
-
-        this._character.entities[namePlaceholder] = entity;
-
-        this._character = this.processCalculations(this._character);
-        this.saveCharacterToCache();
-        this.notifyListeners();
-    }
-
-    public handleEntityInput(
-        id: string,
-        val: string
-    ) {
-        if (!this._character) return;
-
-        const idSplit = id.split("-");
-        const idType = idSplit[1];
-        const entityName = id.split(`input-`).at(-1);
-
-        if (!entityName || !this._character.entities[entityName]) return;
-
-        switch (idType) {
-            case "name":
-                this._character.entities[entityName].name = val.replaceAll(`"`, `„`);
-                break;
-            case "ac":
-                this._character.entities[entityName].ac = isNumeric(val) ? Number(val) : this._character.entities[entityName].ac;
-                break;
-            case "hp_current":
-                let hpCurrent = isNumeric(val) ? Number(val) : this._character.entities[entityName].hp_current;
-                this._character.entities[entityName].hp_current = hpCurrent > this._character.entities[entityName].hp_current ? this._character.entities[entityName].hp_max : hpCurrent ;
-                break;
-            case "hp_max":
-                this._character.entities[entityName].hp_max = isNumeric(val) ? Number(val) : this._character.entities[entityName].hp_max;
-                this._character.entities[entityName].hp_current = this._character.entities[entityName].hp_current > this._character.entities[entityName].hp_max ? this._character.entities[entityName].hp_max : this._character.entities[entityName].hp_current;
-                break;
-            case "capacity_current":
-                let capCurrent = isNumeric(val) ? Number(val) : this._character.entities[entityName].current_capacity;
-                this._character.entities[entityName].current_capacity = capCurrent > this._character.entities[entityName].current_capacity ? this._character.entities[entityName].max_capacity : capCurrent ;
-                break;
-            case "capacity_max":
-                this._character.entities[entityName].max_capacity = isNumeric(val) ? Number(val) : this._character.entities[entityName].max_capacity;
-                this._character.entities[entityName].current_capacity = this._character.entities[entityName].current_capacity > this._character.entities[entityName].max_capacity ? this._character.entities[entityName].max_capacity : this._character.entities[entityName].current_capacity;
-                break;
-            case "notes":
-                this._character.entities[entityName].notes = val;
-                break;
-            case "inventory":
-                this._character.entities[entityName].inventory = val;
-                break;
-            case "speed":
-                this._character.entities[entityName].speed = val;
-                break;
-        }
-
-        this._character = this.processCalculations(this._character);
-
-        this.saveCharacterToCache();
-
-        this.notifyListeners();
-    }
-
-    public handleRemoveEntity(id: string) {
-        if (!this._character) return;
-
-        let val = id.split(`remove-`).at(-1);
-        if(!val) return;
-
-        if (val && this._character.entities[val]) {
-            delete this._character.entities[val];
-        }
-
-        this._character = this.processCalculations(this._character);
-        this.saveCharacterToCache();
-        this.notifyListeners();
-    }
-
-    public handleCurrencyEvents(
-        id: string,
-        val: string
-    ) {
-        if (!this._character) return;
-
-        const entityName = id.split(`input-`).at(-1) as CurrencyType;
-
-        if(!entityName) return;
-
-        let valNum = isNumeric(val) ? Number(val) : this._character.currency[entityName].amount;
-
-        this._character.currency[entityName].amount = valNum;
-
-        this._character = this.processCalculations(this._character);
-        this.saveCharacterToCache();
-        this.notifyListeners();
     }
 }

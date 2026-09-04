@@ -1,5 +1,4 @@
 export const ALL_WEAPON_PROPERTIES = [
-    'Choose Property',
     'Ammunition',
     'Finesse',
     'Heavy',

@@ -1,5 +1,4 @@
 import {CharacterSheetViewModel} from "../03_viewmodels/CharacterSheet.ViewModel";
-import {DND_SIZE_DICTIONARY, SizeMetrics, SizeType} from "../02_models/023_Types/Character/SizeTypes";
 
 type Constructor<T> = new (...args: any[]) => T;
 
@@ -38,7 +37,7 @@ export function isNumeric(val: string): boolean {
     return val.trim() !== '' && !Number.isNaN(Number(val));
 }
 
-export function addAdvancedEventListener(
+export function addInfoEventListener(
     element: HTMLInputElement | HTMLTextAreaElement,
     onCallback: (id: string, value: string) => void
 ): void {
@@ -65,16 +64,4 @@ export function convertFileToBase64(file: File): Promise<string> {
         reader.onerror = () => reject(reader.error);
         reader.readAsDataURL(file);
     });
-}
-
-export function calculateSizeByHeight(heightCm: number): SizeType {
-    if (heightCm < 0) {
-        throw new Error("Height cannot be negative.");
-    }
-
-    const sizeEntries = Object.entries(DND_SIZE_DICTIONARY) as [SizeType, SizeMetrics][];
-
-    const matchedSize = sizeEntries.find(([_, metrics]) => heightCm <= metrics.heightCm.max);
-
-    return matchedSize ? matchedSize[0] : 'Gargantuan';
 }

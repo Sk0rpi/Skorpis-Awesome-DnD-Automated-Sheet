@@ -17,19 +17,15 @@ export class Weapon implements IWeapon {
     mod: number = 0;
 
     constructor(
-        data?: Partial<IWeapon>
+        data?: IWeapon
     ) {
         this.name = data?.name ?? "";
         this.damage_dice = data?.damage_dice ?? "1d4";
-        this.effect = Number(data?.effect) || 0;
-        this.enhancement = Number(data?.enhancement) || 0;
+        this.effect = data?.effect ?? 0;
+        this.enhancement = data?.enhancement ?? 0;
         this.mod_type = data?.mod_type ?? "NONE" as AttributeType;
         this.properties = data?.properties ?? {};
         this.type = data?.type ?? "NONE" as WeaponType;
-
-        this.proficient = data?.proficient ?? false;
-        this.proficiency_bonus = data?.proficiency_bonus ?? 0;
-        this.mod = data?.mod ?? 0;
     }
 
     get hit(): number {

@@ -8,11 +8,10 @@ export class CharacterNotes implements ICharacterNotes {
     equipment: string;
     features: string;
     flaws: string;
-    notes: string;
-    size: string;
     height: number;
     ideals: string;
-    inventory: Record<number, string>;
+    inventory: string;
+    items: Record<string, number>;
     weight: number;
 
     constructor(
@@ -24,12 +23,11 @@ export class CharacterNotes implements ICharacterNotes {
         this.character_appearance_base64 = data?.character_appearance_base64 ?? "";
         this.equipment = data?.equipment ?? "";
         this.features = data?.features ?? "";
-        this.notes = data?.notes ?? "";
-        this.size = data?.size ?? "";
         this.flaws = data?.flaws ?? "";
         this.height = data?.height ?? 0;
         this.ideals = data?.ideals ?? "";
-        this.inventory = data?.inventory ?? {};
+        this.inventory = data?.inventory ?? "";
+        this.items = data?.items ?? {};
         this.weight = data?.weight ?? 0;
     }
 }

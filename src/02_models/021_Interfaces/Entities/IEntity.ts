@@ -1,9 +1,8 @@
 export interface IEntity {
     name: string;
-    hp_max: number;
-    hp_current: number;
+    hp: number;
     ac: number;
-    speed: string;
+    speed: number;
     notes: string;
     max_capacity: number;
     current_capacity: number;

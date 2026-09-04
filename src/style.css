@@ -57,14 +57,14 @@ input[type="checkbox"].greenCheck {
 
 .button.is-love.is-outlined {
     background-color: transparent;
-    border-color: #ff8fb0;
-    color: #FF8FB0FF;
+    border-color: #ffb7ce;
+    color: #ffb7ce;
 }
 
 .button.is-love.is-outlined:hover,
 .button.is-love.is-outlined.is-hovered {
-    background-color: #FF8FB0FF;
-    border-color: #FF8FB0FF;
+    background-color: #ff8fb3;
+    border-color: #ffb7ce;
     color: #fff;
 }
 
@@ -72,35 +72,10 @@ input[type="checkbox"].greenCheck {
 .button.is-love.is-outlined.is-focused,
 .button.is-love.is-outlined:active,
 .button.is-love.is-outlined.is-active {
-    border-color: #FF8FB0FF;
-    color: #FF8FB0FF;
+    border-color: #ffb7ce;
+    color: #ffb7ce;
 }
 .button.is-love.is-outlined:focus:not(:active),
 .button.is-love.is-outlined.is-focused:not(:active) {
-    box-shadow: 0 0 0 0.125em rgba(255, 183, 206, 0.25);
-}
-
-.button.is-github.is-outlined {
-    background-color: transparent;
-    border-color: #b870ff;
-    color: #b870ff;
-}
-
-.button.is-github.is-outlined:hover,
-.button.is-github.is-outlined.is-hovered {
-    background-color: #8534f3;
-    border-color: #8534f3;
-    color: #fff;
-}
-
-.button.is-github.is-outlined:focus,
-.button.is-github.is-outlined.is-focused,
-.button.is-github.is-outlined:active,
-.button.is-github.is-outlined.is-active {
-    border-color: #8534f3;
-    color: #8534f3;
-}
-.button.is-github.is-outlined:focus:not(:active),
-.button.is-github.is-outlined.is-focused:not(:active) {
     box-shadow: 0 0 0 0.125em rgba(255, 183, 206, 0.25);
 }
