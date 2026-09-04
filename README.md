@@ -2,6 +2,10 @@
 A lightweight, interactive, and open-source D&D 5e character sheet for the browser. This project was born out of pure passion for programming and playing TTRPGs, aiming to make stat management as effortless as possible for players. 
 The highlight: This web app is not a static form, but an intelligent live calculator.
 
+## 🛠️ The Journey: From "Vibe Code" to Solid Architecture
+This project originally started as a quick, AI-assisted "Vibe Coding" prototype. However, to truly understand the mechanics and maintain clean, scalable software, **the entire codebase was refactored and rewritten from scratch with minimal AI assistance**. The focus shifted to building a robust, self-engineered **MVVM (Model-View-ViewModel) architecture**, ensuring a strict separation of computational game logic, state management, and UI rendering.
+*(Full disclosure: I did use AI to generate this README text though, because when it comes to writing long paragraphs, I'm just way too uncreative, lol, sorry...)*
+
 ## ✨ Features
 * **Live Calculations & Effects:** Change any attribute value (e.g., via a spell or an item modifying INT), and the app instantly recalculates all modifiers, saving throws, and associated skills in real-time right after you input the effect.
 * **To-Be-Created Class Logic:** Planned backend "if-then" logic for specific classes (e.g., automatic Tool Expertise for the Artificer at level 6).
