@@ -4,6 +4,7 @@ The highlight: This web app is not a static form, but an intelligent live calcul
 
 ## 🛠️ The Journey: From "Vibe Code" to Solid Architecture
 This project originally started as a quick, AI-assisted "Vibe Coding" prototype. However, to truly understand the mechanics and maintain clean, scalable software, **the entire codebase was refactored and rewritten from scratch with minimal AI assistance**. The focus shifted to building a robust, self-engineered **MVVM (Model-View-ViewModel) architecture**, ensuring a strict separation of computational game logic, state management, and UI rendering.
+
 *(Full disclosure: I did use AI to generate this README text though, because when it comes to writing long paragraphs, I'm just way too uncreative, lol, sorry...)*
 
 ## ✨ Features
