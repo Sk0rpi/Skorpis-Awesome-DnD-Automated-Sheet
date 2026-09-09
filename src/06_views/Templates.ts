@@ -51,7 +51,7 @@ export function createMenuSection(): string{
                 <span class="icon mr-0">
                     <i class="fas fa-hand-holding-heart"></i>
                 </span>
-                <span class="pl-1">Donate</span>
+                <span class="pl-1">Support Me</span>
             </a>
             
             <a class="button is-github is-outlined" href="https://github.com/Sk0rpi/Skorpis-Awesome-DnD-Automated-Sheet" target="_blank" rel="noopener noreferrer">
