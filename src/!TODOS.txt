@@ -1,0 +1,11 @@
+Templates > createProficiencySection
+- Add a feature to add or delete custom entries
+
+CharacterSheet-ViewModel
+- Add a function to read custom entries from .json
+
+Index
+- Add a feature to make tables responsive
+
+Whole
+- Language Support
