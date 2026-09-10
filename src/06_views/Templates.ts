@@ -129,7 +129,7 @@ export function createNoteSection({
             </div>
         </div>
         <hr class="has-background-grey my-5" />
-        <div class="card columns is-multiline">
+        <div class="card is-multiline">
             <div class="tabs column is-medium is-full m-0" id="notes-tabs">
                 <ul>
                     <li class="${`notes-equipment-table-nav`=== activeNoteTab ? "is-active" : ""}" data-tab="notes-equipment-table-nav">
@@ -441,7 +441,7 @@ export function createCharacterStatusSection( {
                 <input id="maximum-hit-die-input" class="input is-large has-text-weight-bold has-text-centered" style="width: 10rem; height: 3rem" type="text" placeholder="1d6" value="${maximum_hit_die}">
             </div>
             <div class="card-content is-flex is-flex-direction-row is-justify-content-space-between is-align-items-center has-text-centered" style="gap: 1rem;">
-            <tag class="tag " style="width: 7rem; height: 3rem; gap: 0.25rem; background: #9B374B">
+            <tag class="tag is-danger" style="width: 7rem; height: 3rem; gap: 0.25rem">
                 <span class="icon is-medium mr-0">
                     <i class="fas fa-xl fa-skull has-text-white"></i>
                 </span>
@@ -459,7 +459,7 @@ export function createCharacterStatusSection( {
             <tag class="tag  is-medium" style="width: 10rem; height: 3rem">
                 <span class="subtitle is-block has-text-weight-bold ">Death Saves</span>
             </tag>
-            <tag class="tag " style="width: 7rem; height: 3rem; gap: 0.25rem; background: #3F7E55">
+            <tag class="tag is-success" style="width: 7rem; height: 3rem; gap: 0.25rem">
     `
 
     for(let i = 1; i <= 3; i++) {
@@ -470,7 +470,7 @@ export function createCharacterStatusSection( {
     }
 
     innerHTML += `
-                <span class="icon is-medium ml-0">
+                <span class="icon ml-0">
                     <i class="fas fa-xl fa-heart-pulse has-text-white"></i>
                 </span>
             </tag>
@@ -724,7 +724,7 @@ export function createWeaponSection({
             <div class="card-content p-0">
                 <table class="table mb-0 is-fullwidth">
                     <thead>
-                        <tr style="background: var(--bulma-table-striped-row-even-background-color)">
+                        <tr style="background: var(--bulma-primary)">
                             <th class="is-size-5 has-text-weight-bold">Weapon</th>
                             <th class="is-size-5 has-text-weight-bold">Weapon Type</th>
                             <th class="is-size-5 has-text-weight-bold" style="width: 9rem"><abbr title="Modifier Type">Mod. Type</abbr></th>
@@ -735,7 +735,7 @@ export function createWeaponSection({
                             <th class="is-size-5 has-text-weight-bold">Dmg. Bonus</th>
                             <th></th>
                         </tr>
-                        <tr style="background: var(--bulma-table-striped-row-even-background-color)">
+                        <tr style="background: var(--bulma-primary)">
                             <th class="is-size-5 has-text-weight-bold" colspan="3">Properties</th>
                             <th class="is-size-5 has-text-weight-bold" colspan="5">Damage Dice</th>
                             <th></th>
@@ -848,7 +848,7 @@ export function createWeaponSection({
                                 <input id="weapons-damage-dice-input-${weaponName}" class="input" placeholder="1d4 slash" value="${damage_dice}">
                             </td>
                         </tr>
-                        <tr style="background: var(--bulma-table-striped-row-even-background-color)">
+                        <tr style="background: var(--bulma-primary)">
                             <td colspan="9"></td>
                         </tr>
     `
@@ -963,7 +963,7 @@ export function createSpellSection(spells: Record<string, ISpell>): string {
             <div class="card-content p-0">
                 <table class="table mb-0 is-fullwidth">
                     <thead>
-                        <tr style="background: var(--bulma-table-striped-row-even-background-color)">
+                        <tr style="background: var(--bulma-primary)">
                             <th class="is-size-5 has-text-weight-bold" style="width: 6rem">Level</th>
                             <th class="is-size-5 has-text-weight-bold">Name</th>
                             <th class="is-size-5 has-text-weight-bold" style="width: 10rem">Casting Time</th>
@@ -974,7 +974,7 @@ export function createSpellSection(spells: Record<string, ISpell>): string {
                             <th class="is-size-5 has-text-weight-bold" style="width: 3rem"><abbr title="Material - Do you need something?">M</abbr></th>
                             <th style="width: 3rem"></th>
                         </tr>
-                        <tr style="background: var(--bulma-table-striped-row-even-background-color)">
+                        <tr style="background: var(--bulma-primary)">
                             <th class="is-size-5 has-text-weight-bold" colspan="8">Notes</th>
                             <th></th>
                         </tr>
@@ -1030,7 +1030,7 @@ export function createSpellSection(spells: Record<string, ISpell>): string {
                                 <textarea spellcheck="false" id="spells-notes-input-${spellName}" class="textarea" rows="${spell.notes.split(/\r\n|\r|\n/).length + 3}" placeholder="1 minute - Create a bonfire on ground that you can see withing range. Caution! Hot!">${spell.notes}</textarea>
                             </td>
                         </tr>          
-                        <tr style="background: var(--bulma-table-striped-row-even-background-color)">
+                        <tr style="background: var(--bulma-primary)">
                             <td colspan="9"></td>
                         </tr>
     `
@@ -1097,7 +1097,7 @@ export function createEntitySection(entities: Record<string, IEntity>): string {
             <div class="card-content p-0">
                 <table class="table mb-0 is-fullwidth">
                     <thead>
-                        <tr style="background: var(--bulma-table-striped-row-even-background-color)">
+                        <tr style="background: var(--bulma-primary)">
                             <th class="is-size-5 has-text-weight-bold">Name</th>
                             <th class="is-size-5 has-text-weight-bold" style="width: 6rem">Speed</th>
                             <th class="is-size-5 has-text-weight-bold" style="width: 6rem"><abbr title="Armor-Class">AC</abbr></th>
@@ -1105,7 +1105,7 @@ export function createEntitySection(entities: Record<string, IEntity>): string {
                             <th class="is-size-5 has-text-weight-bold" style="width: 12rem">Capacity / Max</th>
                             <th style="width: 3rem"></th>
                         </tr>
-                        <tr style="background: var(--bulma-table-striped-row-even-background-color)">
+                        <tr style="background: var(--bulma-primary)">
                             <th class="is-size-5 has-text-weight-bold" colspan="3">Notes</th>
                             <th class="is-size-5 has-text-weight-bold" colspan="3">Inventory</th>
                         </tr>
@@ -1155,7 +1155,7 @@ export function createEntitySection(entities: Record<string, IEntity>): string {
                                 <textarea spellcheck="false" id="entities-inventory-input-${entityName}" class="textarea" rows="${entity.inventory.split(/\r\n|\r|\n/).length + 3}" placeholder="Barding, saddlebags, cargo, or equipped gear..." style="height: 100%">${entity.inventory}</textarea>
                             </td>
                         </tr>
-                        <tr style="background: var(--bulma-table-striped-row-even-background-color)">
+                        <tr style="background: var(--bulma-primary)">
                             <td colspan="6"></td>
                         </tr>
     `
@@ -1349,7 +1349,7 @@ export function createProficiencySection({
                         <td><p class="is-medium is-capitalized has-text-weight-bold">${std_proficiency}</p></td>
                         ${noneAttribute ? `` : `
                         <td>
-                            <span class="tag is-medium has-text-weight-semibold ${noneAttribute? "is-hidden" : "is-link"}" style="width: 3rem; justify-content: center;">${attribute}</span>
+                            <span class="tag is-medium has-text-weight-semibold ${noneAttribute? "is-hidden" : "is-info"}" style="width: 3rem; justify-content: center;">${attribute}</span>
                         </td>
                         <td>
                             <span class="tag is-medium has-text-weight-semibold ${mod > 0 ? "is-success" : mod < 0 ? "is-danger" : "is-primary"}" style="width: 3rem; justify-content: center;">${mod}</span>
