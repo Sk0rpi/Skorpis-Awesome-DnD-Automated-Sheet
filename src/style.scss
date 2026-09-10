@@ -1,17 +1,30 @@
-// Set your brand colors
-$purple: #8a4d76;
-$pink: #fa7c91;
-$brown: #757763;
-$beige-light: #d0d1cd;
-$beige-lighter: #eff0eb;
-
 // Path to Bulma's sass folder
 @use "bulma/sass" with (
-  $family-primary: '"Nunito", sans-serif',
-  $grey-dark: $brown,
-  $grey-light: $beige-light,
-  $primary: $purple,
-  $link: $pink,
+  $family-primary: '"EB Garamond", serif',
+  $family-secondary: '"Cinzel", serif',
+
+  $title-family: '"Cinzel", serif',
+  $subtitle-family: '"Cinzel", serif',
+
+  $primary: #D5C6A9,
+  $danger: #A41720,
+  $success: #0A5C36,
+  $warning: #B26E03,
+  $info: #0F4C81,
+  $link: #A41720,
   $control-border-width: 2px,
-  $input-shadow: none
+  $input-shadow: none,
+
+  $body-background-color: #DFD2B7,
+  $card-background-color: #EDE3D0,
+  $card-header-background-color: #F7F2E8,
+  $box-background-color: #F7F2E8,
+  $table-background-color: #F7F2E8,
+  $table-striped-row-even-background-color: #EDE3D0,
+  $table-cell-border-color: #DFD2B7,
+  $table-row-hover-background-color: #D5C6A9,
+  $table-striped-row-even-hover-background-color: #D5C6A9,
+
+  $card-color: #ffffff,
+  $card-header-color: #ffffff,
 );

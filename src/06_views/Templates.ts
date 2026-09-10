@@ -20,7 +20,6 @@ import {ALL_STATUS_TYPES, StatusType} from "../02_models/023_Types/Attributes/St
 import {ALL_CLASS_TYPES} from "../02_models/023_Types/Character/ClassTypes";
 import {ALL_WEAPONS, WeaponType} from "../02_models/023_Types/Proficiencies/WeaponTypes";
 import {ALL_WEAPON_PROPERTIES, WeaponPropertyType} from "../02_models/023_Types/Weapons/WeaponPropertyTypes";
-import {AnySpellProgressionTable} from "../02_models/023_Types/Spells/AnySpellProgressionTable";
 
 export function createMenuSection(): string{
     let innerHTML = `
@@ -371,7 +370,7 @@ export function createCharacterStatusSection( {
     death_save_success: number
 }) :string {
     let innerHTML = `
-        <div class="columns mx-0" style="gap: 0.5rem;">
+        <div class="columns">
     `;
 
     Object.entries(ALL_STATUS_TYPES).forEach(([key, value]) => {
@@ -402,7 +401,7 @@ export function createCharacterStatusSection( {
                     </div>
                     <div class="card-body is-flex is-flex-direction-column is-align-items-center has-text-centered">
 
-                        <div class="columns is-vcentered is-mobile" style="gap: 0.5rem; margin: 0;">
+                        <div class="columns is-vcentered is-mobile">
                             <div class="">
                                 <span class="is-small is-block">Base</span>
                                 ${read_only_base ?
@@ -569,16 +568,16 @@ export function createCurrencyAndStatBanner({
     spell_casting: ISpellCasting;
 }): string {
     let innerHTML = `
-        <div class="card box mb-5 is-shadowless p-0">
+        <div class="box">
             <div class="is-align-content-center columns is-desktop is-multiline">
-                <div class="column is-3 columns is-multiline is-align-items-start">
+                <div class="column is-3 columns is-multiline is-align-items-start pl-6">
                     <div class="column is-12 columns is-desktop is-align-items-center p-0 m-0">
                         <p class="column is-10 is-size-4 has-text-weight-bold">Proficiency Bonus</p>
-                        <p class="column is-2 tag is-primary is-large has-text-weight-bold is-flex is-justify-content-center">+${proficiencyBonus}</p>
+                        <p class="column is-2 tag is-primary is-large has-text-weight-bold is-flex is-justify-content-center" style="min-width: 6rem">+${proficiencyBonus}</p>
                     </div>
                     <div class="column is-12 columns is-desktop is-align-items-center p-0 m-0">
                         <span class="column is-10 is-size-4 has-text-weight-bold">Passive Perception</span>
-                        <span class="column is-2 tag is-primary is-large has-text-weight-bold is-flex is-justify-content-center">
+                        <span class="column is-2 tag is-primary is-large has-text-weight-bold is-flex is-justify-content-center" style="min-width: 6rem">
                             ${passivePerception}
                         </span>
                     </div>
@@ -597,7 +596,7 @@ export function createCurrencyAndStatBanner({
         innerHTML += `
                     <div class="column is-12 columns is-desktop is-align-items-center p-0 m-0">
                         <span class="column is-10 is-size-4 has-text-weight-bold">${currencyType}</span>
-                        <input id="currency-input-${currencyType}" class="column is-2 tag is-large has-text-weight-bold is-flex is-justify-content-center has-text-centered has-text-white" style="background: ${color};" type="text" placeholder="0" value="${amount}">
+                        <input id="currency-input-${currencyType}" class="column is-2 tag is-large has-text-weight-bold is-flex is-justify-content-center has-text-centered has-text-white" style="min-width: 6rem; background: ${color};" type="text" placeholder="0" value="${amount}">
                     </div>               
         `
     })
@@ -620,66 +619,75 @@ export function createCurrencyAndStatBanner({
                 <div class="column is-3 columns is-multiline is-align-items-start">
                     <div class="column is-12 columns is-desktop is-align-items-center p-0 m-0">
                         <span class="column is-10 is-size-4 has-text-weight-bold is-align-content-center">Spell Save</span>
-                        <span class="column is-2 tag is-primary is-large has-text-weight-bold is-flex is-justify-content-center has-text-centered has-text-white" style="width: 5rem;" >
+                        <span class="column is-2 tag is-primary is-large has-text-weight-bold is-flex is-justify-content-center has-text-centered" style="min-width: 6rem">
                             ${spell_save}
                         </span>
                     </div>
-                    <div class="column is-12 columns is-desktop is-align-items-center p-0 m-0">
+                    <div class="column is-12 columns is-desktop is-align-items-center is-justify-content-space-between p-0 m-0">
                         <span class="column is-10 is-size-4 has-text-weight-bold is-align-content-center">Spell Modifier</span>
-                        <div class="field has-addons">
-                            <div class="control">
-                                <div class="select ${spell_mod != 0 ? spell_mod > 0 ? `is-success` : `is-danger` : `is-primary`}">
-                                    <select id="spell-casting-mod-type-input" class="has-text-weight-bold has-text-centered ${spell_mod != 0 ? spell_mod > 0 ? `is-success` : `is-danger` : `is-primary`}" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                        ${choice.map(attributeType => `
-                                            <option value="${attributeType}" ${attributeType === spell_mod_type ? 'selected' : ''}>
-                                                ${attributeType}
-                                            </option>
-                                        `).join('')}
-                                    </select>
+                        <div class="column is-2 p-0 m-0">
+                            <div class="field has-addons">
+                                <div class="control">
+                                    <div class="select ${spell_mod != 0 ? spell_mod > 0 ? `is-success` : `is-danger` : `is-primary`}">
+                                        <select id="spell-casting-mod-type-input" class="has-text-weight-bold has-text-centered ${spell_mod != 0 ? spell_mod > 0 ? `is-success` : `is-danger` : `is-primary`}" style="min-width: 6rem; border-top-right-radius: 0; border-bottom-right-radius: 0">
+                                            ${choice.map(attributeType => `
+                                                <option value="${attributeType}" ${attributeType === spell_mod_type ? 'selected' : ''}>
+                                                    ${attributeType}
+                                                </option>
+                                            `).join('')}
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="control">
-                                <span class="column is-2 tag ${spell_mod != 0 ? spell_mod > 0 ? `is-success` : `is-danger` : `is-primary`} is-large has-text-weight-bold is-flex is-justify-content-center has-text-centered" style="width: 5rem; border-top-left-radius: 0; border-bottom-left-radius: 0;">
-                                    ${spell_mod > 0 ? "+" : ""}${spell_mod}
-                                </span>
+                                <div class="control">
+                                    <span class="tag ${spell_mod != 0 ? spell_mod > 0 ? `is-success` : `is-danger` : `is-primary`} is-large has-text-weight-bold is-flex is-justify-content-center has-text-centered" style="min-width: 6rem; border-top-left-radius: 0; border-bottom-left-radius: 0">
+                                        ${spell_mod > 0 ? "+" : ""}${spell_mod}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="column is-12 columns is-desktop is-align-items-center p-0 m-0">
+                    <div class="column is-12 columns is-desktop is-align-items-center is-justify-content-space-between p-0 m-0">
                         <span class="column is-10 is-size-4 has-text-weight-bold is-align-content-center">Spell Attack</span>
-                        <span class="column is-2 tag ${spell_attack != 0 ? spell_attack > 0 ? `is-success` : `is-danger` : `is-primary`} is-large has-text-weight-bold is-flex is-justify-content-center has-text-centered" style="width: 5rem">
+                        <span class="column is-2 tag ${spell_attack != 0 ? spell_attack > 0 ? `is-success` : `is-danger` : `is-primary`} is-large has-text-weight-bold is-flex is-justify-content-center has-text-centered" style="min-width: 6rem">
                             ${spell_attack > 0 ? "+" : ""}${spell_attack}
                         </span>
                     </div>
-                    <div class="column is-12 columns is-desktop is-align-items-center p-0 m-0">
+                    <div class="column is-12 columns is-desktop is-align-items-center is-justify-content-space-between p-0 m-0">
                         <span class="column is-10 is-size-4 has-text-weight-bold is-align-content-center">Con Save</span>
-                        <span class="column is-2 tag ${con_save != 0 ? con_save > 0 ? `is-success` : `is-danger` : `is-primary`} is-large has-text-weight-bold is-flex is-justify-content-center has-text-centered" style="width: 5rem;">
+                        <span class="column is-2 tag ${con_save != 0 ? con_save > 0 ? `is-success` : `is-danger` : `is-primary`} is-large has-text-weight-bold is-flex is-justify-content-center has-text-centered" style="min-width: 6rem">
                             ${con_save > 0 ? "+" : ""}${con_save}
                         </span>
                     </div>
-                    <div class="column is-12 columns is-desktop is-align-items-center p-0 m-0">
+                    <div class="column is-12 columns is-desktop is-align-items-center is-justify-content-space-between p-0 m-0">
                         <span class="column is-10 is-size-4 has-text-weight-bold is-align-content-center">Concentrating</span>
                         <input class="checkbox is-hidden" type="checkbox" id="spell-casting-concentrating-checkbox">
-                        <span class="column is-2 icon is-clickable is-flex is-justify-content-center has-text-centered" id="spell-casting-concentrating-trigger">
-                            ${concentrating?
-                            `<i class="fas fa-2xl fa-eye" style="color:var(--bulma-primary)"></i>`
-                            :
-                            `<i class="fa-regular fa-2xl fa-eye"></i>`
-                            }
-                        </span>
+                        <div class="column is-2 is-large is-flex is-justify-content-center has-text-centered" style="min-width: 6rem">
+                            <span class="icon is-clickable is-flex is-justify-content-center has-text-centered" id="spell-casting-concentrating-trigger">
+                                ${concentrating?
+                                `<i class="fas fa-2xl fa-eye" style="color:var(--bulma-primary)"></i>`
+                                :
+                                `<i class="fa-regular fa-2xl fa-eye"></i>`
+                                }
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="column is-12 columns is-multiline is-align-items-start">
-                <div class="level box   mb-0 is-shadowless">
-                <div class="column is-flex is-align-content-center has-text-centered columns" style="gap: 3rem">
+                <div class="column is-12">
+                    <hr class="has-background-grey-light my-1"/>
+                </div>
+            </div>
+
+            <div class="column is-12 columns is-multiline is-align-items-start px-6">
     `
 
     Object.entries(spell_slots).forEach(([spell_slot_type, spell_slot]) => {
         spell_slot_type = spell_slot_type === "NaN" ? "All" : spell_slot_type;
         innerHTML += `
-                    <div class="column level-item">
-                        <span class="is-size-5 has-text-weight-bold is-align-content-center mr-3">${spell_slot_type}</span>
+                    <div class="column is-2">
+                        <span class="is-size-5 has-text-weight-bold is-align-content-center mr-4">${spell_slot_type}</span>
         `
         let activeSlots = spell_slot.used;
         for(let i = 0; i < spell_slot.max; i++) {
@@ -1119,16 +1127,16 @@ export function createEntitySection(entities: Record<string, IEntity>): string {
                             </td>
                             <td>
                                 <div style="display: flex; align-items: center; gap: 5px;">
-                                    <input id="entities-hp_current-input-${entityName}" class="input" placeholder="50" style="width: 5rem;" value="${entity.hp_current}">
+                                    <input id="entities-hp_current-input-${entityName}" class="input" placeholder="50" value="${entity.hp_current}">
                                     <span>/</span>
-                                    <input id="entities-hp_max-input-${entityName}" class="input" placeholder="100" style="width: 5rem;" value="${entity.hp_max}">
+                                    <input id="entities-hp_max-input-${entityName}" class="input" placeholder="100" value="${entity.hp_max}">
                                 </div>
                             </td>
                             <td>
                                 <div style="display: flex; align-items: center; gap: 5px;">
-                                    <input id="entities-capacity_current-input-${entityName}" class="input" placeholder="100 St." style="width: 5rem;" value="${entity.current_capacity}">
+                                    <input id="entities-capacity_current-input-${entityName}" class="input" placeholder="100 St." value="${entity.current_capacity}">
                                     <span>/</span>
-                                    <input id="entities-capacity_max-input-${entityName}" class="input" placeholder="1000 St." style="width: 5rem;" value="${entity.max_capacity}">
+                                    <input id="entities-capacity_max-input-${entityName}" class="input" placeholder="1000 St." value="${entity.max_capacity}">
                                 </div>
                             </td>
                             <td class="is-vcentered">
@@ -1166,16 +1174,16 @@ export function createEntitySection(entities: Record<string, IEntity>): string {
                             </td>
                             <td>
                                 <div style="display: flex; align-items: center; gap: 5px;">
-                                    <input id="entities-hp_current-input-new" class="input" placeholder="50" style="width: 5rem;">
+                                    <input id="entities-hp_current-input-new" class="input" placeholder="50">
                                     <span>/</span>
-                                    <input id="entities-hp_max-input-new" class="input" placeholder="100" style="width: 5rem;">
+                                    <input id="entities-hp_max-input-new" class="input" placeholder="100">
                                 </div>
                             </td>
                             <td>
                                 <div style="display: flex; align-items: center; gap: 5px;">
-                                    <input id="entities-capacity_current-input-new" class="input" placeholder="100 St." style="width: 5rem;">
+                                    <input id="entities-capacity_current-input-new" class="input" placeholder="100 St.">
                                     <span>/</span>
-                                    <input id="entities-capacity_max-input-new" class="input" placeholder="1000 St." style="width: 5rem;">
+                                    <input id="entities-capacity_max-input-new" class="input" placeholder="1000 St.">
                                 </div>
                             </td>
                             <td class="is-vcentered">
@@ -1205,23 +1213,20 @@ export function createEntitySection(entities: Record<string, IEntity>): string {
 
 export function createActiveProficienciesSection(proficiencies: Record<string, IProficiency>): string {
     let innerHTML = `
-            <div class="columns is-multiline" style="width: 100%">
     `;
 
     for (let i = 0; i < ALL_PROFICIENCIES.length; i++) {
         innerHTML +=`
-                <div class="column is-one-quarter">
-                    <div class="card is-shadowless">
-                        <div class="card-header">
-                            <div class="tag column is-flex is-align-items-center  is-medium my-0 ml-2">
-                                <span class="icon is-small mr-2">
-                                    <i class="fas ${ALL_PROFICIENCIES_ICONS[i]}"></i>
+                <div class="column is-3 columns is-multiline mr-1 mb-1">
+                    <div class="column is-12 box">
+                        <div class="column is-12">
+                            <div class="tag is-link is-flex is-align-items-center p-4">
+                                <span class="icon">
+                                    <i class="fas fa-lg ${ALL_PROFICIENCIES_ICONS[i]}"></i>
                                 </span>
-                                <span>${ALL_PROFICIENCIES[i]}</span>
+                                <span class="has-text-weight-bold is-size-6">${ALL_PROFICIENCIES[i]}</span>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="columns is-multiline card-content px-2 py-2">
                     `
 
         let sortedProficiencies = Object.entries(proficiencies).sort();
@@ -1236,25 +1241,24 @@ export function createActiveProficienciesSection(proficiencies: Record<string, I
                         proficiency.mod > 0 ? "is-success" : "is-warning"
                         : proficiency.mod > 0 ? "is-info"
                     : "is-danger"
-                : ""
+                : "is-primary"
             ;
 
             innerHTML += `
-                                <div class="tag is-medium column is-full py-0 m-1 ${color}">
-                                    <div class="tags has-addons columns m-0">
-                                        <span class="tag is-medium is-capitalized ${color} column is-flex is-justify-content-start has-text-weight-bold">${proficiencyName}</span>
-                                        <span class="tag is-medium ${color} is-narrow px-3 is-2 has-text-weight-semibold is-flex is-justify-content-start" style="width: 3rem">${proficiency.mod_type != "NONE" ? proficiency.mod_type : ""}</span>
-                                        <span class="tag is-medium ${color} is-narrow px-3 is-2 has-text-weight-semibold is-flex is-justify-content-end" style="width: 3rem">${proficiency.mod_type != "NONE" ? proficiency.mod > 0 ? "+" + proficiency.mod : proficiency.mod  : ""}</span>
-                                    </div>
-                                </div>
+                        <div class="columns column is-12 p-0 m-0">
+                            <div class="column is-12 tags has-addons is-flex is-align-content-center py-1">
+                                <span class="tag is-capitalized ${color} column is-size-6 is-7 has-text-weight-semibold is-flex is-justify-content-start py-1" style="white-space: normal; height: 100%">${proficiencyName}</span>
+                                <span class="tag ${color} column is-size-6 is-3 has-text-weight-semibold is-flex is-justify-content-start py-1" style="height: 100%">${proficiency.mod_type != "NONE" ? proficiency.mod_type : ""}</span>
+                                <span class="tag ${color} column is-size-6 is-2 has-text-weight-semibold is-flex is-justify-content-end py-1" style="height: 100%">${proficiency.mod_type != "NONE" ? proficiency.mod > 0 ? "+" + proficiency.mod : proficiency.mod  : ""}</span>
+                            </div>
+                        </div>
             `
         })
 
         innerHTML +=`
-                            </div>
-                        </div>
                     </div>
                 </div>
+            </div>
     `;
     }
 
@@ -1348,7 +1352,7 @@ export function createProficiencySection({
                             <span class="tag is-medium has-text-weight-semibold ${noneAttribute? "is-hidden" : "is-link"}" style="width: 3rem; justify-content: center;">${attribute}</span>
                         </td>
                         <td>
-                            <span class="tag is-medium has-text-weight-semibold ${mod > 0 ? "is-success" : mod < 0 ? "is-danger" : ""}" style="width: 3rem; justify-content: center;">${mod}</span>
+                            <span class="tag is-medium has-text-weight-semibold ${mod > 0 ? "is-success" : mod < 0 ? "is-danger" : "is-primary"}" style="width: 3rem; justify-content: center;">${mod}</span>
                         </td>
                         `}
             `;

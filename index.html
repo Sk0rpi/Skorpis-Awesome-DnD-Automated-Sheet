@@ -12,7 +12,7 @@
 <section class="section is-hidden" id="app">
     <div class="container">
         <div class="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
-            <span class="title">Skorpi's Awesome D&D Automation Sheet</span>
+            <span class="title is-size-1">Skorpi's Awesome D&D Automation Sheet</span>
         </div>
 
         <hr class="has-background-grey my-5" />
@@ -34,6 +34,10 @@
         <hr class="has-background-grey my-5" />
 
         <div class="" id="attribute-section"></div>
+
+        <hr class="has-background-grey my-5" />
+
+        <div class="card p-4" id="curreny-stat-banner"></div>
 
         <hr class="has-background-grey my-5" />
 
@@ -68,18 +72,10 @@
             </div>
 
             <div id="section-weapons" class="card-content">
-                <div class="" id="curreny-stat-banner"></div>
-
-                <hr class="has-background-grey my-5" />
-
                 <div class="" id="weapon-section"></div>
             </div>
 
             <div id="section-spells" class="card-content is-hidden">
-                <div class="" id="spell-casting-section"></div>
-
-                <hr class="has-background-grey my-5" />
-
                 <div class="" id="spell-section"></div>
             </div>
 
@@ -90,13 +86,10 @@
 
         <hr class="has-background-grey my-5" />
 
-        <div class="card">
-            <div class="card-header">
-                <span class="title m-4 is-4">Proficient Proficiencies & Languages</span>
-            </div>
-            <div class="card-content">
-                <div class="columns is-multiline" id="active-proficiencies-section" style="width: 100%"></div>
-            </div>
+        <div class="card columns is-multiline">
+                <span class="column is-12 title m-0">Proficient Proficiencies & Languages</span>
+
+                <div class="column is-12 columns mx-1 is-multiline" id="active-proficiencies-section"></div>
         </div>
 
         <hr class="has-background-grey my-5" />
