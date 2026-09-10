@@ -87,7 +87,8 @@ export class CharacterView {
             (c) => ({
                 currencies: c.currency,
                 proficiencyBonus: c.proficiency_bonus,
-                passivePerception: c.passive_perception
+                passivePerception: c.passive_perception,
+                spell_casting: c.spell_casting,
             }),
         );
 
@@ -99,13 +100,6 @@ export class CharacterView {
                     weapons: c.weapons,
                     tempProperties: this.viewModel.tempProperties
                 }),
-        );
-
-        this.renderSection(
-            'spell-casting-section',
-            createSpellCastingBanner,
-            character,
-            (c) => c.spell_casting,
         );
 
         this.renderSection(
