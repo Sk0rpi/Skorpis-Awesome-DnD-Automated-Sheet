@@ -14,7 +14,6 @@ import {ProficiencyType} from "../02_models/023_Types/Proficiencies/ProficiencyT
 import {IProficiency} from "../02_models/021_Interfaces/Proficiencies/IProficiency";
 import {CharacterStatus} from "../02_models/022_Classes/Character/CharacterStatus";
 import {ICharacterStatus} from "../02_models/021_Interfaces/Character/ICharacterStatus";
-import {SpellCasting} from "../02_models/022_Classes/Spells/SpellCasting";
 import {ALL_SPELL_SLOT_TYPES, SpellSlotType} from "../02_models/023_Types/Spells/SpellSlotTypes";
 import {SpellSlot} from "../02_models/022_Classes/Spells/SpellSlot";
 import {calculateSizeByHeight, convertFileToBase64, isNumeric} from "../07_services/Util";
@@ -26,9 +25,7 @@ import {Entity} from "../02_models/022_Classes/Entities/Entity";
 import {CLASS_SPELL_TABLE_CONNECTOR} from "../01_Constants/Spells/ClassSpelltableConnector"
 import {ClassTypes} from "../02_models/023_Types/Character/ClassTypes";
 import {StandardProgressionTable} from "../02_models/023_Types/Spells/StandardProgressionTableTypes";
-import {PactMagicProgressionTable} from "../02_models/023_Types/Spells/PactProgressionTableType";
-import {IStandardSpellSlots} from "../02_models/021_Interfaces/Spells/IStandardSpellSlots";
-import {IPactMagicSlots} from "../02_models/021_Interfaces/Spells/IPactMagicSlots";
+import {ISpellSlot} from "../02_models/021_Interfaces/Spells/ISpellSlot";
 
 export class CharacterSheetViewModel {
     private _character: Character | null = null;
@@ -148,45 +145,41 @@ export class CharacterSheetViewModel {
 
         character.notes.size = calculateSizeByHeight(character.notes.height);
 
-        let spell_Casting: SpellCasting = new SpellCasting();
-        character.spell_casting = spell_Casting;
-
         let spell_mod_type = character.spell_casting.spell_mod_type;
         character.spell_casting.spell_mod = character.attributes[spell_mod_type].mod;
         character.spell_casting.proficiency_bonus = proficiencyBonus;
         character.spell_casting.con_save = character.attributes["CON"].save_mod;
 
         let spellTable = CLASS_SPELL_TABLE_CONNECTOR[character.info.class as ClassTypes];
-        if (!spellTable) return character;
 
-        if ('slotLevel' in spellTable) {
-            let table = spellTable as PactMagicProgressionTable;
-            Object.entries(table).forEach(([key, pactMagicSlot]) => {
-                if(!pactMagicSlot) return;
-                let levelNum = Number(pactMagicSlot.slotLevel);
-                levelNum = levelNum < 1 ? 1 : levelNum > 20 ? 20 : levelNum;
-                let spell_Slot = new SpellSlot();
-                let level_Number = levelNum as SpellSlotType;
-                spell_Slot.level = level_Number;
-                spell_Slot.max = pactMagicSlot.slotCount;
-                spell_Casting.spell_slots[level_Number] = spell_Slot;
-            })
+        if (!spellTable) {
+            character.spell_casting.spell_slots = {} as Record<SpellSlotType, ISpellSlot>;
+            return character;
         }
 
-        else {
-            let levelNum = Number(character.info.level);
-            levelNum = levelNum < 1 ? 1 : levelNum > 20 ? 20 : levelNum;
-            let table = spellTable[levelNum] as StandardProgressionTable;
-            Object.entries(table).forEach(([level, max]) => {
-                let spell_Slot = new SpellSlot();
-                let level_Number = Number(level) as SpellSlotType;
-                spell_Slot.level = level_Number;
-                spell_Slot.max = Number(max);
-                spell_Casting.spell_slots[level_Number] = spell_Slot;
-            })
-        }
+        let levelNum = Number(character.info.level);
+        levelNum = levelNum < 1 ? 1 : levelNum > 20 ? 20 : levelNum;
+        let table = spellTable[levelNum] as StandardProgressionTable;
+        Object.entries(ALL_SPELL_SLOT_TYPES).forEach(([slotType, value]) => {
+            let max = table[Number(slotType) as SpellSlotType];
+            if(!max) {
+                delete character.spell_casting.spell_slots[Number(slotType) as SpellSlotType];
+                return
+            }
+            let level_Number = Number(slotType) as SpellSlotType;
 
-        character.spell_casting = spell_Casting;
+            if(character.spell_casting.spell_slots[level_Number]){
+                character.spell_casting.spell_slots[level_Number].max = Number(max);
+                character.spell_casting.spell_slots[level_Number].used =
+                    Number(max) < character.spell_casting.spell_slots[level_Number].used ?
+                    Number(max) : character.spell_casting.spell_slots[level_Number].used;
+                return
+            }
+            let spell_Slot = new SpellSlot();
+            spell_Slot.level = level_Number;
+            spell_Slot.max = Number(max);
+            character.spell_casting.spell_slots[level_Number] = spell_Slot;
+        })
 
         return character;
     }
@@ -638,6 +631,8 @@ export class CharacterSheetViewModel {
         }
 
         this._character = this.processCalculations(this._character);
+
+        console.log(this._character);
 
         this.saveCharacterToCache();
 
