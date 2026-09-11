@@ -162,7 +162,7 @@ body {
   min-height: 100vh;
 
   &::before {
-    @include bulma-grain(0.08);
+    @include bulma-grain(0.04);
   }
 
   > * {

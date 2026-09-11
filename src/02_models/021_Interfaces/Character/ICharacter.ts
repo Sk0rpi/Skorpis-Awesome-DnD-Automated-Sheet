@@ -11,7 +11,6 @@ import {ICharacterNotes} from "./ICharacterNotes";
 import {CurrencyType} from "../../023_Types/Character/CurrencyTypes";
 import {AttributeType} from "../../023_Types/Attributes/AttributeTypes";
 import {StatusType} from "../../023_Types/Attributes/StatusTypes";
-import {AnySpellProgressionTable} from "../../023_Types/Spells/AnySpellProgressionTable";
 
 export interface ICharacter {
     info: ICharacterInfo;
