@@ -46,8 +46,8 @@
   --bulma-scheme-invert-ter-l: 14%;
   --bulma-scheme-invert-bis-l: 7%;
   --bulma-scheme-invert-l: 4%;
-  --bulma-family-primary: "EB Garamond", serif;
-  --bulma-family-secondary: "Cinzel", serif;
+  --bulma-family-primary: Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --bulma-family-secondary: Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
   --bulma-family-code: Inconsolata, Hack, SF Mono, Roboto Mono, Source Code Pro, Ubuntu Mono, monospace;
   --bulma-size-small: 0.75rem;
   --bulma-size-normal: 1rem;
@@ -947,8 +947,8 @@
     --bulma-scheme-invert-ter-l: 14%;
     --bulma-scheme-invert-bis-l: 7%;
     --bulma-scheme-invert-l: 4%;
-    --bulma-family-primary: "EB Garamond", serif;
-    --bulma-family-secondary: "Cinzel", serif;
+    --bulma-family-primary: Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
+    --bulma-family-secondary: Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
     --bulma-family-code: Inconsolata, Hack, SF Mono, Roboto Mono, Source Code Pro, Ubuntu Mono, monospace;
     --bulma-size-small: 0.75rem;
     --bulma-size-normal: 1rem;
@@ -1865,8 +1865,8 @@
   --bulma-scheme-invert-ter-l: 14%;
   --bulma-scheme-invert-bis-l: 7%;
   --bulma-scheme-invert-l: 4%;
-  --bulma-family-primary: "EB Garamond", serif;
-  --bulma-family-secondary: "Cinzel", serif;
+  --bulma-family-primary: Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --bulma-family-secondary: Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
   --bulma-family-code: Inconsolata, Hack, SF Mono, Roboto Mono, Source Code Pro, Ubuntu Mono, monospace;
   --bulma-size-small: 0.75rem;
   --bulma-size-normal: 1rem;
@@ -2898,7 +2898,7 @@ th:not([align]) {
 }
 
 :root {
-  --bulma-body-background-color: #DFD2B7;
+  --bulma-body-background-color: #f3ede1;
   --bulma-body-size: 1em;
   --bulma-body-min-width: 300px;
   --bulma-body-rendering: optimizeLegibility;
@@ -5323,7 +5323,7 @@ button.tag:active,
 .title,
 .subtitle {
   --bulma-title-color: var(--bulma-text-strong);
-  --bulma-title-family: "Cinzel", serif;
+  --bulma-title-family: false;
   --bulma-title-size: var(--bulma-size-3);
   --bulma-title-weight: var(--bulma-weight-extrabold);
   --bulma-title-line-height: 1.125;
@@ -5332,7 +5332,7 @@ button.tag:active,
   --bulma-title-sub-size: 0.75em;
   --bulma-title-sup-size: 0.75em;
   --bulma-subtitle-color: var(--bulma-text);
-  --bulma-subtitle-family: "Cinzel", serif;
+  --bulma-subtitle-family: false;
   --bulma-subtitle-size: var(--bulma-size-5);
   --bulma-subtitle-weight: var(--bulma-weight-normal);
   --bulma-subtitle-line-height: 1.25;
@@ -5368,7 +5368,6 @@ button.tag:active,
   font-size: var(--bulma-title-size);
   font-weight: var(--bulma-title-weight);
   line-height: var(--bulma-title-line-height);
-  font-family: var(--bulma-title-family);
 }
 .title strong {
   color: var(--bulma-title-strong-color);
@@ -5404,7 +5403,6 @@ button.tag:active,
   font-size: var(--bulma-subtitle-size);
   font-weight: var(--bulma-subtitle-weight);
   line-height: var(--bulma-subtitle-line-height);
-  font-family: var(--bulma-subtitle-family);
 }
 .subtitle strong {
   color: var(--bulma-subtitle-strong-color);
@@ -5461,8 +5459,8 @@ button.tag:active,
   --bulma-input-height: var(--bulma-control-height);
   --bulma-input-shadow: none;
   --bulma-input-placeholder-color: hsla(var(--bulma-text-h), var(--bulma-text-s), var(--bulma-text-strong-l), 0.3);
-  --bulma-input-disabled-color: var(--bulma-text-weak);
-  --bulma-input-disabled-background-color: var(--bulma-background);
+  --bulma-input-disabled-color: black;
+  --bulma-input-disabled-background-color: #D5C6A9;
   --bulma-input-disabled-border-color: var(--bulma-background);
   --bulma-input-disabled-placeholder-color: hsla(var(--bulma-text-h), var(--bulma-text-s), var(--bulma-text-weak-l), 0.3);
   --bulma-input-arrow: var(--bulma-link);
@@ -5693,7 +5691,7 @@ button.tag:active,
 [disabled].radio, [disabled].checkbox, fieldset[disabled] .radio, fieldset[disabled] .checkbox,
 .radio input[disabled],
 .checkbox input[disabled] {
-  color: var(--bulma-text-weak);
+  color: black;
   cursor: not-allowed;
 }
 
@@ -5872,7 +5870,7 @@ button.tag:active,
   font-size: var(--bulma-size-large);
 }
 .select.is-disabled::after {
-  border-color: var(--bulma-text-weak) !important;
+  border-color: black !important;
   opacity: 0.5;
 }
 .select.is-fullwidth {
@@ -6552,7 +6550,7 @@ button.tag:active,
 
 .card {
   --bulma-card-color: #ffffff;
-  --bulma-card-background-color: #EDE3D0;
+  --bulma-card-background-color: #f3e6cf;
   --bulma-card-shadow: var(--bulma-shadow);
   --bulma-card-radius: 0.75rem;
   --bulma-card-header-background-color: #F7F2E8;
@@ -6560,7 +6558,7 @@ button.tag:active,
   --bulma-card-header-padding: 0.75rem 1rem;
   --bulma-card-header-shadow: 0 0.125em 0.25em hsla(var(--bulma-scheme-h), var(--bulma-scheme-s), var(--bulma-scheme-invert-l), 0.1);
   --bulma-card-header-weight: var(--bulma-weight-bold);
-  --bulma-card-content-background-color: transparent;
+  --bulma-card-content-background-color: #F7F2E8;
   --bulma-card-content-padding: 1.5rem;
   --bulma-card-footer-background-color: transparent;
   --bulma-card-footer-border-top: 1px solid var(--bulma-border-weak);
@@ -21047,11 +21045,11 @@ has-background-danger.is-hoverable:active {
 }
 
 .is-family-primary {
-  font-family: '"EB Garamond", serif' !important;
+  font-family: "Inter", "SF Pro", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
 }
 
 .is-family-secondary {
-  font-family: '"Cinzel", serif' !important;
+  font-family: "Inter", "SF Pro", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
 }
 
 .is-family-sans-serif {
@@ -21562,9 +21560,99 @@ has-background-danger.is-hoverable:active {
   pointer-events: all !important;
 }
 
+.cinzel {
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.eb-garamond {
+  font-family: "EB Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "EB Garamond", serif;
+}
+
+.title, .subtitle {
+  font-family: "Cinzel", serif;
+}
+
+:root {
+  --is-link-70: hsl(var(--bulma-link-h), var(--bulma-link-s), 30%);
+  --is-danger-70: hsl(var(--bulma-danger-h), var(--bulma-danger-s), 50%);
+  --is-success-70: hsl(var(--bulma-success-h), var(--bulma-success-s), 30%);
+}
+
+input[type=checkbox] {
+  accent-color: var(--is-link-70);
+}
+
+input[type=checkbox].redCheck {
+  accent-color: var(--is-danger-70);
+}
+
+input[type=checkbox].greenCheck {
+  accent-color: var(--is-success-70);
+}
+
+.button.is-love {
+  background-color: #8B1E4F;
+  border-color: #8B1E4F;
+  color: #fff;
+}
+
+.button.is-love:hover,
+.button.is-love.is-hovered {
+  background-color: #6F133E;
+  border-color: #8B1E4F;
+  color: #fff;
+}
+
+.button.is-love:focus,
+.button.is-love.is-focused,
+.button.is-love:active,
+.button.is-love.is-active {
+  color: #fff;
+}
+
+.button.is-love:focus:not(:active),
+.button.is-love.is-focused:not(:active) {
+  box-shadow: 0 0 0 0.125em rgba(255, 183, 206, 0.25);
+}
+
+.button.is-github {
+  background-color: #5A2D87;
+  border-color: #5A2D87;
+  color: #fff;
+}
+
+.button.is-github:hover,
+.button.is-github.is-hovered {
+  background-color: #431F66;
+  border-color: #5A2D87;
+  color: #fff;
+}
+
+.button.is-github:focus,
+.button.is-github.is-focused,
+.button.is-github:active,
+.button.is-github.is-active {
+  color: #fff;
+}
+
+.button.is-github:focus:not(:active),
+.button.is-github.is-focused:not(:active) {
+  box-shadow: 0 0 0 0.125em rgba(255, 183, 206, 0.25);
+}
+
 body {
   position: relative;
-  background: linear-gradient(135deg, #DFD2B7 0%, #D5C6A9 100%);
+  background: linear-gradient(135deg, #f3ede1 0%, #D5C6A9 100%);
   min-height: 100vh;
 }
 body::before {
@@ -21575,7 +21663,7 @@ body::before {
   width: 100%;
   height: 100%;
   background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgMjAwIDIwMCcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz48ZmlsdGVyIGlkPSdub2lzZUZpbHRlcic+PGZlVHVyYnVsZW5jZSB0eXBlPSdmcmFjdGFsTm9pc2UnIGJhc2VGcmVxdWVuY3k9JzAuNzUnIG51bU9jdGF2ZXM9JzMnIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWx0ZXI9J3VybCgjbm9pc2VGaWx0ZXIpJy8+PC9zdmc+");
-  opacity: 0.08;
+  opacity: 0.04;
   pointer-events: none;
   z-index: 1;
 }

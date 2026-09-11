@@ -4,6 +4,7 @@ import {calculateTotal} from "../../../07_services/Util";
 export class CharacterStatus implements ICharacterStatus {
     base: number;
     effect: number;
+    color: string;
     post_total_extra: string;
     pre_total_extra: string;
     read_only_base: boolean;
@@ -14,6 +15,7 @@ export class CharacterStatus implements ICharacterStatus {
     ) {
         this.base = data?.base ?? 0;
         this.effect = data?.effect ?? 0;
+        this.color = data?.color ?? "";
         this.post_total_extra = data?.post_total_extra ?? "";
         this.pre_total_extra = data?.pre_total_extra ?? "";
         this.read_only_base = data?.read_only_base ?? false;

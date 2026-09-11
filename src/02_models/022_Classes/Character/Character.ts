@@ -23,7 +23,9 @@ import {ICharacterNotes} from "../../021_Interfaces/Character/ICharacterNotes";
 import {AttributeType} from "../../023_Types/Attributes/AttributeTypes";
 import {CurrencyType} from "../../023_Types/Character/CurrencyTypes";
 import {StatusType} from "../../023_Types/Attributes/StatusTypes";
-import {AnySpellProgressionTable} from "../../023_Types/Spells/AnySpellProgressionTable";
+import {StandardProgressionTable} from "../../023_Types/Spells/StandardProgressionTableTypes";
+import {ALL_LEVEL_TYPES} from "../../023_Types/Character/LevelTypes";
+import {IStandardSpellSlots} from "../../021_Interfaces/Spells/IStandardSpellSlots";
 
 export class Character implements ICharacter {
     attributes: Record<AttributeType, IAttribute>;
@@ -48,7 +50,7 @@ export class Character implements ICharacter {
     proficiency_bonus: number = 0;
     passive_perception: number = 0;
 
-    spell_progression_table: AnySpellProgressionTable = null;
+    spell_progression_table: StandardProgressionTable = {} as Record<ALL_LEVEL_TYPES, IStandardSpellSlots>;
 
     constructor(
         data?: ICharacter

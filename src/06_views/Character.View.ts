@@ -5,7 +5,7 @@ import {
     createAttributeSection,
     createCharacterInfoSection, createCharacterStatusSection, createCurrencyAndStatBanner, createEntitySection,
     createMenuSection, createNoteSection,
-    createProficiencySection, createSpellCastingBanner, createSpellSection, createWeaponSection
+    createProficiencySection, createSpellSection, createWeaponSection
 } from "./Templates";
 import {ALL_PROFICIENCY_TYPES} from "../02_models/023_Types/Proficiencies/AnyProficiencyTypes";
 import {ALL_PROFICIENCIES} from "../02_models/023_Types/Proficiencies/ProficiencyTypes";
@@ -56,6 +56,7 @@ export class CharacterView {
             character,
             (c) => ({
                 characterInfo: c.info,
+                characterNotes: c.notes,
                 inspiration: c.inspiration
             }),
         );
