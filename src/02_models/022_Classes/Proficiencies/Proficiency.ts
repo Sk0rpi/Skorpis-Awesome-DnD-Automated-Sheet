@@ -8,6 +8,7 @@ export class Proficiency implements IProficiency {
     proficient: number;
     type: ProficiencyType;
     mod: number = 0;
+    skill_effects: string = "";
 
     constructor(mod_type: AttributeType, name: string, proficient: number, type: ProficiencyType);
     constructor(data?: IProficiency);

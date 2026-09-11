@@ -26,6 +26,7 @@ import {CLASS_SPELL_TABLE_CONNECTOR} from "../01_Constants/Spells/ClassSpelltabl
 import {ClassTypes} from "../02_models/023_Types/Character/ClassTypes";
 import {StandardProgressionTable} from "../02_models/023_Types/Spells/StandardProgressionTableTypes";
 import {ISpellSlot} from "../02_models/021_Interfaces/Spells/ISpellSlot";
+import {ALL_ARTISANS_TOOLS} from "../02_models/023_Types/Proficiencies/ArtisansToolTypes";
 
 export class CharacterSheetViewModel {
     private _character: Character | null = null;
@@ -144,6 +145,8 @@ export class CharacterSheetViewModel {
         character.status["Initiative"].pre_total_extra = character.status["Initiative"].total > 0 ? "+" : "";
 
         character.notes.size = calculateSizeByHeight(character.notes.height);
+
+        character = this.processRules(character);
 
         let spell_mod_type = character.spell_casting.spell_mod_type;
         character.spell_casting.spell_mod = character.attributes[spell_mod_type].mod;
@@ -1044,5 +1047,17 @@ export class CharacterSheetViewModel {
         this._character = this.processCalculations(this._character);
         this.saveCharacterToCache();
         this.notifyListeners();
+    }
+
+    private processRules(character: Character): Character {
+        if (character.info.class.includes("Artificer")) {
+            if (character.info.level >= 6) {
+                Object.entries(ALL_ARTISANS_TOOLS).forEach(([key, values]) => {
+                    character.proficiencies[key].mod += character.proficiency_bonus;
+                    character.proficiencies[key].skill_effects = "Tool Expertise";
+                })
+            }
+        }
+        return character;
     }
 }

@@ -8,4 +8,5 @@ export interface IProficiency {
     mod_type: AttributeType;
 
     mod: number;
+    skill_effects: string;
 }

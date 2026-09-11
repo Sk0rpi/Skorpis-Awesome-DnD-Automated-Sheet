@@ -1234,7 +1234,7 @@ export function createActiveProficienciesSection(proficiencies: Record<string, I
 
     for (let i = 0; i < ALL_PROFICIENCIES.length; i++) {
         innerHTML +=`
-                <div class="column is-3 columns is-multiline mb-1">
+                <div class="column is-4 columns is-multiline mb-1">
                     <div class="column is-12 box">
                         <div class="column is-12">
                             <div class="tag is-link is-flex is-align-items-center p-4">
@@ -1264,8 +1264,9 @@ export function createActiveProficienciesSection(proficiencies: Record<string, I
             innerHTML += `
                         <div class="columns column is-12 p-0 m-0">
                             <div class="column is-12 tags has-addons is-flex is-align-items-stretch py-1">
-                                <span class="tag is-capitalized ${color} column is-size-6 is-7 has-text-weight-semibold is-flex is-justify-content-start py-1" style="white-space: normal; height: auto !important;">${proficiencyName}</span>
-                                <span class="tag ${color} column is-size-6 is-3 has-text-weight-semibold is-flex is-justify-content-start py-1" style="height: auto !important;">${proficiency.mod_type != "NONE" ? proficiency.mod_type : ""}</span>
+                                <span class="tag is-capitalized ${color} column is-size-6 ${proficiency.skill_effects ? `is-4` : `is-8`} has-text-weight-semibold is-flex is-justify-content-start py-1" style="white-space: normal; height: auto !important;">${proficiencyName}</span>
+                                ${proficiency.skill_effects ? `<span class="tag is-capitalized ${color} column is-size-6 is-4 has-text-weight-semibold is-flex is-justify-content-start py-1" style="white-space: normal; height: auto !important;">${proficiency.skill_effects}</span>` : ``}
+                                <span class="tag ${color} column is-size-6 is-2 has-text-weight-semibold is-flex is-justify-content-start py-1" style="height: auto !important;">${proficiency.mod_type != "NONE" ? proficiency.mod_type : ""}</span>
                                 <span class="tag ${color} column is-size-6 is-2 has-text-weight-semibold is-flex is-justify-content-end py-1" style="height: auto !important;">${proficiency.mod_type != "NONE" ? proficiency.mod > 0 ? "+" + proficiency.mod : proficiency.mod  : ""}</span>
                             </div>
                         </div>
