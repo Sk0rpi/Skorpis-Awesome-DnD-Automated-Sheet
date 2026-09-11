@@ -137,10 +137,10 @@ export class CharacterSheetViewModel {
         character.passive_perception = 10 + character.attributes["WIS"].mod + prof_bonus;
 
         character.status["Current-HP"].post_total_extra = ` / ${character.status["Max-HP"].total}${character.status["Current-HP"].effect > 0 ? ` + <span class="icon is-small m-2"><i class="fas fa-shield-halved"></i></span> ${character.status["Current-HP"].effect}` : ""}`;
-        character.status["Current-HP"].color = character.status["Current-HP"].effect > 0 ? "is-info" : "is-dark";
+        character.status["Current-HP"].color = character.status["Current-HP"].effect > 0 ? "is-info" : "";
 
         character.status["Initiative"].read_only_base = true;
-        character.status["Initiative"].color = character.status["Initiative"].total == 0 ? "is-dark" : character.status["Initiative"].total > 0 ? "is-success" : "is-danger";
+        character.status["Initiative"].color = character.status["Initiative"].total == 0 ? "" : character.status["Initiative"].total > 0 ? "is-success" : "is-danger";
         character.status["Initiative"].pre_total_extra = character.status["Initiative"].total > 0 ? "+" : "";
 
         character.notes.size = calculateSizeByHeight(character.notes.height);

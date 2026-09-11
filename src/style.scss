@@ -1,0 +1,172 @@
+// Path to Bulma's sass folder
+$primary-light:                         #D5C6A9;
+$danger-light:                          #A41720;
+$success-light:                         #0A5C36;
+$warning-light:                         #B26E03;
+$info-light:                            #0F4C81;
+$link-light:                            $danger-light;
+
+$body-background-color-light:           #f3ede1;
+$card-color-light:                      #ffffff;
+$card-header-color-light:               $card-color-light;
+
+$card-background-color-light:           #f3e6cf;
+$card-header-background-color-light:    #F7F2E8;
+$card-content-background-color-light:   $card-header-background-color-light;
+
+$box-background-color-light:            $card-header-background-color-light;
+
+$input-disabled-background-color-light: $primary-light;
+$input-disabled-color-light:            black;
+
+$table-background-color-light:                  $card-header-background-color-light;
+$table-striped-row-even-background-color-light: #EDE3D0;
+$table-cell-border-color-light:                 #DFD2B7;
+$table-row-hover-background-color-light:        $primary-light;
+$table-striped-row-even-hover-background-color-light: $primary-light;
+
+@use "bulma/sass" with (
+  $primary: $primary-light,
+  $danger: $danger-light,
+  $success: $success-light,
+  $warning: $warning-light,
+  $info: $info-light,
+  $link: $link-light,
+  $control-border-width: 2px,
+  $input-shadow: none,
+
+  $body-background-color: $body-background-color-light,
+  $card-color: $card-color-light,
+  $card-header-color: $card-header-color-light,
+
+  $card-background-color: $card-background-color-light,
+  $card-header-background-color: $card-header-background-color-light,
+  $card-content-background-color: $card-content-background-color-light,
+
+  $box-background-color: $box-background-color-light,
+
+  $input-disabled-background-color: $input-disabled-background-color-light,
+  $input-disabled-color: $input-disabled-color-light,
+
+  $table-background-color: $table-background-color-light,
+  $table-striped-row-even-background-color: $table-striped-row-even-background-color-light,
+  $table-cell-border-color: $table-cell-border-color-light,
+  $table-row-hover-background-color: $table-row-hover-background-color-light,
+  $table-striped-row-even-hover-background-color: $table-striped-row-even-hover-background-color-light,
+);
+
+.cinzel {
+           font-family: "Cinzel", serif;
+           font-optical-sizing: auto;
+           font-weight: normal;
+           font-style: normal;
+}
+
+.eb-garamond {
+                font-family: "EB Garamond", serif;
+                font-optical-sizing: auto;
+                font-weight: normal;
+                font-style: normal;
+}
+
+body {
+  font-family: "EB Garamond", serif;
+}
+
+.title, .subtitle {
+  font-family: "Cinzel", serif;
+}
+
+:root {
+  --is-link-70: hsl(var(--bulma-link-h), var(--bulma-link-s), 30%);
+  --is-danger-70: hsl(var(--bulma-danger-h), var(--bulma-danger-s), 50%);
+  --is-success-70: hsl(var(--bulma-success-h), var(--bulma-success-s), 30%);
+}
+
+input[type="checkbox"] {
+  accent-color: var(--is-link-70);
+}
+
+input[type="checkbox"].redCheck {
+  accent-color: var(--is-danger-70);
+}
+
+input[type="checkbox"].greenCheck {
+  accent-color: var(--is-success-70);
+}
+
+.button.is-love{
+  background-color: #8B1E4F ;
+  border-color: #8B1E4F ;
+  color: #fff;
+}
+
+.button.is-love:hover,
+.button.is-love.is-hovered {
+  background-color: #6F133E ;
+  border-color: #8B1E4F ;
+  color: #fff;
+}
+
+.button.is-love:focus,
+.button.is-love.is-focused,
+.button.is-love:active,
+.button.is-love.is-active {
+  color: #fff;
+}
+.button.is-love:focus:not(:active),
+.button.is-love.is-focused:not(:active) {
+  box-shadow: 0 0 0 0.125em rgba(255, 183, 206, 0.25);
+}
+
+.button.is-github{
+  background-color: #5A2D87 ;
+  border-color: #5A2D87 ;
+  color: #fff;
+}
+
+.button.is-github:hover,
+.button.is-github.is-hovered {
+  background-color: #431F66 ;
+  border-color: #5A2D87 ;
+  color: #fff;
+}
+
+.button.is-github:focus,
+.button.is-github.is-focused,
+.button.is-github:active,
+.button.is-github.is-active {
+  color: #fff;
+}
+.button.is-github:focus:not(:active),
+.button.is-github.is-focused:not(:active) {
+  box-shadow: 0 0 0 0.125em rgba(255, 183, 206, 0.25);
+}
+
+@mixin bulma-grain($opacity: 0.06) {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgMjAwIDIwMCcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz48ZmlsdGVyIGlkPSdub2lzZUZpbHRlcic+PGZlVHVyYnVsZW5jZSB0eXBlPSdmcmFjdGFsTm9pc2UnIGJhc2VGcmVxdWVuY3k9JzAuNzUnIG51bU9jdGF2ZXM9JzMnIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWx0ZXI9J3VybCgjbm9pc2VGaWx0ZXIpJy8+PC9zdmc+");
+  opacity: $opacity;
+  pointer-events: none;
+  z-index: 1;
+}
+
+body {
+  position: relative;
+  background: linear-gradient(135deg, #f3ede1 0%, #D5C6A9 100%);
+  min-height: 100vh;
+
+  &::before {
+    @include bulma-grain(0.04);
+  }
+
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+}

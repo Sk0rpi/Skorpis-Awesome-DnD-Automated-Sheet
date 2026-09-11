@@ -5,7 +5,7 @@ import {
     createAttributeSection,
     createCharacterInfoSection, createCharacterStatusSection, createCurrencyAndStatBanner, createEntitySection,
     createMenuSection, createNoteSection,
-    createProficiencySection, createSpellCastingBanner, createSpellSection, createWeaponSection
+    createProficiencySection, createSpellSection, createWeaponSection
 } from "./Templates";
 import {ALL_PROFICIENCY_TYPES} from "../02_models/023_Types/Proficiencies/AnyProficiencyTypes";
 import {ALL_PROFICIENCIES} from "../02_models/023_Types/Proficiencies/ProficiencyTypes";
@@ -56,6 +56,7 @@ export class CharacterView {
             character,
             (c) => ({
                 characterInfo: c.info,
+                characterNotes: c.notes,
                 inspiration: c.inspiration
             }),
         );
@@ -87,7 +88,8 @@ export class CharacterView {
             (c) => ({
                 currencies: c.currency,
                 proficiencyBonus: c.proficiency_bonus,
-                passivePerception: c.passive_perception
+                passivePerception: c.passive_perception,
+                spell_casting: c.spell_casting,
             }),
         );
 
@@ -99,13 +101,6 @@ export class CharacterView {
                     weapons: c.weapons,
                     tempProperties: this.viewModel.tempProperties
                 }),
-        );
-
-        this.renderSection(
-            'spell-casting-section',
-            createSpellCastingBanner,
-            character,
-            (c) => c.spell_casting,
         );
 
         this.renderSection(

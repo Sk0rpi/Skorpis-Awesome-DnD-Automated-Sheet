@@ -1,119 +1,123 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8"/>
     <title>Skorpi's Awesome D&D Automation Sheet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <section class="section is-hidden" id="app">
     <div class="container">
-        <div class="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
-            <span class="title">Skorpi's Awesome D&D Automation Sheet</span>
+        <div class="box is-flex is-flex-direction-column is-justify-content-center is-align-items-center py-6">
+            <span class="title is-size-2 mb-0 has-text-centered">Skorpi's Awesome </span>
+            <span class="title is-size-1 has-text-danger mb-0 has-text-centered">D&D</span>
+            <span class="title is-size-2 has-text-centered"> Automation Sheet</span>
         </div>
 
-        <hr class="has-background-grey-dark my-5" />
+        <hr class="has-background-grey my-5" />
 
         <div class="" id="menu"></div>
 
-        <hr class="has-background-grey-dark my-5" />
+        <hr class="has-background-grey my-5" />
 
         <div class="" id="character-info-section"></div>
 
-        <hr class="has-background-grey-dark my-5" />
+        <hr class="has-background-grey my-5" />
 
         <div class="" id="note-banner"></div>
 
-        <hr class="has-background-grey-dark my-5" />
+        <hr class="has-background-grey my-5" />
 
         <div id="character-status-section"></div>
 
-        <hr class="has-background-grey-dark my-5" />
+        <hr class="has-background-grey my-5" />
 
         <div class="" id="attribute-section"></div>
 
-        <hr class="has-background-grey-dark my-5" />
+        <hr class="has-background-grey my-5" />
 
-        <div class="card">
-            <div class="tabs is-left is-boxed is-size-5 mb-0" id="character-tabs">
-                <ul>
-                    <li class="is-active" data-tab="weapons">
-                        <a>
-                            <span class="icon is-small"
-                                ><i class="fas fa-shield-halved" aria-hidden="true"></i
-                            ></span>
-                            <span>Weapons</span>
-                        </a>
-                    </li>
-                    <li data-tab="spells">
-                        <a>
-                            <span class="icon is-small"
-                                ><i class="fas fa-book" aria-hidden="true"></i
-                            ></span>
-                            <span>Spells</span>
-                        </a>
-                    </li>
-                    <li data-tab="entities">
-                        <a>
-                            <span class="icon is-small"
-                                ><i class="fas fa-user-plus" aria-hidden="true"></i
-                            ></span>
-                            <span>Entities</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <div class="card p-4" id="curreny-stat-banner"></div>
 
-            <div id="section-weapons" class="card-content">
-                <div class="" id="curreny-stat-banner"></div>
+        <hr class="has-background-grey my-5" />
 
-                <hr class="has-background-grey-dark my-5" />
+        <div class="card p-4">
+            <div class="box p-0 pb-4">
+                <div class="tabs is-left is-boxed is-size-5 mb-0" id="character-tabs">
+                    <ul>
+                        <li class="is-active is-size-5 has-text-weight-bold" data-tab="weapons">
+                            <a>
+                                <span class="icon is-small"
+                                    ><i class="fas fa-shield-halved" aria-hidden="true"></i
+                                ></span>
+                                <span>Weapons</span>
+                            </a>
+                        </li>
+                        <li class="is-size-5 has-text-weight-bold" data-tab="spells">
+                            <a>
+                                <span class="icon is-small"
+                                    ><i class="fas fa-book" aria-hidden="true"></i
+                                ></span>
+                                <span>Spells</span>
+                            </a>
+                        </li>
+                        <li class="is-size-5 has-text-weight-bold" data-tab="entities">
+                            <a>
+                                <span class="icon is-small"
+                                    ><i class="fas fa-user-plus" aria-hidden="true"></i
+                                ></span>
+                                <span>Entities</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-                <div class="" id="weapon-section"></div>
-            </div>
+                <div id="section-weapons" class="card-content p-0">
+                    <div class="" id="weapon-section"></div>
+                </div>
 
-            <div id="section-spells" class="card-content is-hidden">
-                <div class="" id="spell-casting-section"></div>
+                <div id="section-spells" class="card-content p-0 is-hidden">
+                    <div class="" id="spell-section"></div>
+                </div>
 
-                <hr class="has-background-grey-dark my-5" />
-
-                <div class="" id="spell-section"></div>
-            </div>
-
-            <div id="section-entities" class="card-content is-hidden">
-                <div class="" id="entity-section"></div>
+                <div id="section-entities" class="card-content p-0 is-hidden">
+                    <div class="" id="entity-section"></div>
+                </div>
             </div>
         </div>
 
-        <hr class="has-background-grey-dark my-5" />
+        <hr class="has-background-grey my-5" />
 
         <div class="card">
-            <div class="card-header">
-                <span class="title m-4 is-4">Proficient Proficiencies & Languages</span>
-            </div>
-            <div class="card-content">
-                <div class="columns is-multiline" id="active-proficiencies-section" style="width: 100%"></div>
-            </div>
+                <div class="m-4 pt-4 columns is-multiline is-justify-content-space-between" id="active-proficiencies-section"></div>
         </div>
 
-        <hr class="has-background-grey-dark my-5" />
+        <hr class="has-background-grey my-5" />
 
-        <div class="card" id="proficiency-section"></div>
+        <div class="card p-4">
+            <div class="box p-0 pb-2">
+                <div class="card is-shadowless" id="proficiency-section"></div>
+            </div>
+        </div>
     </div>
 </section>
 <hr class="has-background-white my-6" />
 <section class="section pt-0">
-    <div class="container">
-        <h2 class="title is-4 has-text-white mb-5">Impressum / Imprint</h2>
-        <p class="subtitle is-6 has-text-grey-light mb-5">Anbieterkennzeichnung nach § 5 DDG</p>
+    <div class="box container has-text-centered">
+        <p class="title is-4">Impressum / Imprint</p>
+        <p class="subtitle is-6 mb-5">Anbieterkennzeichnung nach § 5 DDG</p>
 
         <div class="columns is-desktop">
             <div class="column">
-                <div class="box has-text-white">
-                    <h3 class="heading has-text-grey-light">Diensteanbieter</h3>
+                <div class="box is-shadowless" style="border: 1px solid black;">
+                    <p class="is-size-6 has-text-weight-semibold">Diensteanbieter</p>
                     <p class="is-size-5 font-weight-bold mb-2">skorpi - Dennis Retzlaff</p>
                     <p>c/o Online-Impressum 10885</p>
                     <p>Europaring 90</p>
@@ -122,10 +126,10 @@
             </div>
 
             <div class="column">
-                <div class="box has-text-white">
-                    <h3 class="heading has-text-grey-light">Kontakt & Inhalt</h3>
-                    <p class="mb-1"><strong>E-Mail:</strong> <a href="mailto:impressum@hkk-entertainment.de" class="has-text-info">impressum@hkk-entertainment.de</a></p>
-                    <p class="mb-1">Check out my <a href="https://mein.online-impressum.de/skorpi/" class="has-info-text" target="_blank" rel="noopener noreferrer">HUB here</a></p>
+                <div class="box is-shadowless" style="border: 1px solid black;">
+                    <p class="is-size-6 has-text-weight-semibold">Kontakt & Inhalt</p>
+                    <p class="mb-1"><strong>E-Mail:</strong> <a href="mailto:impressum@hkk-entertainment.de" class="has-text-danger">impressum@hkk-entertainment.de</a></p>
+                    <p class="mb-1">Check out my <a href="https://mein.online-impressum.de/skorpi/" class="has-text-danger" target="_blank" rel="noopener noreferrer">HUB here</a></p>
                     <hr class="has-background-grey my-3" />
                     <p class="is-size-7 has-text-grey-light">
                         Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV: <br>
