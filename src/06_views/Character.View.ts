@@ -1,11 +1,11 @@
 import {CharacterSheetViewModel} from "../03_viewmodels/CharacterSheet.ViewModel";
 import {Character} from "../02_models/022_Classes/Character/Character";
 import {
-    createActiveProficienciesSection,
+    createProficientSkillsSection,
     createAttributeSection,
     createCharacterInfoSection, createCharacterStatusSection, createCurrencyAndStatBanner, createEntitySection,
     createMenuSection, createNoteSection,
-    createProficiencySection, createSpellSection, createWeaponSection
+    createProficiencySection, createSiteMenuSection, createSpellSection, createWeaponSection
 } from "./Templates";
 import {ALL_PROFICIENCY_TYPES} from "../02_models/023_Types/Proficiencies/AnyProficiencyTypes";
 import {ALL_PROFICIENCIES} from "../02_models/023_Types/Proficiencies/ProficiencyTypes";
@@ -18,6 +18,7 @@ export class CharacterView {
     private viewModel: CharacterSheetViewModel;
     private activeProficiencyTab: string = ALL_PROFICIENCIES[0];
     private activeNoteTab: string = "notes-equipment-table-nav";
+    private activeSiteMenuTab: string = "menu-nav-character";
     private isAppVisible: boolean = false;
 
     constructor(viewModel: CharacterSheetViewModel) {
@@ -38,6 +39,13 @@ export class CharacterView {
         this.renderSection(
             'menu',
             createMenuSection
+        );
+
+        this.renderSection(
+            'site-menu',
+            createSiteMenuSection,
+            character,
+            (c) => this.activeSiteMenuTab
         );
 
         this.renderSection(
@@ -119,8 +127,8 @@ export class CharacterView {
         );
 
         this.renderSection(
-            'active-proficiencies-section',
-            createActiveProficienciesSection,
+            'proficient-skills-section',
+            createProficientSkillsSection,
             character,
             (c) => c.proficiencies,
         );
@@ -148,6 +156,7 @@ export class CharacterView {
         this.bindSpellEvents(character);
         this.bindEntityEvents(character);
         this.bindCurrencyEvents(character);
+        this.bindSiteMenuEvents();
 
         if (!this.isAppVisible) {
             const appSection = document.getElementById('app');
@@ -206,6 +215,44 @@ export class CharacterView {
             const id = target.id;
             this.viewModel.handleSpellCastingEvent(id, "")
         })
+    }
+
+    private bindSiteMenuEvents(): void {
+        const siteMenuTabs = document.getElementById('site-menu-tabs') as HTMLDivElement;
+
+        const sectionMenuCharacter = document.getElementById('section-menu-character') as HTMLDivElement;
+        const sectionMenuActiveSkillsAndNotes = document.getElementById('section-menu-proficient-skills-and-notes') as HTMLDivElement;
+        const sectionAttributes = document.getElementById('section-attributes') as HTMLDivElement;
+        const sectionWeaponsSpellsAndEntities = document.getElementById('section-weapons-spells-and-entities') as HTMLDivElement;
+        const sectionAllSkills = document.getElementById('section-all-skills') as HTMLDivElement;
+
+        const tabSections = [
+            { tabId: 'menu-nav-character', element: sectionMenuCharacter },
+            { tabId: 'menu-nav-proficient-skills-notes', element: sectionMenuActiveSkillsAndNotes },
+            { tabId: 'menu-nav-attributes', element: sectionAttributes },
+            { tabId: 'menu-nav-weapons-spells-entities', element: sectionWeaponsSpellsAndEntities },
+            { tabId: 'menu-nav-all-skills', element: sectionAllSkills },
+        ];
+
+        siteMenuTabs.querySelectorAll('li').forEach(li => {
+            li.addEventListener('click', () => {
+                const targetTab = li.getAttribute('data-tab');
+
+                if (targetTab) this.activeSiteMenuTab = targetTab.toString();
+
+                siteMenuTabs.querySelectorAll('li').forEach(tab => tab.classList.remove('is-active'));
+                li.classList.add('is-active');
+
+                tabSections.forEach(item => {
+                    if (item.tabId === targetTab) {
+                        item.element.classList.remove('is-hidden');
+                    } else {
+                        item.element.classList.add('is-hidden');
+                    }
+                });
+            });
+        });
+
     }
 
     private bindNoteEvents(character: Character): void {
