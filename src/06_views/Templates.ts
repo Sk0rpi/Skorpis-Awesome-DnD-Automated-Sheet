@@ -23,7 +23,7 @@ import {ALL_WEAPON_PROPERTIES, WeaponPropertyType} from "../02_models/023_Types/
 
 export function createMenuSection(): string{
     let innerHTML = `
-        <div class="box columns pt-4 pr-4 pb-2 pl-4 m-0 is-justify-content-space-between">
+        <div class="box columns pt-4 pr-4 pb-2 pl-4 m-0 is-justify-content-space-between is-desktop">
             <input id="import-character-input" type="file" class="is-hidden" accept=".json">
             <a id="import-character-button" class="column is-2-desktop mb-2 button is-success">
                 <span class="icon mr-0">
@@ -68,6 +68,46 @@ export function createMenuSection(): string{
            
         </div>
     `;
+    return innerHTML;
+}
+
+export function createSiteMenuSection(activeSiteMenuTab: string): string {
+    let innerHTML= `
+        <div class="tabs column is-medium is-full p-0 mb-4" id="site-menu-tabs">
+            <ul>
+                <li class="${`menu-nav-character` === activeSiteMenuTab ? "is-active" : ""}" data-tab="menu-nav-character">
+                    <a>
+                        <span class="icon is-small"><i class="fas fa-user-shield" aria-hidden="true"></i></span>
+                        <span class="label is-size-4 has-text-weight-semibold">Character</span>
+                    </a>
+                </li>
+                <li class="${`menu-nav-proficient-skills-notes` === activeSiteMenuTab ? "is-active" : ""}" data-tab="menu-nav-proficient-skills-notes">
+                    <a>
+                        <span class="icon is-small"><i class="fas fa-bolt" aria-hidden="true"></i></span>
+                        <span class="label is-size-4 has-text-weight-semibold">Proficient Skills & Notes</span>
+                    </a>
+                </li>
+                <li class="${`menu-nav-attributes` === activeSiteMenuTab ? "is-active" : ""}" data-tab="menu-nav-attributes">
+                    <a>
+                        <span class="icon is-small"><i class="fas fa-shield-alt" aria-hidden="true"></i></span>
+                        <span class="label is-size-4 has-text-weight-semibold">Attributes</span>
+                    </a>
+                </li>
+                <li class="${`menu-nav-weapons-spells-entities` === activeSiteMenuTab ? "is-active" : ""}" data-tab="menu-nav-weapons-spells-entities">
+                    <a>
+                        <span class="icon is-small"><i class="fas fa-magic" aria-hidden="true"></i></span>
+                        <span class="label is-size-4 has-text-weight-semibold">Weapons, Spells & Entities</span>
+                    </a>
+                </li>
+                <li class="${`menu-nav-all-skills` === activeSiteMenuTab ? "is-active" : ""}" data-tab="menu-nav-all-skills">
+                    <a>
+                        <span class="icon is-small"><i class="fas fa-book" aria-hidden="true"></i></span>
+                        <span class="label is-size-4 has-text-weight-semibold">All Skills</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    `
     return innerHTML;
 }
 
@@ -192,9 +232,9 @@ export function createNoteSection({
 }
 
 export function createCharacterInfoSection({
-    characterInfo,
-    characterNotes,
-    inspiration
+                                               characterInfo,
+                                               characterNotes,
+                                               inspiration
                                            }:{
     characterInfo: ICharacterInfo,
     characterNotes: ICharacterNotes,
@@ -217,12 +257,11 @@ export function createCharacterInfoSection({
     let size = characterNotes.size;
 
     let innerHTML = `
-        <div class="columns is-desktop has-text-centered is-justify-content-space-between">
-            <div class="column is-3-desktop">
-                <div class="card p-4">
+        <div class="columns is-multiline has-text-centered is-justify-content-space-between">
+            <div class="column is-3-desktop is-12-mobile"">
+                <div class="card p-4" style="height:100%">
                     <div class="card-body">
                         <input class="file-input is-hidden" type="file" id="image-import-input" accept=".png,.jpg,.jpeg,.gif">
-                        
                         <figure class="image is-3by4 ${appearance ? `` : `is-clickable`} is-flex is-align-items-center is-justify-content-center border-placeholder has-background-primary" id="image-import-trigger-figure" style="position: relative;">
                             ${appearance ? `
                                 <img class="card is-shadowless" src="data:image/jpeg;base64,${appearance}" style="object-fit: cover; width: 100%; height: 100%;" alt="Character Portrait" />
@@ -234,104 +273,119 @@ export function createCharacterInfoSection({
                                 </div>
                             `}
                         </figure>
-                        
-                        <input id="info-name-input" class="input is-medium has-text-weight-bold has-text-centered mt-4 has-text-weight-normal" type="text" placeholder="Onestone Bluntheus" value="${name}">
                     </div>
                 </div>
             </div>
-            <div class="column is-9-desktop columns is-multiline">
-                <div class="column is-2-desktop">
-                    <div class="card p-4"">
-                        <label class="label is-size-4 has-text-weight-semibold">Level</label>
-                        <div class="card-body">
-                            <input id="info-level-input" class="input is-medium has-text-weight-bold has-text-centered" type="text" placeholder="1" value="${level}">
-                        </div>
-                        <hr class="has-background-white my-4" style="width: 100%;">
-                        <div class="card-body is-flex is-align-items-center is-justify-content-center">
-                            <input class="checkbox is-hidden" type="checkbox" id="info-inspiration-checkbox">
-                            <span class="icon is-medium mr-0 is-clickable" id="info-inspiration-trigger">
-                                ${characterInspiration?
-                                `<i class="fas fa-2xl fa-star has-text-warning"></i>`
-                                :
-                                `<i class="fa-regular fa-2xl fa-star"></i>`
-                            }
-                            </span>
-                        </div>
-                        <label class="label is-size-4 has-text-weight-semibold pb-4 mb-0"><abbr title="Inspiration">Insp.</abbr></label>
-                    </div>
-                </div>
-                <div class="column is-5-desktop">
-                    <div class="card p-4">
-                        <label class="label is-size-4 has-text-weight-semibold">Background</label>
-                        <div class="card-body">
-                            <input id="info-background-input" class="input is-medium has-text-weight-bold has-text-centered" type="text" placeholder="Professional Home Brewer" value="${background}">
-                        </div>
-                        <hr class="has-background-white my-4" style="width: 100%;">
-                        <div class="card-body">
-                            <input id="info-species-input" class="input is-medium has-text-weight-bold has-text-centered" type="text" placeholder="Fairy-Giant" value="${species}">
-                        </div>
-                        <label class="label is-size-4 has-text-weight-semibold">Species</label>
-                    </div>
-                </div>
+            
+            <div class="column is-9-desktop is-12-mobile">
+                <div class="columns is-multiline is-mobile">
                 
-                <div class="column is-5-desktop">
-                    <div class="card p-4">
-                        <label class="label is-size-4 has-text-weight-semibold">Class</label>
-                        <div class="card-body">
-                            <div class="select is-medium is-fullwidth">
-                                <select id="info-class-input" class="has-text-weight-bold has-text-centered px-4">
-                                    ${ALL_CLASS_TYPES.map(classType => `
-                                        <option value="${classType}" ${classType === characterClass ? 'selected' : ''}>
-                                            ${classType}
-                                        </option>
-                                    `).join('')}
-                                </select>
+                    <div class="column is-2-desktop is-6-mobile">
+                        <div class="card p-4 has-text-centered" style="height:100%">
+                            <label class="label is-size-4 has-text-weight-semibold pb-4 mb-0"><abbr title="Inspiration">Insp.</abbr></label>
+                            <div class="card-body is-flex is-align-items-center is-justify-content-center">
+                                <input class="checkbox is-hidden" type="checkbox" id="info-inspiration-checkbox">
+                                <span class="icon is-medium mr-0 is-clickable" id="info-inspiration-trigger">
+                                    ${characterInspiration ? `<i class="fas fa-2xl fa-star has-text-warning"></i>` : `<i class="fa-regular fa-2xl fa-star"></i>`}
+                                </span>
                             </div>
                         </div>
-                        
-                        <hr class="has-background-white my-4" style="width: 100%;">
-                        
-                        <div class="card-body">
-                            <input id="info-alignment-input" class="input is-medium has-text-weight-bold has-text-centered" type="text" placeholder="Chaotic Evil" value="${alignment}">
-                        </div>
-                        <label class="label is-size-4 has-text-weight-semibold">Alignment</label>
                     </div>
-                </div>
-                <div class="column is-3">
-                    <div class="card p-4 has-text-centered">
-                        <label class="label is-size-4 has-text-weight-semibold">Height</label>
-                        <div class="card-body">
-                            <input id="notes-height-input" class="input is-medium has-text-weight-bold has-text-centered" style="height: 3.15rem" type="text" placeholder="180 cm" value="${height > 0 ? `${height} cm` : ``}">
+                    <div class="column is-2-desktop is-6-mobile">
+                        <div class="card p-4 has-text-centered">
+                            <label class="label is-size-4 has-text-weight-semibold">Level</label>
+                            <div class="card-body">
+                                <input id="info-level-input" class="input is-medium has-text-weight-bold has-text-centered" type="text" placeholder="1" value="${level}">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="column is-3">
-                    <div class="card p-4 has-text-centered">
-                        <label class="label is-size-4 has-text-weight-semibold">Age</label>
-                        <div class="card-body">
-                            <input id="notes-age-input" class="input is-medium has-text-weight-bold has-text-centered" style="height: 3.15rem" type="text" placeholder="24" value="${age > 0 ? `${age}` : ``}">
+                    <div class="column is-4-desktop is-12-mobile">
+                        <div class="card p-4 has-text-centered">
+                            <label class="label is-size-4 has-text-weight-semibold">Name</label>
+                            <div class="card-body">
+                                <input id="info-name-input" class="input is-medium has-text-weight-bold has-text-centered has-text-weight-normal" type="text" placeholder="Onestone Bluntheus" value="${name}">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="column is-3">
-                    <div class="card p-4 has-text-centered">
-                        <label class="label is-size-4 has-text-weight-semibold">Weight</label>
-                        <div class="card-body">
-                            <input id="notes-weight-input" class="input is-medium has-text-weight-bold has-text-centered" style="height: 3.15rem" type="text" placeholder="75 kg" value="${weight > 0 ? `${weight} kg` : ``}">
+                    <div class="column is-4-desktop is-12-mobile">
+                        <div class="card p-4 has-text-centered">
+                            <label class="label is-size-4 has-text-weight-semibold">Background</label>
+                            <div class="card-body">
+                                <input id="info-background-input" class="input is-medium has-text-weight-bold has-text-centered" type="text" placeholder="Professional Home Brewer" value="${background}">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="column is-3">
-                    <div class="card p-4 has-text-centered">
-                        <label class="label is-size-4 has-text-weight-semibold">Size</label>
-                        <div class="card-body">
-                            <span class="tag  is-size-4 has-text-weight-bold is-flex is-justify-content-center is-align-items-center" style="height: 3.15rem">${size}</span>
+                    
+                    
+                    <div class="column is-3-desktop is-12-mobile">
+                        <div class="card p-4 has-text-centered">
+                            <label class="label is-size-4 has-text-weight-semibold">Species</label>
+                            <div class="card-body">
+                                <input id="info-species-input" class="input is-medium has-text-weight-bold has-text-centered" type="text" placeholder="Fairy-Giant" value="${species}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3-desktop is-12-mobile">
+                        <div class="card p-4 has-text-centered">
+                            <label class="label is-size-4 has-text-weight-semibold">Alignment</label>
+                            <div class="card-body">
+                                <input id="info-alignment-input" class="input is-medium has-text-weight-bold has-text-centered" type="text" placeholder="Chaotic Evil" value="${alignment}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-6-desktop is-12-mobile">
+                        <div class="card p-4 has-text-centered">
+                            <label class="label is-size-4 has-text-weight-semibold">Class</label>
+                            <div class="card-body">
+                                <div class="select is-medium is-fullwidth">
+                                    <select id="info-class-input" class="has-text-weight-bold has-text-centered px-4">
+                                        ${ALL_CLASS_TYPES.map(classType => `
+                                            <option value="${classType}" ${classType === characterClass ? 'selected' : ''}>
+                                                ${classType}
+                                            </option>
+                                        `).join('')}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="column is-3-desktop is-6-mobile">
+                        <div class="card p-4 has-text-centered">
+                            <label class="label is-size-4 has-text-weight-semibold">Age</label>
+                            <div class="card-body">
+                                <input id="notes-age-input" class="input is-medium has-text-weight-bold has-text-centered" style="height: 3.15rem" type="text" placeholder="24" value="${age > 0 ? `${age}` : ``}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3-desktop is-6-mobile">
+                        <div class="card p-4 has-text-centered">
+                            <label class="label is-size-4 has-text-weight-semibold">Height</label>
+                            <div class="card-body">
+                                <input id="notes-height-input" class="input is-medium has-text-weight-bold has-text-centered" style="height: 3.15rem" type="text" placeholder="180 cm" value="${height > 0 ? `${height} cm` : ``}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3-desktop is-6-mobile">
+                        <div class="card p-4 has-text-centered">
+                            <label class="label is-size-4 has-text-weight-semibold">Weight</label>
+                            <div class="card-body">
+                                <input id="notes-weight-input" class="input is-medium has-text-weight-bold has-text-centered" style="height: 3.15rem" type="text" placeholder="75 kg" value="${weight > 0 ? `${weight} kg` : ``}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3-desktop is-6-mobile">
+                        <div class="card p-4 has-text-centered">
+                            <label class="label is-size-4 has-text-weight-semibold">Size</label>
+                            <div class="card-body">
+                                <span class="tag is-size-4 has-text-weight-bold is-flex is-justify-content-center is-align-items-center" style="height: 3.15rem">${size}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <hr class="has-background-grey my-5" />
+        
         <div class="columns has-text-centered">
             <div class="column is-6-desktop is-12-mobile">
                 <div class="card is-flex is-flex-direction-column" style="height: 100%">
@@ -350,10 +404,10 @@ export function createCharacterInfoSection({
                 </div>
             </div>
         </div>
-
-    `
+    `;
     return innerHTML;
 }
+
 
 export function createCharacterStatusSection( {
     status,
@@ -431,7 +485,7 @@ export function createCharacterStatusSection( {
     `;
 
     innerHTML += `
-    <div class="card columns p-0 m-0 is-justify-content-space-between">
+    <div class="card columns p-0 m-0 mb-5 is-justify-content-space-between">
         <div class="column is-3 box columns p-3 m-4 is-desktop">
             <span class="column is-7 tag is-size-5 has-text-weight-bold is-primary has-text-centered is-flex is-justify-content-center" style="height: 3rem">Maximum Hit Die</span>
             <div class="column is-1"></div>
@@ -728,245 +782,175 @@ export function createCurrencyAndStatBanner({
 
 
 export function createWeaponSection({
-    weapons,
-    tempProperties
+                                        weapons,
+                                        tempProperties
                                     } : {
     weapons: Record<string, IWeapon>,
     tempProperties: WeaponPropertyType[]
-    }): string {
+}): string {
     let weaponTypes: WeaponType[] = (Object.keys(ALL_WEAPONS) as WeaponType[]);
 
     let innerHTML = `
         <div class="card is-shadowless">
-            <div class="card-content p-0">
-                <table class="table mb-0 is-fullwidth">
-                    <thead>
-                        <tr style="background: var(--bulma-primary)">
-                            <th class="is-size-5 has-text-weight-bold">Weapon</th>
-                            <th class="is-size-5 has-text-weight-bold">Weapon Type</th>
-                            <th class="is-size-5 has-text-weight-bold" style="width: 9rem"><abbr title="Modifier Type">Mod. Type</abbr></th>
-                            <th class="is-size-5 has-text-weight-bold" style="width: 5rem"><abbr title="Effect">Efc.</abbr></th>
-                            <th class="is-size-5 has-text-weight-bold" style="width: 5rem"><abbr title="Enhancement">Enh.</abbr></th>
-                            <th class="is-size-5 has-text-weight-bold"><abbr title="Proficiency">Prof.</abbr></th>
-                            <th class="is-size-5 has-text-weight-bold"><abbr title="Hit Modifier">Hit Mod.</abbr></th>
-                            <th class="is-size-5 has-text-weight-bold">Dmg. Bonus</th>
-                            <th></th>
-                        </tr>
-                        <tr style="background: var(--bulma-primary)">
-                            <th class="is-size-5 has-text-weight-bold" colspan="3">Properties</th>
-                            <th class="is-size-5 has-text-weight-bold" colspan="5">Damage Dice</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <div class="card-content p-3">
+                <div class="columns is-multiline">
     `
+
     Object.entries(weapons).forEach(([weaponName, weapon]) => {
-        let name = weapon.name;
-        let type = weapon.type;
-        let properties = weapon.properties;
-        let mod_type = weapon.mod_type;
-        let mod = weapon.mod;
-        let effect = weapon.effect;
-        let enhancement = weapon.enhancement;
-        let proficient = weapon.proficient;
-        let proficiency_bonus = weapon.proficiency_bonus;
-        let hit = weapon.hit;
-        let damage_dice = weapon.damage_dice;
-        let damage_bonus = weapon.damage_bonus;
-        let weapon_property_choice = ALL_WEAPON_PROPERTIES.filter(prop => !(prop in properties));
-
+        let weapon_property_choice = ALL_WEAPON_PROPERTIES.filter(prop => !(prop in weapon.properties));
         innerHTML += `
-                        <tr>
-                            <td>
-                                <input id="weapons-name-input-${weaponName}" class="input has-text-weight-bold" placeholder="Dagger..." value="${name}">
-                            </td>
-                            <td>
-                                <div class="select">
-                                    <select id="weapons-type-input-${weaponName}" class="input is-capitalized">
-                                        ${weaponTypes.map(weaponType => `
-                                            <option value="${weaponType}" ${weaponType === type as WeaponType ? 'selected' : ''}>
-                                                ${weaponType}
-                                            </option>
-                                        `).join('')}
-                                    </select>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="select">
-                                    <select id="weapons-mod-type-input-${weaponName}" class="input">
-                                        ${ALL_ATTRIBUTE_TYPES.map(attributeType => `
-                                            <option value="${attributeType}" ${attributeType === mod_type as AttributeType ? 'selected' : ''}>
-                                                ${attributeType}
-                                            </option>
-                                        `).join('')}
-                                    </select>
-                                </div>
-                            </td>
-                            <td>
-                                <input id="weapons-effect-input-${weaponName}" class="input has-text-weight-bold" placeholder="0" value="${effect}">
-                            </td>
-                            <td>
-                                <input id="weapons-enhancement-input-${weaponName}" class="input has-text-weight-bold" placeholder="0" value="${enhancement}">
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-align-items-center">
-                                    <input id="weapons-proficient-input-${weaponName}" class="checkbox" type="checkbox" disabled ${proficient ? "checked" : ""} style="transform: scale(1.5);">
-                                </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-align-items-center has-text-weight-bold" style="gap: 0.25rem">
-                                    <span class="is-size-5 has-text-weight-bold ${hit > 0 ? "has-text-success" : hit < 0 ? "has-text-danger" : ""}">${hit > 0 ? "+" : ""}${hit}</span>
-                                    <span class="icon has-text-info"><abbr title="${proficient ? `+${proficiency_bonus} Proficiency Bonus + ` : ``}${mod} Modifier + ${effect} Effect + ${enhancement} Enhancement"><i class="fas fa-info-circle"></i></abbr></span> 
-                                </div>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-align-items-center has-text-weight-bold" style="gap: 0.25rem">
-                                    <span class="is-size-5 has-text-weight-bold ${damage_bonus > 0 ? "has-text-success" : damage_bonus < 0 ? "has-text-danger" : ""}">${damage_bonus > 0 ? "+" : ""}${damage_bonus}</span>
-                                    <span class="icon has-text-info"><abbr title="${mod} Modifier + ${effect} Effect + ${enhancement} Enhancement"><i class="fas fa-info-circle"></i></abbr></span> 
-                                </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-justify-content-end is-align-items-center has-text-weight-bold" style="gap: 0.25rem">
-                                    <button id="weapons-remove-${weaponName}" class="button is-danger " title="Delete Weapon" type="button">
-                                        <i class="fa-solid fa-xmark"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <div class="is-flex">
-                                    <div class="select">
-                                        <select id="weapons-add-property-${weaponName}" class="input is-capitalized">
-                                            ${weapon_property_choice.map(weaponProperty => `
-                                                <option value="${weaponProperty}">
-                                                    ${weaponProperty}
-                                                </option>
-                                            `).join('')}
+                    <div class="column is-12 is-6-desktop is-4-widescreen">
+                        <div class="box mb-0" style="border: 1px solid var(--bulma-primary); height: 100%;">
+                            <div class="is-flex is-justify-content-between is-align-items-center mb-3">
+                                <input id="weapons-name-input-${weaponName}" class="input has-text-weight-bold mr-2" value="${weapon.name}" placeholder="Weapon name...">
+                                <button id="weapons-remove-${weaponName}" class="button is-danger" type="button">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="columns is-mobile is-multiline is-variable is-2 mb-2">
+                                <div class="column is-6">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1">Weapon Type</label>
+                                    <div class="select is-fullwidth">
+                                        <select id="weapons-type-input-${weaponName}" class="is-capitalized">
+                                            ${weaponTypes.map(w => `<option value="${w}" ${w === weapon.type ? 'selected' : ''}>${w}</option>`).join('')}
                                         </select>
                                     </div>
-    `
-        Object.entries(properties).forEach(([key, property]) => {
-            innerHTML += `
-                                    <div class="tags has-addons m-0 ml-3">
-                                        <div class="tag  is-capitalized has-text-weight-bold is-size-6">
-                                            <span>${property}</span>
-                                            <a id="weapons-remove-property-${weaponName}-${property}" class="ml-2">
-                                                <i class="fa-solid fa-xmark"></i>
-                                            </a>
-                                        </div>
+                                </div>
+                                <div class="column is-6">
+                                    <label class="label is-size-5 has-text-weight-bold  mb-1">Mod. Type</label>
+                                    <div class="select is-fullwidth">
+                                        <select id="weapons-mod-type-input-${weaponName}">
+                                            ${ALL_ATTRIBUTE_TYPES.map(a => `<option value="${a}" ${a === weapon.mod_type ? 'selected' : ''}>${a}</option>`).join('')}
+                                        </select>
                                     </div>
+                                </div>
+                                <div class="column is-3">
+                                    <label class="label is-size-5 has-text-weight-bold  mb-1">Effect</label>
+                                    <input id="weapons-effect-input-${weaponName}" class="input has-text-weight-bold" value="${weapon.effect}" placeholder="0">
+                                </div>
+                                <div class="column is-3">
+                                    <label class="label is-size-5 has-text-weight-bold  mb-1"><abbr title="Enhancement">Enhance.</abbr></label>
+                                    <input id="weapons-enhancement-input-${weaponName}" class="input has-text-weight-bold" value="${weapon.enhancement}" placeholder="0">
+                                </div>
+                                <div class="column is-3 has-text-centered">
+                                    <label class="label is-size-5 has-text-weight-bold  mb-1"><abbr title="Hit Modifier">Hit</abbr></label>
+                                    <div class="is-size-5 has-text-weight-bold mt-1 ${weapon.hit > 0 ? 'has-text-success' : weapon.hit < 0 ? 'has-text-danger' : ''}">
+                                        ${weapon.hit > 0 ? '+' : ''}${weapon.hit}
+                                    </div>
+                                </div>
+                                <div class="column is-3 has-text-centered">
+                                    <label class="label is-size-5 has-text-weight-bold  mb-1"><abbr title="Damage Bonus">Dmg</abbr></label>
+                                    <div class="is-size-5 has-text-weight-bold mt-1 ${weapon.damage_bonus > 0 ? 'has-text-success' : weapon.damage_bonus < 0 ? 'has-text-danger' : ''}">
+                                        ${weapon.damage_bonus > 0 ? '+' : ''}${weapon.damage_bonus}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field mb-3">
+                                <label class="label is-size-5 has-text-weight-bold  mb-1">Damage Dice</label>
+                                <textarea id="weapons-damage-dice-input-${weaponName}" class="textarea" rows="3">${weapon.damage_dice}</textarea>
+                            </div>
+
+                            <div class="field">
+                                <label class="label is-size-5 has-text-weight-bold  mb-1">Properties</label>
+                                <div class="is-flex is-flex-wrap-wrap" style="gap: 0.25rem; align-items: center;">
+                                    <div class="select">
+                                        <select id="weapons-add-property-${weaponName}" class="is-capitalized">
+                                            ${weapon_property_choice.map(p => `<option value="${p}">${p}</option>`).join('')}
+                                        </select>
+                                    </div>
+                                    ${Object.entries(weapon.properties).map(([k, prop]) => `
+                                        <div class="tags has-addons m-0">
+                                            <div class="tag is-primary is-size-5 is-capitalized has-text-weight-bold">
+                                                <span>${prop}</span>
+                                                <a id="weapons-remove-property-${weaponName}-${prop}" class="ml-2">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
         `
-        })
-
-        innerHTML += `
-                                </div>
-                            </td>
-                            <td colspan="6">
-                                <input id="weapons-damage-dice-input-${weaponName}" class="input" placeholder="1d4 slash" value="${damage_dice}">
-                            </td>
-                        </tr>
-                        <tr style="background: var(--bulma-primary)">
-                            <td colspan="9"></td>
-                        </tr>
-    `
     })
 
-    let weapon_property_choice = ALL_WEAPON_PROPERTIES.filter(prop => !tempProperties.includes(prop));
-
+    let weapon_property_choice_new = ALL_WEAPON_PROPERTIES.filter(prop => !tempProperties.includes(prop));
     innerHTML += `
-                        <tr class="">
-                            <td>
-                                <input id="weapons-name-input-new" class="input" placeholder="Dagger...">
-                            </td>
-                            <td>
-                                <div class="select">
-                                    <select id="weapons-type-input-new" class="input is-capitalized">
-                                        ${weaponTypes.map(weaponType => `
-                                            <option value="${weaponType}">
-                                                ${weaponType}
-                                            </option>
-                                        `).join('')}
-                                    </select>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="select">
-                                    <select id="weapons-mod-type-input-new" class="input">
-                                        ${ALL_ATTRIBUTE_TYPES.map(attributeType => `
-                                            <option value="${attributeType}">
-                                                ${attributeType}
-                                            </option>
-                                        `).join('')}
-                                    </select>
-                                </div>
-                            </td>
-                            <td>
-                                <input id="weapons-effect-input-new" class="input has-text-weight-bold" placeholder="0">
-                            </td>
-                            <td>
-                                <input id="weapons-enhancement-input-new" class="input has-text-weight-bold" placeholder="0">
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-align-items-center">
-                                    <span class="is-size-4 has-text-weight-bold">-</span>
-                                </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-align-items-center" style="gap: 0.25rem">
-                                    <span class="is-size-4 has-text-weight-bold">-</span>
-                                    <span class="icon has-text-info"><abbr title="Proficiency Bonus + Modifier + Effect + Enhancement"><i class="fas fa-info-circle"></i></abbr></span>
-                                </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-align-items-center" style="gap: 0.25rem">
-                                    <span class="is-size-4 has-text-weight-bold">-</span>
-                                    <span class="icon has-text-info"><abbr title="Modifier + Effect + Enhancement"><i class="fas fa-info-circle"></i></abbr></span>
-                                </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-justify-content-end is-align-items-center" style="gap: 0.25rem">
-                                    <button id="weapons-add-new" class="button is-success " title="Add Weapon" type="button">
-                                        <i class="fa-solid fa-check"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td colspan="3">
-                                <div class="is-flex">
-                                    <div class="select">
-                                        <select id="weapons-add-property-new" class="input is-capitalized">
-                                            ${weapon_property_choice.map(weaponProperty => `
-                                                <option value="${weaponProperty}">
-                                                    ${weaponProperty}
-                                                </option>
-                                            `).join('')}
+                    <div class="column is-12 is-6-desktop is-4-widescreen">
+                        <div class="box mb-0" style="background: var(--bulma-card-background-color); border: 2px dashed var(--bulma-success); height: 100%;">
+                            <h4 class="title is-6 mb-3">Add New Weapon</h4>
+                            <input id="weapons-name-input-new" class="input mb-3" placeholder="Weapon name (e.g. Dagger)...">
+                            
+                            <div class="columns is-mobile is-multiline is-variable is-2 mb-2">
+                                <div class="column is-6">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1">Weapon Type</label>
+                                    <div class="select is-fullwidth">
+                                        <select id="weapons-type-input-new" class="is-capitalized">
+                                            ${weaponTypes.map(w => `<option value="${w}">${w}</option>`).join('')}
                                         </select>
                                     </div>
-    `
-
-    Object.entries(tempProperties).forEach(([key, property]) => {
-        innerHTML += `
-                                    <div class="tags has-addons m-0 ml-3">
-                                        <div class="tag  is-capitalized has-text-weight-bold is-size-6">
-                                            <span>${property}</span>
-                                            <a id="weapons-remove-temp-property-${property}" class="ml-2">
-                                                <i class="fa-solid fa-xmark"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-            `
-    })
-
-    innerHTML += `
                                 </div>
-                            </td>
-                            <td colspan="6">
-                                <input id="weapons-damage-dice-input-new" class="input" placeholder="1d4 slash">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                <div class="column is-6">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1">Mod. Type</label>
+                                    <div class="select is-fullwidth">
+                                        <select id="weapons-mod-type-input-new">
+                                            ${ALL_ATTRIBUTE_TYPES.map(a => `<option value="${a}">${a}</option>`).join('')}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="column is-3">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Effect">Effect</abbr></label>
+                                    <input id="weapons-effect-input-new" class="input has-text-weight-bold" placeholder="0">
+                                </div>
+                                <div class="column is-3">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Enhancement">Enhance.</abbr></label>
+                                    <input id="weapons-enhancement-input-new" class="input has-text-weight-bold" placeholder="0">
+                                </div>
+                                <div class="column is-3 has-text-centered">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Hit Modifier">Hit</abbr></label>
+                                    <div class="is-size-5 has-text-weight-bold mt-1">-</div>
+                                </div>
+                                <div class="column is-3 has-text-centered">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Damage Bonus">Dmg</abbr></label>
+                                    <div class="is-size-5 has-text-weight-bold mt-1">-</div>
+                                </div>
+                            </div>
+
+                            <div class="field mb-3">
+                                <label class="label is-size-5 has-text-weight-bold mb-1">Damage Dice</label>
+                                <textarea id="weapons-damage-dice-input-new" class="textarea" rows="3" placeholder="1d4 slash"></textarea>
+                            </div>
+
+                            <div class="field">
+                                <label class="label is-size-5 has-text-weight-bold mb-1">Properties</label>
+                                <div class="is-flex is-flex-wrap-wrap" style="gap: 0.25rem; align-items: center;">
+                                    <div class="select">
+                                        <select id="weapons-add-property-new" class="is-capitalized">
+                                            ${weapon_property_choice_new.map(p => `<option value="${p}">${p}</option>`).join('')}
+                                        </select>
+                                    </div>
+                                    ${Object.entries(tempProperties).map(([k, prop]) => `
+                                        <div class="tags has-addons m-0">
+                                            <div class="tag is-primary is-size-5 is-capitalized has-text-weight-bold">
+                                                <span>${prop}</span>
+                                                <a id="weapons-remove-temp-property-${prop}" class="ml-2">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <button id="weapons-add-new" class="button is-success is-fullwidth" type="button">
+                                <i class="fa-solid fa-check mr-2"></i> Add Weapon
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     `
@@ -977,250 +961,279 @@ export function createWeaponSection({
 export function createSpellSection(spells: Record<string, ISpell>): string {
     let innerHTML = `
         <div class="card is-shadowless">
-            <div class="card-content p-0">
-                <table class="table mb-0 is-fullwidth">
-                    <thead>
-                        <tr style="background: var(--bulma-primary)">
-                            <th class="is-size-5 has-text-weight-bold" style="width: 6rem">Level</th>
-                            <th class="is-size-5 has-text-weight-bold">Name</th>
-                            <th class="is-size-5 has-text-weight-bold" style="width: 10rem">Casting Time</th>
-                            <th class="is-size-5 has-text-weight-bold" style="width: 6rem">Range</th>
-                            <th class="is-size-5 has-text-weight-bold" style="width: 3rem"><abbr title="Concentration - Do you need to focus?">Conc.</abbr></th>
-                            <th class="is-size-5 has-text-weight-bold" style="width: 3rem"><abbr title="Verbal - Do you need to speak?">V</abbr></th>
-                            <th class="is-size-5 has-text-weight-bold" style="width: 3rem"><abbr title="Somatic - Do you need to see?">S</abbr></th>
-                            <th class="is-size-5 has-text-weight-bold" style="width: 3rem"><abbr title="Material - Do you need something?">M</abbr></th>
-                            <th style="width: 3rem"></th>
-                        </tr>
-                        <tr style="background: var(--bulma-primary)">
-                            <th class="is-size-5 has-text-weight-bold" colspan="8">Notes</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <div class="card-content p-3">
     `
 
+    const groupedSpells: Record<number, [string, ISpell][]> = {};
     Object.entries(spells).forEach(([spellName, spell]) => {
+        const lvl = spell.level;
+        if (!groupedSpells[lvl]) {
+            groupedSpells[lvl] = [];
+        }
+        groupedSpells[lvl].push([spellName, spell]);
+    });
+
+    const sortedLevels = Object.keys(groupedSpells)
+        .map(Number)
+        .sort((a, b) => a - b);
+
+    sortedLevels.forEach((level) => {
+        const title = level === 0 ? "Cantrips" : `Spell Level ${level}`;
+
         innerHTML += `
-                        <tr>
-                            <td>
-                                <input id="spells-level-input-${spellName}" class="input" placeholder="CT" value="${spell.level === 0 ? "CT" : spell.level}">
-                            </td>
-                            <td>
-                                <input id="spells-name-input-${spellName}" class="input has-text-weight-bold" placeholder="Create Bonfire" value="${spell.name}">
-                            </td>
-                            <td>
-                                <input id="spells-casting-time-input-${spellName}" class="input" placeholder="1 action" value="${spell.casting_time}">
-                            </td>
-                            <td>
-                                <input id="spells-range-input-${spellName}" class="input" placeholder="60f" value="${spell.range}">
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-align-items-center">
-                                    <input id="spells-conc-checkbox-${spellName}" class="checkbox" type="checkbox" style="transform: scale(1.5);" title="Concentration" ${spell.concentration ? "checked" : ""}>
+                <div class="is-flex is-align-items-center mt-4 mb-2">
+                    <h3 class="title is-5 mb-0">${title}</h3>
+                </div>
+                <hr class="mt-1 mb-4" style="background-color: var(--bulma-primary); height: 2px; border: none;">
+                <div class="columns is-multiline mb-5">
+        `
+
+        groupedSpells[level].forEach(([spellName, spell]) => {
+            innerHTML += `
+                    <div class="column is-12 is-6-desktop is-4-widescreen">
+                        <div class="box mb-0" style="border: 1px solid var(--bulma-primary); height: 100%;">
+                            <div class="is-flex is-justify-content-between is-align-items-center mb-3">
+                                <input id="spells-name-input-${spellName}" class="input has-text-weight-bold mr-2" value="${spell.name}" placeholder="Spell name...">
+                                <button id="spells-remove-${spellName}" class="button is-danger" type="button">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="columns is-mobile is-multiline is-variable is-2 mb-2">
+                                <div class="column is-4">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1">Level</label>
+                                    <input id="spells-level-input-${spellName}" class="input" placeholder="CT" value="${spell.level === 0 ? "CT" : spell.level}">
                                 </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-align-items-center">
-                                    <input id="spells-v-checkbox-${spellName}" class="checkbox" type="checkbox" style="transform: scale(1.5);" title="Verbal (V)" ${spell.verbal ? "checked" : ""}>
+                                <div class="column is-4">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1">Cast Time</label>
+                                    <input id="spells-casting-time-input-${spellName}" class="input" placeholder="1 action" value="${spell.casting_time}">
                                 </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-align-items-center">
-                                    <input id="spells-s-checkbox-${spellName}" class="checkbox" type="checkbox" style="transform: scale(1.5);" title="Somatic (S)" ${spell.somatic ? "checked" : ""}>
+                                <div class="column is-4">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1">Range</label>
+                                    <input id="spells-range-input-${spellName}" class="input" placeholder="60ft" value="${spell.range}">
                                 </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-align-items-center">
-                                    <input id="spells-m-checkbox-${spellName}" class="checkbox" type="checkbox" style="transform: scale(1.5);" title="Material (M)" ${spell.material ? "checked" : ""}>
+                            </div>
+
+                            <div class="columns is-mobile is-variable is-1 mb-2">
+                                <div class="column is-3 has-text-centered">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Concentration">Conc.</abbr></label>
+                                    <div class="is-flex is-justify-content-center mt-1">
+                                        <input id="spells-conc-checkbox-${spellName}" class="checkbox" type="checkbox" style="transform: scale(1.5);" ${spell.concentration ? "checked" : ""}>
+                                    </div>
                                 </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-justify-content-end is-align-items-center" style="gap: 0.25rem">
-                                    <button id="spells-remove-${spellName}" class="button is-danger " title="Remove Spell" type="button">
-                                        <i class="fa-solid fa-xmark"></i>
-                                    </button>
+                                <div class="column is-3 has-text-centered">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Verbal">V</abbr></label>
+                                    <div class="is-flex is-justify-content-center mt-1">
+                                        <input id="spells-v-checkbox-${spellName}" class="checkbox" type="checkbox" style="transform: scale(1.5);" ${spell.verbal ? "checked" : ""}>
+                                    </div>
                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="9">
-                                <textarea spellcheck="false" id="spells-notes-input-${spellName}" class="textarea" rows="${spell.notes.split(/\r\n|\r|\n/).length + 3}" placeholder="1 minute - Create a bonfire on ground that you can see withing range. Caution! Hot!">${spell.notes}</textarea>
-                            </td>
-                        </tr>          
-                        <tr style="background: var(--bulma-primary)">
-                            <td colspan="9"></td>
-                        </tr>
-    `
+                                <div class="column is-3 has-text-centered">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Somatic">S</abbr></label>
+                                    <div class="is-flex is-justify-content-center mt-1">
+                                        <input id="spells-s-checkbox-${spellName}" class="checkbox" type="checkbox" style="transform: scale(1.5);" ${spell.somatic ? "checked" : ""}>
+                                    </div>
+                                </div>
+                                <div class="column is-3 has-text-centered">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Material">M</abbr></label>
+                                    <div class="is-flex is-justify-content-center mt-1">
+                                        <input id="spells-m-checkbox-${spellName}" class="checkbox" type="checkbox" style="transform: scale(1.5);" ${spell.material ? "checked" : ""}>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label class="label is-size-5 has-text-weight-bold mb-1">Notes</label>
+                                <textarea spellcheck="false" id="spells-notes-input-${spellName}" class="textarea" rows="6" placeholder="Spell details...">${spell.notes}</textarea>
+                            </div>
+                        </div>
+                    </div>
+            `
+        });
+
+        innerHTML += `
+                </div>
+        `
     });
 
     innerHTML += `
-                        <tr class="">
-                            <td>
-                                <input id="spells-level-input-new" class="input" placeholder="CT">
-                            </td>
-                            <td>
-                                <input id="spells-name-input-new" class="input" placeholder="Create Bonfire">
-                            </td>
-                            <td>
-                                <input id="spells-casting-time-input-new" class="input" placeholder="1 action">
-                            </td>
-                            <td>
-                                <input id="spells-range-input-new" class="input" placeholder="60f">
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-align-items-center">
-                                    <input id="spells-conc-checkbox-new" class="checkbox" type="checkbox" style="transform: scale(1.5);" title="Concentration">
+                <div class="is-flex is-align-items-center mt-5 mb-2">
+                    <h3 class="title is-5 mb-0">Create Spell</h3>
+                </div>
+                <hr class="mt-1 mb-4" style="background-color: var(--bulma-success); height: 2px; border: none;">
+                <div class="columns is-multiline">
+                    <div class="column is-12 is-6-desktop is-4-widescreen">
+                        <div class="box mb-0" style="background: var(--bulma-card-background-color); border: 2px dashed var(--bulma-success); height: 100%;">
+                            <h4 class="title is-6 mb-3">Add New Spell</h4>
+                            <input id="spells-name-input-new" class="input mb-3" placeholder="Spell name (e.g. Create Bonfire)...">
+                            
+                            <div class="columns is-mobile is-multiline is-variable is-2 mb-2">
+                                <div class="column is-4">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1">Level</label>
+                                    <input id="spells-level-input-new" class="input" placeholder="CT">
                                 </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-align-items-center">
-                                    <input id="spells-v-checkbox-new" class="checkbox" type="checkbox" style="transform: scale(1.5);" title="Verbal (V)">
+                                <div class="column is-4">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1">Cast Time</label>
+                                    <input id="spells-casting-time-input-new" class="input" placeholder="1 action">
                                 </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-align-items-center">
-                                    <input id="spells-s-checkbox-new" class="checkbox" type="checkbox" style="transform: scale(1.5);" title="Somatic (S)">
+                                <div class="column is-4">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1">Range</label>
+                                    <input id="spells-range-input-new" class="input" placeholder="60ft">
                                 </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-align-items-center">
-                                    <input id="spells-m-checkbox-new" class="checkbox" type="checkbox" style="transform: scale(1.5);" title="Material (M)">
+                            </div>
+
+                            <div class="columns is-mobile is-variable is-1 mb-2">
+                                <div class="column is-3 has-text-centered">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Concentration">Conc.</abbr></label>
+                                    <div class="is-flex is-justify-content-center mt-1">
+                                        <input id="spells-conc-checkbox-new" class="checkbox" type="checkbox" style="transform: scale(1.5);">
+                                    </div>
                                 </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-justify-content-end is-align-items-center" style="gap: 0.25rem">
-                                    <button id="spells-add-new" class="button is-success " title="Add Spell" type="button">
-                                        <i class="fa-solid fa-check"></i>
-                                    </button>
+                                <div class="column is-3 has-text-centered">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Verbal">V</abbr></label>
+                                    <div class="is-flex is-justify-content-center mt-1">
+                                        <input id="spells-v-checkbox-new" class="checkbox" type="checkbox" style="transform: scale(1.5);">
+                                    </div>
                                 </div>
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td colspan="9">
-                                <textarea spellcheck="false" id="spells-notes-input-new" class="textarea" rows="2" placeholder="1 minute - Create a bonfire on ground that you can see withing range. Caution! Hot!"></textarea>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                <div class="column is-3 has-text-centered">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Somatic">S</abbr></label>
+                                    <div class="is-flex is-justify-content-center mt-1">
+                                        <input id="spells-s-checkbox-new" class="checkbox" type="checkbox" style="transform: scale(1.5);">
+                                    </div>
+                                </div>
+                                <div class="column is-3 has-text-centered">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Material">M</abbr></label>
+                                    <div class="is-flex is-justify-content-center mt-1">
+                                        <input id="spells-m-checkbox-new" class="checkbox" type="checkbox" style="transform: scale(1.5);">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field mb-4">
+                                <label class="label is-size-5 has-text-weight-bold mb-1">Notes</label>
+                                <textarea spellcheck="false" id="spells-notes-input-new" class="textarea" rows="6" placeholder="1 minute - Create a bonfire on ground that you can see within range..."></textarea>
+                            </div>
+
+                            <button id="spells-add-new" class="button is-success is-fullwidth" type="button">
+                                <i class="fa-solid fa-check mr-2"></i> Add Spell
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>          
+        </div>
     `
+
     return innerHTML;
 }
 
 export function createEntitySection(entities: Record<string, IEntity>): string {
     let innerHTML = `
         <div class="card is-shadowless">
-            <div class="card-content p-0">
-                <table class="table mb-0 is-fullwidth">
-                    <thead>
-                        <tr style="background: var(--bulma-primary)">
-                            <th class="is-size-5 has-text-weight-bold">Name</th>
-                            <th class="is-size-5 has-text-weight-bold" style="width: 6rem">Speed</th>
-                            <th class="is-size-5 has-text-weight-bold" style="width: 6rem"><abbr title="Armor-Class">AC</abbr></th>
-                            <th class="is-size-5 has-text-weight-bold" style="width: 12rem"><abbr title="Hit Points">HP</abbr> / Max</th>
-                            <th class="is-size-5 has-text-weight-bold" style="width: 12rem">Capacity / Max</th>
-                            <th style="width: 3rem"></th>
-                        </tr>
-                        <tr style="background: var(--bulma-primary)">
-                            <th class="is-size-5 has-text-weight-bold" colspan="3">Notes</th>
-                            <th class="is-size-5 has-text-weight-bold" colspan="3">Inventory</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <div class="card-content p-3">
+                <div class="columns is-multiline">
     `
 
     Object.entries(entities).forEach(([entityName, entity]) => {
         innerHTML += `
-                        <tr>
-                            <td>
-                                <input id='entities-name-input-${entityName}' class="input has-text-weight-bold" placeholder="Wheelbarrow" value='${entity.name}'>
-                            </td>
-                            <td>
-                                <input id="entities-speed-input-${entityName}" class="input" placeholder="60f" value="${entity.speed}">
-                            </td>
-                            <td>
-                                <input id="entities-ac-input-${entityName}" class="input" placeholder="10" value="${entity.ac}">
-                            </td>
-                            <td>
-                                <div style="display: flex; align-items: center; gap: 5px;">
-                                    <input id="entities-hp_current-input-${entityName}" class="input" placeholder="50" value="${entity.hp_current}">
-                                    <span>/</span>
-                                    <input id="entities-hp_max-input-${entityName}" class="input" placeholder="100" value="${entity.hp_max}">
+                    <div class="column is-12 is-6-desktop is-4-widescreen">
+                        <div class="box mb-0" style="border: 1px solid var(--bulma-primary); height: 100%;">
+                            <div class="is-flex is-justify-content-between is-align-items-center mb-3">
+                                <input id="entities-name-input-${entityName}" class="input has-text-weight-bold mr-2" value="${entity.name}" placeholder="Wheelbarrow">
+                                <button id="entities-remove-${entityName}" class="button is-danger" type="button">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="columns is-mobile is-multiline is-variable is-2 mb-2">
+                                <div class="column is-6">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1">Speed</label>
+                                    <input id="entities-speed-input-${entityName}" class="input" placeholder="60ft" value="${entity.speed}">
                                 </div>
-                            </td>
-                            <td>
-                                <div style="display: flex; align-items: center; gap: 5px;">
-                                    <input id="entities-capacity_current-input-${entityName}" class="input" placeholder="100 St." value="${entity.current_capacity}">
-                                    <span>/</span>
-                                    <input id="entities-capacity_max-input-${entityName}" class="input" placeholder="1000 St." value="${entity.max_capacity}">
+                                <div class="column is-6">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Armor-Class">AC</abbr></label>
+                                    <input id="entities-ac-input-${entityName}" class="input" placeholder="10" value="${entity.ac}">
                                 </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-justify-content-end is-align-items-center" style="gap: 0.25rem">
-                                    <button id="entities-remove-${entityName}" class="button is-danger " title="Remove Entity" type="button">
-                                        <i class="fa-solid fa-xmark"></i>
-                                    </button>
+                                <div class="column is-6">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Hit Points">HP</abbr> / Max</label>
+                                    <div class="is-flex is-align-items-center" style="gap: 5px;">
+                                        <input id="entities-hp_current-input-${entityName}" class="input" placeholder="50" value="${entity.hp_current}">
+                                        <span>/</span>
+                                        <input id="entities-hp_max-input-${entityName}" class="input" placeholder="100" value="${entity.hp_max}">
+                                    </div>
                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <textarea spellcheck="false" id="entities-notes-input-${entityName}" class="textarea" rows="${entity.notes.split(/\r\n|\r|\n/).length + 3}" placeholder="Behavior, active effects, or companion traits..." style="height: 100%">${entity.notes}</textarea>
-                            </td>
-                            <td colspan="3">
-                                <textarea spellcheck="false" id="entities-inventory-input-${entityName}" class="textarea" rows="${entity.inventory.split(/\r\n|\r|\n/).length + 3}" placeholder="Barding, saddlebags, cargo, or equipped gear..." style="height: 100%">${entity.inventory}</textarea>
-                            </td>
-                        </tr>
-                        <tr style="background: var(--bulma-primary)">
-                            <td colspan="6"></td>
-                        </tr>
-    `
+                                <div class="column is-6">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1">Capacity / Max</label>
+                                    <div class="is-flex is-align-items-center" style="gap: 5px;">
+                                        <input id="entities-capacity_current-input-${entityName}" class="input" placeholder="100 St." value="${entity.current_capacity}">
+                                        <span>/</span>
+                                        <input id="entities-capacity_max-input-${entityName}" class="input" placeholder="1000 St." value="${entity.max_capacity}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field mb-3">
+                                <label class="label is-size-5 has-text-weight-bold mb-1">Notes</label>
+                                <textarea spellcheck="false" id="entities-notes-input-${entityName}" class="textarea" rows="3" placeholder="Behavior, active effects, or companion traits...">${entity.notes}</textarea>
+                            </div>
+
+                            <div class="field">
+                                <label class="label is-size-5 has-text-weight-bold mb-1">Inventory</label>
+                                <textarea spellcheck="false" id="entities-inventory-input-${entityName}" class="textarea" rows="3" placeholder="Barding, saddlebags, cargo, or equipped gear...">${entity.inventory}</textarea>
+                            </div>
+                        </div>
+                    </div>
+        `
     })
 
     innerHTML += `
-                        <tr class="">
-                            <td>
-                                <input id='entities-name-input-new' class="input" placeholder="Wheelbarrow">
-                            </td>
-                            <td>
-                                <input id="entities-speed-input-new" class="input" placeholder="60f">
-                            </td>
-                            <td>
-                                <input id="entities-ac-input-new" class="input" placeholder="10">
-                            </td>
-                            <td>
-                                <div style="display: flex; align-items: center; gap: 5px;">
-                                    <input id="entities-hp_current-input-new" class="input" placeholder="50">
-                                    <span>/</span>
-                                    <input id="entities-hp_max-input-new" class="input" placeholder="100">
+                    <div class="column is-12 is-6-desktop is-4-widescreen">
+                        <div class="box mb-0" style="background: var(--bulma-card-background-color); border: 2px dashed var(--bulma-success); height: 100%;">
+                            <h4 class="title is-6 mb-3">Add New Entity</h4>
+                            <input id="entities-name-input-new" class="input mb-3" placeholder="Entity name (e.g. Wheelbarrow)...">
+                            
+                            <div class="columns is-mobile is-multiline is-variable is-2 mb-2">
+                                <div class="column is-6">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1">Speed</label>
+                                    <input id="entities-speed-input-new" class="input" placeholder="60ft">
                                 </div>
-                            </td>
-                            <td>
-                                <div style="display: flex; align-items: center; gap: 5px;">
-                                    <input id="entities-capacity_current-input-new" class="input" placeholder="100 St.">
-                                    <span>/</span>
-                                    <input id="entities-capacity_max-input-new" class="input" placeholder="1000 St.">
+                                <div class="column is-6">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Armor-Class">AC</abbr></label>
+                                    <input id="entities-ac-input-new" class="input" placeholder="10">
                                 </div>
-                            </td>
-                            <td class="is-vcentered">
-                                <div class="is-flex is-justify-content-end is-align-items-center" style="gap: 0.25rem">
-                                    <button id="entities-add-new" class="button is-success " title="Add Entity" type="button">
-                                        <i class="fa-solid fa-check"></i>
-                                    </button>
+                                <div class="column is-6">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1"><abbr title="Hit Points">HP</abbr> / Max</label>
+                                    <div class="is-flex is-align-items-center" style="gap: 5px;">
+                                        <input id="entities-hp_current-input-new" class="input" placeholder="50">
+                                        <span>/</span>
+                                        <input id="entities-hp_max-input-new" class="input" placeholder="100">
+                                    </div>
                                 </div>
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td colspan="3">
-                                <textarea spellcheck="false" id="entities-notes-input-new" class="textarea" rows="2" placeholder="Behavior, active effects, or companion traits..."></textarea>
-                            </td>
-                            <td colspan="3">
-                                <textarea spellcheck="false" id="entities-inventory-input-new" class="textarea" rows="2" placeholder="Barding, saddlebags, cargo, or equipped gear..."></textarea>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                <div class="column is-6">
+                                    <label class="label is-size-5 has-text-weight-bold mb-1">Capacity / Max</label>
+                                    <div class="is-flex is-align-items-center" style="gap: 5px;">
+                                        <input id="entities-capacity_current-input-new" class="input" placeholder="100 St.">
+                                        <span>/</span>
+                                        <input id="entities-capacity_max-input-new" class="input" placeholder="1000 St.">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field mb-3">
+                                <label class="label is-size-5 has-text-weight-bold mb-1">Notes</label>
+                                <textarea spellcheck="false" id="entities-notes-input-new" class="textarea" rows="3" placeholder="Behavior, active effects, or companion traits..."></textarea>
+                            </div>
+
+                            <div class="field mb-4">
+                                <label class="label is-size-5 has-text-weight-bold mb-1">Inventory</label>
+                                <textarea spellcheck="false" id="entities-inventory-input-new" class="textarea" rows="3" placeholder="Barding, saddlebags, cargo, or equipped gear..."></textarea>
+                            </div>
+
+                            <button id="entities-add-new" class="button is-success is-fullwidth" type="button">
+                                <i class="fa-solid fa-check mr-2"></i> Add Entity
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     `
@@ -1228,20 +1241,20 @@ export function createEntitySection(entities: Record<string, IEntity>): string {
     return innerHTML
 }
 
-export function createActiveProficienciesSection(proficiencies: Record<string, IProficiency>): string {
+export function createProficientSkillsSection(proficiencies: Record<string, IProficiency>): string {
     let innerHTML = `
     `;
 
     for (let i = 0; i < ALL_PROFICIENCIES.length; i++) {
         innerHTML +=`
-                <div class="column is-3 columns is-multiline mb-1">
+                <div class="column is-3-desktop columns is-multiline mb-1">
                     <div class="column is-12 box">
                         <div class="column is-12">
                             <div class="tag is-link is-flex is-align-items-center p-4">
                                 <span class="icon">
                                     <i class="fas fa-lg ${ALL_PROFICIENCIES_ICONS[i]}"></i>
                                 </span>
-                                <span class="has-text-weight-bold is-size-6">${ALL_PROFICIENCIES[i]}</span>
+                                <span class="has-text-weight-bold is-size-5">${ALL_PROFICIENCIES[i]}</span>
                             </div>
                         </div>
                     `
@@ -1264,9 +1277,9 @@ export function createActiveProficienciesSection(proficiencies: Record<string, I
             innerHTML += `
                         <div class="columns column is-12 p-0 m-0">
                             <div class="column is-12 tags has-addons is-flex is-align-items-stretch py-1">
-                                <span class="tag is-capitalized ${color} column is-size-6 is-7 has-text-weight-semibold is-flex is-justify-content-start py-1" style="white-space: normal; height: auto !important;">${proficiencyName}</span>
-                                <span class="tag ${color} column is-size-6 is-3 has-text-weight-semibold is-flex is-justify-content-start py-1" style="height: auto !important;">${proficiency.mod_type != "NONE" ? proficiency.mod_type : ""}</span>
-                                <span class="tag ${color} column is-size-6 is-2 has-text-weight-semibold is-flex is-justify-content-end py-1" style="height: auto !important;">${proficiency.mod_type != "NONE" ? proficiency.mod > 0 ? "+" + proficiency.mod : proficiency.mod  : ""}</span>
+                                <span class="tag is-capitalized ${color} column is-size-5 is-7 has-text-weight-semibold is-flex is-justify-content-start py-1" style="white-space: normal; height: auto !important;">${proficiencyName}</span>
+                                <span class="tag ${color} column is-size-5 is-3 has-text-weight-semibold is-flex is-justify-content-start py-1" style="height: auto !important;">${proficiency.mod_type != "NONE" ? proficiency.mod_type : ""}</span>
+                                <span class="tag ${color} column is-size-5 is-2 has-text-weight-semibold is-flex is-justify-content-end py-1" style="height: auto !important;">${proficiency.mod_type != "NONE" ? proficiency.mod > 0 ? "+" + proficiency.mod : proficiency.mod  : ""}</span>
                             </div>
                         </div>
             `
@@ -1366,10 +1379,10 @@ export function createProficiencySection({
                         <td class="is-vcentered"><p class="label is-size-5 has-text-weight-semibold is-capitalized">${std_proficiency}</p></td>
                         ${noneAttribute ? `` : `
                         <td>
-                            <span class="tag is-size-6 has-text-weight-semibold ${noneAttribute? "is-hidden" : "is-info"}" style="width: 4rem; justify-content: center;">${attribute}</span>
+                            <span class="tag is-size-5 has-text-weight-semibold ${noneAttribute? "is-hidden" : "is-info"}" style="width: 4rem; justify-content: center;">${attribute}</span>
                         </td>
                         <td>
-                            <span class="tag is-size-6 has-text-weight-semibold ${mod > 0 ? "is-success" : mod < 0 ? "is-danger" : "is-primary"}" style="width: 4rem; justify-content: center;">${mod}</span>
+                            <span class="tag is-size-5 has-text-weight-semibold ${mod > 0 ? "is-success" : mod < 0 ? "is-danger" : "is-primary"}" style="width: 4rem; justify-content: center;">${mod}</span>
                         </td>
                         `}
             `;

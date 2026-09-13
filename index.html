@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<section class="section is-hidden" id="app">
+<section class="section is-hidden pb-5" id="app">
     <div class="container">
         <div class="box is-flex is-flex-direction-column is-justify-content-center is-align-items-center py-6">
             <span class="title is-size-2 mb-0 has-text-centered">Skorpi's Awesome </span>
@@ -22,124 +22,120 @@
             <span class="title is-size-2 has-text-centered"> Automation Sheet</span>
         </div>
 
-        <hr class="has-background-grey my-5" />
+        <div class="mb-5" id="menu"></div>
 
-        <div class="" id="menu"></div>
+        <div class="box p-4">
 
-        <hr class="has-background-grey my-5" />
+        <section class="" id="site-menu"></section>
 
-        <div class="" id="character-info-section"></div>
+            <section class="" id="section-menu-character">
+                <div class="" id="character-info-section"></div>
+            </section>
 
-        <hr class="has-background-grey my-5" />
+            <section class="is-hidden" id="section-menu-proficient-skills-and-notes">
+                <div class="card">
+                    <div class="m-4 pt-4 columns is-multiline is-justify-content-space-between" id="proficient-skills-section"></div>
+                </div>
 
-        <div class="" id="note-banner"></div>
+                <div class="" id="note-banner"></div>
+            </section>
 
-        <hr class="has-background-grey my-5" />
+            <section class="is-hidden" id="section-attributes">
+                <div id="character-status-section"></div>
 
-        <div id="character-status-section"></div>
+                <div id="attribute-section"></div>
+            </section>
 
-        <hr class="has-background-grey my-5" />
+            <section class="is-hidden" id="section-weapons-spells-and-entities">
+                <div class="card p-4" id="curreny-stat-banner"></div>
 
-        <div class="" id="attribute-section"></div>
-
-        <hr class="has-background-grey my-5" />
-
-        <div class="card p-4" id="curreny-stat-banner"></div>
-
-        <hr class="has-background-grey my-5" />
-
-        <div class="card p-4">
-            <div class="box p-0 pb-4">
-                <div class="tabs is-left is-boxed is-size-5 mb-0" id="character-tabs">
-                    <ul>
-                        <li class="is-active is-size-5 has-text-weight-bold" data-tab="weapons">
-                            <a>
-                                <span class="icon is-small"
+                <div class="card p-4">
+                    <div class="box p-0 pb-4">
+                        <div class="tabs is-left is-boxed is-size-5 mb-0" id="character-tabs">
+                            <ul>
+                                <li class="is-active is-size-5 has-text-weight-bold" data-tab="weapons">
+                                    <a>
+                                    <span class="icon is-small"
                                     ><i class="fas fa-shield-halved" aria-hidden="true"></i
-                                ></span>
-                                <span>Weapons</span>
-                            </a>
-                        </li>
-                        <li class="is-size-5 has-text-weight-bold" data-tab="spells">
-                            <a>
-                                <span class="icon is-small"
+                                    ></span>
+                                        <span>Weapons</span>
+                                    </a>
+                                </li>
+                                <li class="is-size-5 has-text-weight-bold" data-tab="spells">
+                                    <a>
+                                    <span class="icon is-small"
                                     ><i class="fas fa-book" aria-hidden="true"></i
-                                ></span>
-                                <span>Spells</span>
-                            </a>
-                        </li>
-                        <li class="is-size-5 has-text-weight-bold" data-tab="entities">
-                            <a>
-                                <span class="icon is-small"
+                                    ></span>
+                                        <span>Spells</span>
+                                    </a>
+                                </li>
+                                <li class="is-size-5 has-text-weight-bold" data-tab="entities">
+                                    <a>
+                                    <span class="icon is-small"
                                     ><i class="fas fa-user-plus" aria-hidden="true"></i
-                                ></span>
-                                <span>Entities</span>
-                            </a>
-                        </li>
-                    </ul>
+                                    ></span>
+                                        <span>Entities</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="section-weapons" class="card-content p-0">
+                            <div class="" id="weapon-section"></div>
+                        </div>
+
+                        <div id="section-spells" class="card-content p-0 is-hidden">
+                            <div class="" id="spell-section"></div>
+                        </div>
+
+                        <div id="section-entities" class="card-content p-0 is-hidden">
+                            <div class="" id="entity-section"></div>
+                        </div>
+                    </div>
                 </div>
+            </section>
 
-                <div id="section-weapons" class="card-content p-0">
-                    <div class="" id="weapon-section"></div>
+            <section class="is-hidden" id="section-all-skills">
+                <div class="card p-4">
+                    <div class="box p-0 pb-2">
+                        <div class="card is-shadowless" id="proficiency-section"></div>
+                    </div>
                 </div>
-
-                <div id="section-spells" class="card-content p-0 is-hidden">
-                    <div class="" id="spell-section"></div>
-                </div>
-
-                <div id="section-entities" class="card-content p-0 is-hidden">
-                    <div class="" id="entity-section"></div>
-                </div>
-            </div>
-        </div>
-
-        <hr class="has-background-grey my-5" />
-
-        <div class="card">
-                <div class="m-4 pt-4 columns is-multiline is-justify-content-space-between" id="active-proficiencies-section"></div>
-        </div>
-
-        <hr class="has-background-grey my-5" />
-
-        <div class="card p-4">
-            <div class="box p-0 pb-2">
-                <div class="card is-shadowless" id="proficiency-section"></div>
-            </div>
+            </section>
         </div>
     </div>
-</section>
-<hr class="has-background-white my-6" />
-<section class="section pt-0">
-    <div class="box container has-text-centered">
-        <p class="title is-4">Impressum / Imprint</p>
-        <p class="subtitle is-6 mb-5">Anbieterkennzeichnung nach § 5 DDG</p>
+    </section>
+    <section class="section pt-0">
+        <div class="box container has-text-centered">
+            <p class="title is-4">Impressum / Imprint</p>
+            <p class="subtitle is-6 mb-5">Anbieterkennzeichnung nach § 5 DDG</p>
 
-        <div class="columns is-desktop">
-            <div class="column">
-                <div class="box is-shadowless" style="border: 1px solid black;">
-                    <p class="is-size-6 has-text-weight-semibold">Diensteanbieter</p>
-                    <p class="is-size-5 font-weight-bold mb-2">skorpi - Dennis Retzlaff</p>
-                    <p>c/o Online-Impressum 10885</p>
-                    <p>Europaring 90</p>
-                    <p>53757 Sankt Augustin</p>
+            <div class="columns is-desktop">
+                <div class="column">
+                    <div class="box is-shadowless" style="border: 1px solid black;">
+                        <p class="is-size-6 has-text-weight-semibold">Diensteanbieter</p>
+                        <p class="is-size-5 font-weight-bold mb-2">skorpi - Dennis Retzlaff</p>
+                        <p>c/o Online-Impressum 10885</p>
+                        <p>Europaring 90</p>
+                        <p>53757 Sankt Augustin</p>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="box is-shadowless" style="border: 1px solid black;">
+                        <p class="is-size-6 has-text-weight-semibold">Kontakt & Inhalt</p>
+                        <p class="mb-1"><strong>E-Mail:</strong> <a href="mailto:impressum@hkk-entertainment.de" class="has-text-danger">impressum@hkk-entertainment.de</a></p>
+                        <p class="mb-1">Check out my <a href="https://mein.online-impressum.de/skorpi/" class="has-text-danger" target="_blank" rel="noopener noreferrer">HUB here</a></p>
+                        <hr class="has-background-grey my-3" />
+                        <p class="is-size-7 has-text-grey-light">
+                            Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV: <br>
+                            Dennis Retzlaff (Anschrift wie links)
+                        </p>
+                    </div>
                 </div>
             </div>
-
-            <div class="column">
-                <div class="box is-shadowless" style="border: 1px solid black;">
-                    <p class="is-size-6 has-text-weight-semibold">Kontakt & Inhalt</p>
-                    <p class="mb-1"><strong>E-Mail:</strong> <a href="mailto:impressum@hkk-entertainment.de" class="has-text-danger">impressum@hkk-entertainment.de</a></p>
-                    <p class="mb-1">Check out my <a href="https://mein.online-impressum.de/skorpi/" class="has-text-danger" target="_blank" rel="noopener noreferrer">HUB here</a></p>
-                    <hr class="has-background-grey my-3" />
-                    <p class="is-size-7 has-text-grey-light">
-                        Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV: <br>
-                        Dennis Retzlaff (Anschrift wie links)
-                    </p>
-                </div>
-            </div>
-
         </div>
-    </div>
+
 </section>
 
 
