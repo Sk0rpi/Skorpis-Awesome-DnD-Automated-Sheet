@@ -35,7 +35,7 @@ export function createMenuSection(): string{
             </div>
             
             <div class="column is-2">
-                <a id="export-character-button" class="button is-info is-flex is-justify-content-center" style="height: 100%">
+                <a id="export-character-button" class="button is-info is-flex is-justify-content-center p-4" style="height: 100%">
                     <span class="icon mr-0">
                         <i class="fas fa-file-export"></i>
                     </span>
@@ -44,7 +44,7 @@ export function createMenuSection(): string{
             </div>
             
             <div class="column is-2">            
-                <a class="button is-love is-flex is-justify-content-center" style="height: 100%" href="https://ko-fi.com/sk0rp1" target="_blank" rel="noopener noreferrer">
+                <a class="button is-love is-flex is-justify-content-center p-4" style="height: 100%" href="https://ko-fi.com/sk0rp1" target="_blank" rel="noopener noreferrer">
                     <span class="icon mr-0">
                         <i class="fas fa-hand-holding-heart"></i>
                     </span>
@@ -53,7 +53,7 @@ export function createMenuSection(): string{
             </div>
             
             <div class="column is-2">            
-                <a class="button is-github is-flex is-justify-content-center" style="height: 100%" href="https://github.com/Sk0rpi/Skorpis-Awesome-DnD-Automated-Sheet" target="_blank" rel="noopener noreferrer">
+                <a class="button is-github is-flex is-justify-content-center p-4" style="height: 100%" href="https://github.com/Sk0rpi/Skorpis-Awesome-DnD-Automated-Sheet" target="_blank" rel="noopener noreferrer">
                     <span class="icon mr-0">
                         <i class="fa-brands fa-github"></i>
                     </span>
@@ -62,7 +62,7 @@ export function createMenuSection(): string{
             </div>
             
             <div class="column is-2">            
-                <a id="create-character-button" class="button is-danger is-flex is-justify-content-center" style="height: 100%">
+                <a id="create-character-button" class="button is-danger is-flex is-justify-content-center p-4" style="height: 100%">
                     <span class="icon mr-0">
                         <i class="fas fa-user-plus"></i>
                     </span>
