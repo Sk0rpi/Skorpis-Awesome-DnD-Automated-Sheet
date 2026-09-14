@@ -23,49 +23,52 @@ import {ALL_WEAPON_PROPERTIES, WeaponPropertyType} from "../02_models/023_Types/
 
 export function createMenuSection(): string{
     let innerHTML = `
-        <div class="box columns pt-4 pr-4 pb-2 pl-4 m-0 is-justify-content-space-between is-desktop">
+        <div class="box columns p-0 m-0 is-desktop">
             <input id="import-character-input" type="file" class="is-hidden" accept=".json">
-            <a id="import-character-button" class="column is-2-desktop mb-2 button is-success">
-                <span class="icon mr-0">
-                    <i class="fas fa-file-import"></i>
-                </span>
-                <span class="pl-1 is-size-5 has-text-weight-semibold">Import Character</span>
-            </a>
+            <div class="column is-2">
+                <a id="import-character-button" class="button is-success is-flex is-justify-content-center p-4" style="height: 100%">
+                    <span class="icon mr-0">
+                        <i class="fas fa-file-import"></i>
+                    </span>
+                    <span class="title has-text-white pl-1 is-size-5 has-text-weight-semibold" style="white-space: normal;">Import</span>
+                </a>
+            </div>
             
-            <a id="export-character-button" class="column is-2-desktop mb-2 button is-info">
-                <span class="icon mr-0">
-                    <i class="fas fa-file-export"></i>
-                </span>
-                <span class="pl-1 is-size-5 has-text-weight-semibold">Export Character</span>
-            </a>
+            <div class="column is-2">
+                <a id="export-character-button" class="button is-info is-flex is-justify-content-center" style="height: 100%">
+                    <span class="icon mr-0">
+                        <i class="fas fa-file-export"></i>
+                    </span>
+                    <span class="title has-text-white pl-1 is-size-5 has-text-weight-semibold" style="white-space: normal;">Export</span>
+                </a>
+            </div>
             
-            <a id="create-character-button" class="column is-3-desktop mb-2 button is-danger">
-                <span class="icon mr-0">
-                    <i class="fas fa-user-plus"></i>
-                </span>
-                <span class="pl-1 is-size-5 has-text-weight-semibold">Create New Character</span>
-            </a>
+            <div class="column is-2">            
+                <a class="button is-love is-flex is-justify-content-center" style="height: 100%" href="https://ko-fi.com/sk0rp1" target="_blank" rel="noopener noreferrer">
+                    <span class="icon mr-0">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </span>
+                    <span class="title has-text-white pl-1 is-size-5 has-text-weight-semibold" style="white-space: normal;">Support Me</span>
+                </a>
+            </div>
             
-            <a class="column is-2-desktop mb-2 button is-love" href="https://ko-fi.com/sk0rp1" target="_blank" rel="noopener noreferrer">
-                <span class="icon mr-0">
-                    <i class="fas fa-hand-holding-heart"></i>
-                </span>
-                <span class="pl-1 is-size-5 has-text-weight-semibold">Support Me</span>
-            </a>
+            <div class="column is-2">            
+                <a class="button is-github is-flex is-justify-content-center" style="height: 100%" href="https://github.com/Sk0rpi/Skorpis-Awesome-DnD-Automated-Sheet" target="_blank" rel="noopener noreferrer">
+                    <span class="icon mr-0">
+                        <i class="fa-brands fa-github"></i>
+                    </span>
+                    <span class="title has-text-white pl-1 is-size-5 has-text-weight-semibold" style="white-space: normal;">Github</span>
+                </a>
+            </div>
             
-            <a class="column is-1-desktop mb-2 button is-github" href="https://github.com/Sk0rpi/Skorpis-Awesome-DnD-Automated-Sheet" target="_blank" rel="noopener noreferrer">
-                <span class="icon mr-0">
-                    <i class="fa-brands fa-github"></i>
-                </span>
-                <span class="pl-1 is-size-5 has-text-weight-semibold">Github</span>
-            </a>
-            <a class="column is-1-desktop mb-2 button is-warning" href="../DnD-Character-Sheet/" target="_blank" rel="noopener noreferrer">
-                <span class="icon mr-0">
-                    <i class="fa-solid fa-file-zipper"></i>
-                </span>
-                <span class="pl-1 is-size-5 has-text-weight-semibold">Old</span>
-            </a>
-           
+            <div class="column is-2">            
+                <a id="create-character-button" class="button is-danger is-flex is-justify-content-center" style="height: 100%">
+                    <span class="icon mr-0">
+                        <i class="fas fa-user-plus"></i>
+                    </span>
+                    <span class="title has-text-white pl-1 is-size-5 has-text-weight-semibold" style="white-space: normal;">Create New</span>
+                </a>
+            </div>
         </div>
     `;
     return innerHTML;
