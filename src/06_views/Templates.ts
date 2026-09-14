@@ -423,7 +423,7 @@ export function createCharacterStatusSection( {
     death_save_success: number
 }) :string {
     let innerHTML = `
-        <div class="columns">
+        <div class="columns is-mobile is-multiline">
     `;
 
     Object.entries(ALL_STATUS_TYPES).forEach(([key, value]) => {
@@ -449,35 +449,38 @@ export function createCharacterStatusSection( {
         }
 
         innerHTML += `
-            <div class="column is-one-fifth" id="status">
-                <div class="card p-4">
+            <div class="column is-one-fifth-desktop ${type === "Current-HP" ? " is-12-mobile" : "is-6-mobile"}" id="status">
+                <div class="card p-4 is-flex is-flex-direction-column" style="height: 100%">
                     <div class="card-header is-justify-content-center">
-                        <span class="title mt-4 pb-4 is-size-4">${type}</span>
+                        <span class="title mt-4 pb-4 is-size-4 has-text-centered">${type}</span>
                     </div>
                     <hr class="m-1" style="background: var(--bulma-card-background-color)">
-                    <div class="card-content columns is-12 is-multiline m-0 p-0">
+                    
+                    <div class="card-content columns is-12 is-multiline m-0 p-0 mt-auto">
                         <div class="column is-6 is-align-content-center">
                             <span class="column is-12 is-size-5 has-text-weight-semibold is-block has-text-black has-text-centered m-0 p-0">Base</span>
                             ${read_only_base ?
-                                `<input class="column is-12 input is-size-5 has-text-weight-bold has-text-centered m-0 p-0" disabled type="text" placeholder="0" value="${base}">`
-                                :
-                                `<input id="${type}-base-input" class="column is-12 input is-size-5 has-text-weight-bold has-text-centered m-0 p-0" type="text" placeholder="0" value="${base}">`
-                            }
+                        `<input class="column is-12 input is-size-5 has-text-weight-bold has-text-centered m-0 p-0" disabled type="text" placeholder="0" value="${base}">`
+                        :
+                        `<input id="${type}-base-input" class="column is-12 input is-size-5 has-text-weight-bold has-text-centered m-0 p-0" type="text" placeholder="0" value="${base}">`
+                    }
                         </div>
                         <div class="column is-6 is-align-content-center">
                             <span class="column is-12 is-size-5 has-text-weight-semibold is-block has-text-black has-text-centered m-0 p-0">${type === "Current-HP" ? "Shield" : "Effect"}</span>
                             <input id="${type}-effect-input" class="column is-12 input is-size-5 has-text-weight-bold has-text-centered m-0 p-0" type="text" placeholder="0" value="${effect}">
                         </div>
+                        
                         <div class="column is-12">
                             <hr class="my-0 py-1" style="background: var(--bulma-card-background-color)">
                         </div>
-                        <div class="column is-12 is-align-content-center pt-0"   >
+                        
+                        <div class="column is-12 is-align-content-center pt-0">
                             <span class="column is-12 is-size-5 has-text-weight-semibold is-block has-text-black has-text-centered m-0 p-0">Total</span>
                             <span class="column is-12 tag ${color ? color : "is-primary"} is-size-4 has-text-weight-extrabold has-text-centered is-align-content-center m-0 p-0">${pre_total_extra}${total}${post_total_extra}</span>
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
         `;
     });
     innerHTML += `    
@@ -485,63 +488,79 @@ export function createCharacterStatusSection( {
     `;
 
     innerHTML += `
-    <div class="card columns p-0 m-0 mb-5 is-justify-content-space-between">
-        <div class="column is-3 box columns p-3 m-4 is-desktop">
-            <span class="column is-7 tag is-size-5 has-text-weight-bold is-primary has-text-centered is-flex is-justify-content-center" style="height: 3rem">Maximum Hit Die</span>
-            <div class="column is-1"></div>
-            <input id="maximum-hit-die-input" class="column is-4 input is-size-4 has-text-weight-bold has-text-centered" style="height: 3rem" type="text" placeholder="1d6" value="${maximum_hit_die}">
-        </div>
-        <div class="column is-4 box columns p-3 m-4 is-justify-content-center">
-            <div class="tags has-addons is-desktop">
-                <div class="tag is-danger py-5 px-4" style="height: 3rem">
-                    <span class="icon is-medium mr-1">
-                        <i class="fas fa-xl fa-skull has-text-white"></i>
-                    </span>
-    `
+        <div class="card mt-0 mr-0 mb-4 ml-0 p-2">
+            
+            <div class="columns is-mobile is-vcentered is-variable is-2 m-0 is-mobile is-multiline">
+                
+                <div class="column is-2-desktop is-6-mobile">
+                    <span class="tag is-size-5 has-text-weight-bold is-primary has-text-centered is-flex is-justify-content-center w-100" style="height: 3rem; width: 100%;">Maximum Hit Die</span>
+                </div>
+                
+                <div class="column is-1-desktop is-6-mobile">
+                    <input id="maximum-hit-die-input" class="input is-size-5 has-text-weight-bold has-text-centered" style="height: 3rem;" type="text" placeholder="1d6" value="${maximum_hit_die}">
+                </div>
+                
+                <div class="column is-2-desktop is-4-mobile">
+                    <div class="tag is-danger is-flex is-justify-content-center" style="height: 3rem; width: 100%;">
+                        <span class="icon is-medium mr-1">
+                            <i class="fas fa-xl fa-skull has-text-white"></i>
+                        </span>
+    `;
 
     for(let i = 1; i <= 3; i++) {
         innerHTML += `
-                    <input id="death-save-failure-${i}-checkbox" class="checkbox redCheck ml-1" type="checkbox" ${death_save_failure > 0 ? "checked" : ""}>
-        `
+                        <input id="death-save-failure-${i}-checkbox" class="checkbox redCheck ml-1" type="checkbox" ${death_save_failure > 0 ? "checked" : ""}>
+        `;
         death_save_failure--;
     }
 
     innerHTML += `
+                    </div>              
                 </div>
-                <div class="tag has-text-weight-bold is-primary py-5" style="height: 3rem">
-                    <span class="subtitle is-block has-text-weight-bold ">Death Saves</span>
+                
+                <div class="column is-2-desktop is-4-mobile">
+                    <div class="tag has-text-weight-bold is-primary is-flex is-justify-content-center" style="height: 3rem; width: 100%;">
+                        <span class="subtitle is-block has-text-weight-bold has-text-centered" style="white-space: normal">Death Saves</span>
+                    </div>
                 </div>
-                <div class="tag is-success py-5 px-4" style="height: 3rem">
-    `
+                
+                <div class="column is-2-desktop is-4-mobile">
+                    <div class="tag is-success is-flex is-justify-content-center" style="height: 3rem; width: 100%;">
+    `;
 
     for(let i = 1; i <= 3; i++) {
         innerHTML += `
-                    <input id="death-save-success-${i}-checkbox" class="checkbox greenCheck mr-1" type="checkbox" ${death_save_success > 0 ? "checked" : ""}>
-        `
+                        <input id="death-save-success-${i}-checkbox" class="checkbox greenCheck mr-1" type="checkbox" ${death_save_success > 0 ? "checked" : ""}>
+        `;
         death_save_success--;
     }
 
     innerHTML += `
-                    <span class="icon ml-1">
-                        <i class="fas fa-xl fa-heart-pulse has-text-white"></i>
-                    </span>
+                        <span class="icon ml-1">
+                            <i class="fas fa-xl fa-heart-pulse has-text-white"></i>
+                        </span>
+                    </div>
                 </div>
+                
+                <div class="column is-1-desktop is-6-mobile">
+                    <input id="current-hit-die-input" class="input is-size-5 has-text-weight-bold has-text-centered" style="height: 3rem;" type="text" placeholder="1d6" value="${current_hit_die}">
+                </div>
+                
+                <div class="column is-2-desktop is-6-mobile">
+                    <span class="tag is-size-5 has-text-weight-bold is-primary has-text-centered is-flex is-justify-content-center" style="height: 3rem; width: 100%;">Current Hit Die</span>
+                </div>
+                
             </div>
         </div>
-        <div class="column is-3 box columns p-3 m-4 is-desktop">
-            <input id="current-hit-die-input" class="column is-4 input is-size-4 has-text-weight-bold has-text-centered" style="height: 3rem" type="text" placeholder="1d6" value="${current_hit_die}">
-            <div class="column is-1"></div>
-            <span class="column is-7 tag is-size-5 has-text-weight-bold is-primary has-text-centered is-flex is-justify-content-center" style="height: 3rem">Current Hit Die</span>
-        </div>
-    </div>
-    `
+    `;
+
 
     return innerHTML;
 }
 
 export function createAttributeSection(attributes: Record<AttributeType, IAttribute>): string  {
     let innerHTML = `
-        <div class="columns">
+        <div class="columns is-12 is-mobile is-multiline">
     `;
 
     Object.entries(ALL_ATTRIBUTE_TYPES).forEach(([name, attribute]) => {
@@ -559,29 +578,29 @@ export function createAttributeSection(attributes: Record<AttributeType, IAttrib
         let save_mod = charAttr.save_mod ? charAttr.save_mod : 0;
 
         innerHTML += `
-            <div class="column is-2" id="status">
+            <div class="column is-2-desktop is-4-mobile" id="status">
                 <div class="card p-4">
                     <div class="card-header is-justify-content-center">
                         <span class="title mt-4 pb-4 is-size-4">${type}</span>
                     </div>
                     <hr class="m-1" style="background: var(--bulma-card-background-color)">
-                    <div class="card-content columns is-12 is-multiline m-0 p-0">
-                        <div class="column is-6 is-align-content-center">
+                    <div class="card-content columns is-12-mobile is-multiline m-0 p-0">
+                        <div class="column is-6-desktop is-12-mobile is-align-content-center">
                             <span class="column is-12 is-size-5 has-text-weight-semibold is-block has-text-black has-text-centered m-0 p-0">Base</span>
                             <input id="${type}-base-input" class="column is-12 input is-size-5 has-text-weight-bold has-text-centered m-0 p-0" type="text" placeholder="0" value="${base}">
                         </div>
-                        <div class="column is-6 is-align-content-center">
+                        <div class="column is-6-desktop is-12-mobile  is-align-content-center">
                             <span class="column is-12 is-size-5 has-text-weight-semibold is-block has-text-black has-text-centered m-0 p-0">Effect</span>
                             <input id="${type}-effect-input" class="column is-12 input is-size-5 has-text-weight-bold has-text-centered m-0 p-0" type="text" placeholder="0" value="${effect}">
                         </div>
                         <div class="column is-12">
                             <hr class="my-0 py-1" style="background: var(--bulma-card-background-color)">
                         </div>
-                        <div class="column is-6 is-align-content-center pt-0"   >
+                        <div class="column is-6-desktop is-12-mobile  is-align-content-center pt-0"   >
                             <span class="column is-12 is-size-5 has-text-weight-semibold is-block has-text-black has-text-centered m-0 p-0">Total</span>
                             <span class="column is-12 tag is-primary is-size-4 has-text-weight-extrabold has-text-centered is-align-content-center m-0 p-0">${total}</span>
                         </div>
-                        <div class="column is-6 is-align-content-center pt-0"   >
+                        <div class="column is-6-desktop is-12-mobile  is-align-content-center pt-0"   >
                             <span class="column is-12 is-size-5 has-text-weight-semibold is-block has-text-black has-text-centered m-0 p-0"><abbr title="Modifier">Mod.</abbr></span>
                             <span class="column is-12 tag ${mod != 0 ? mod > 0 ? "is-success" : "is-danger" : "is-primary"} is-size-4 has-text-weight-extrabold has-text-centered is-align-content-center m-0 p-0">${mod > 0 ? "+" : ""}${mod}</span>
                         </div>
@@ -1300,58 +1319,47 @@ export function createProficientSkillsSection(proficiencies: Record<string, IPro
 }
 
 export function createProficiencySection({
-    proficiency,
-    activeProficiencyTab
+                                             proficiency,
+                                             activeProficiencyTab
                                          }: {
-        proficiency: Record<string,
-        IProficiency>, activeProficiencyTab: string
+    proficiency: Record<string, IProficiency>,
+    activeProficiencyTab: string
 }): string {
-    let innerHTML =`
-        <div class="tabs is-left is-boxed" id="proficiency-tabs">
-            <ul>
+    let innerHTML = `
+        <div class="box p-0 m-0">
+            <div class="tabs is-left is-boxed m-0 p-0" id="proficiency-tabs">
+                <ul>
     `;
 
     for (let i = 0; i < ALL_PROFICIENCIES.length; i++) {
-        innerHTML +=`
-                <li data-tab="${ALL_PROFICIENCIES[i]}-tab" class="${ALL_PROFICIENCIES[i] == activeProficiencyTab ? "is-active" : ""} is-size-5">
-                    <a>
-                        <span class="icon is-small">
-                            <i class="fas ${ALL_PROFICIENCIES_ICONS[i]}"></i>
-                        </span>
-                        <span class="label is-size-5 has-text-weight-semibold">${ALL_PROFICIENCIES[i]}</span>
-                    </a>
-                </li>
-    `;
+        innerHTML += `
+                    <li data-tab="${ALL_PROFICIENCIES[i]}-tab" class="${ALL_PROFICIENCIES[i] == activeProficiencyTab ? "is-active" : ""} is-size-5">
+                        <a>
+                            <span class="icon is-small">
+                                <i class="fas ${ALL_PROFICIENCIES_ICONS[i]}"></i>
+                            </span>
+                            <span class="label is-size-5 has-text-weight-semibold mx-1">${ALL_PROFICIENCIES[i]}</span>
+                        </a>
+                    </li>
+        `;
     }
 
     innerHTML += `
-            </ul>
-        </div>
+                </ul>
+            </div>
     `;
 
     for (let i = 0; i < ALL_PROFICIENCIES.length; i++) {
         const groups = Object.values(ALL_PROFICIENCY_TYPES);
         const activeGroup = groups[i];
-
         const isOnlyNone = Object.values(groups[i]).every(value => value === 'NONE');
 
-        innerHTML += `
-        <div id="${ALL_PROFICIENCIES[i]}-list" class="${ALL_PROFICIENCIES[i] == activeProficiencyTab ? "" : "is-hidden"} card-content pt-0">
-            <table class="table is-fullwidth is-striped is-hoverable">
-                <thead>
-                    <tr>
-                        <th class="is-narrow is-size-5 has-text-weight-bold" style="min-width: 5rem"><abbr title="Proficiency">Prof.</abbr></th>
-                        <th class="is-size-5 has-text-weight-bold">Name</th>
-                        ${isOnlyNone ? "" : `<th class="is-narrow is-size-5 has-text-weight-bold" style="min-width: 5rem"><abbr title="Attribute-Type">Attr.</abbr></th>`}
-                        ${isOnlyNone ? "" : `<th class="is-narrow is-size-5 has-text-weight-bold" style="min-width: 5rem"><abbr title="Modifier">Mod.</abbr></th>`}
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-
         if (activeGroup) {
+            innerHTML += `
+            <div id="${ALL_PROFICIENCIES[i]}-list" class="columns is-multiline p-4 ${ALL_PROFICIENCIES[i] == activeProficiencyTab ? "" : "is-hidden"}">
+            `;
+
             Object.entries(activeGroup).sort().forEach(([std_proficiency, attribute]) => {
-                let noneAttribute = attribute === "NONE";
                 let proficiency_level = 0;
                 let mod = 0;
 
@@ -1361,41 +1369,49 @@ export function createProficiencySection({
                 }
 
                 innerHTML += `
-                    <tr>
-                        <td class="is-vcentered">
-            `;
+                <div class="column is-12-mobile is-6-tablet is-4-desktop">
+                    <div class="card px-4 py-2">
+                        <div class="columns is-mobile is-vcentered">
 
-                for (let checkboxNum = 1; checkboxNum <= 2; checkboxNum++) {
-                    const isChecked = proficiency_level >= checkboxNum ? "checked" : "";
+                            <div class="column is-narrow">
+                                <div class="is-flex" style="gap: 1rem;">
+                                    <input type="checkbox" id="${std_proficiency}-checkbox-1" ${proficiency_level >= 1 ? "checked" : ""} class="checkbox" style="transform: scale(1.4)"/>
+                                    <input type="checkbox" id="${std_proficiency}-checkbox-2" ${proficiency_level >= 2 ? "checked" : ""} class="checkbox" style="transform: scale(1.4)"/>
+                                </div>
+                            </div>
+                            
+                            <div class="column">
+                                <p class="is-size-5 is-capitalized has-text-weight-semibold has-text-dark">${std_proficiency}</p>
+                            </div>
+                            
+                            ${isOnlyNone ? "" : `
+                            <div class="column is-narrow">
+                                <div class="tags has-addons are-medium mb-0">
+                                    <span class="tag is-info is-size-6 has-text-weight-medium px-3">
+                                        ${attribute}
+                                    </span>
+                                    <span class="tag is-size-6 has-text-weight-bold px-3 ${mod > 0 ? "is-success" : mod < 0 ? "is-danger" : "is-primary"}">
+                                        ${mod > 0 ? `+${mod}` : mod}
+                                    </span>
+                                </div>
+                            </div>
+                            `}
 
-                    innerHTML += `
-                        <input type="checkbox" id="${std_proficiency}-checkbox-${checkboxNum}" ${isChecked} class="checkbox mr-2" style="transform: scale(1.3)"/>
-                    `;
-                }
-
-
-                innerHTML += `
-                        </td>
-                        <td class="is-vcentered"><p class="label is-size-5 has-text-weight-semibold is-capitalized">${std_proficiency}</p></td>
-                        ${noneAttribute ? `` : `
-                        <td>
-                            <span class="tag is-size-5 has-text-weight-semibold ${noneAttribute? "is-hidden" : "is-info"}" style="width: 4rem; justify-content: center;">${attribute}</span>
-                        </td>
-                        <td>
-                            <span class="tag is-size-5 has-text-weight-semibold ${mod > 0 ? "is-success" : mod < 0 ? "is-danger" : "is-primary"}" style="width: 4rem; justify-content: center;">${mod}</span>
-                        </td>
-                        `}
-            `;
-            })
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
 
             innerHTML += `
-                </tbody>
-            </table>
-        </div>
-        `;
+            </div>  
+            `;
         }
     }
 
+    innerHTML += `
+        </div>
+    `
+
     return innerHTML;
 }
-
