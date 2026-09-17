@@ -6,6 +6,7 @@ import {BLOOD_HUNTER_PROFANE_SOUL_TABLE} from "./BloodHunterProfaneSoulTable";
 import {THIRD_CASTER_TABLE} from "./ThirdCasterTable";
 import {HALF_CASTER_TABLE} from "./HalfCasterTable";
 import {WARLOCK_TABLE} from "./WarlockTable";
+import {MONK_TABLE} from "./MonkTable";
 
 export const CLASS_SPELL_TABLE_CONNECTOR: Record<ClassTypes, any> = {
     'Artificer': ARTIFICER_TABLE,
@@ -76,17 +77,17 @@ export const CLASS_SPELL_TABLE_CONNECTOR: Record<ClassTypes, any> = {
     'Fighter: Rune Knight': null,
     'Fighter: Samurai': null,
 
-    'Monk': null,
-    'Monk: Way of Mercy': null,
-    'Monk: Way of the Astral Self': null,
-    'Monk: Way of the Drunken Master': null,
-    'Monk: Way of the Four Elements': null,
-    'Monk: Way of the Kensei': null,
-    'Monk: Way of the Long Death': null,
-    'Monk: Way of the Open Hand': null,
-    'Monk: Way of the Shadow': null,
-    'Monk: Way of the Sun Soul': null,
-    'Monk: Way of the Ascendant Dragon': null,
+    'Monk': MONK_TABLE,
+    'Monk: Way of Mercy': MONK_TABLE,
+    'Monk: Way of the Astral Self': MONK_TABLE,
+    'Monk: Way of the Drunken Master': MONK_TABLE,
+    'Monk: Way of the Four Elements': MONK_TABLE,
+    'Monk: Way of the Kensei': MONK_TABLE,
+    'Monk: Way of the Long Death': MONK_TABLE,
+    'Monk: Way of the Open Hand': MONK_TABLE,
+    'Monk: Way of the Shadow': MONK_TABLE,
+    'Monk: Way of the Sun Soul': MONK_TABLE,
+    'Monk: Way of the Ascendant Dragon': MONK_TABLE,
 
     'Paladin': HALF_CASTER_TABLE,
     'Paladin: Oath of Devotion': HALF_CASTER_TABLE,
