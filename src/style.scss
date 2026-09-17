@@ -170,3 +170,7 @@ body {
     z-index: 2;
   }
 }
+
+.select::after {
+  display: none !important;
+}

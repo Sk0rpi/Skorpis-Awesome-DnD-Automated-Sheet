@@ -202,18 +202,21 @@ export class CharacterView {
     private bindSpellCastingEvents(): void {
         const modTypeInput = document.getElementById('spell-casting-mod-type-input') as HTMLInputElement;
         const concentrationCheckbox = document.getElementById('spell-casting-concentrating-checkbox') as HTMLInputElement;
-        const concentrationTrigger = document.getElementById('spell-casting-concentrating-trigger') as HTMLElement;
 
         addAdvancedEventListener(modTypeInput, (id, val) => this.viewModel.handleSpellCastingEvent(id, val));
-
-        concentrationTrigger.addEventListener('click', (event): void => {
-            concentrationCheckbox.click();
-        })
 
         concentrationCheckbox.addEventListener('change', (event): void => {
             const target = event.currentTarget as HTMLInputElement;
             const id = target.id;
             this.viewModel.handleSpellCastingEvent(id, "")
+        })
+
+        const checkboxButton = document.getElementById("spell-casting-concentrating-checkbox-button") as HTMLInputElement | null;
+        checkboxButton?.addEventListener("click", (event) => {
+            if (concentrationCheckbox) {
+                concentrationCheckbox.checked = !concentrationCheckbox.checked;
+                concentrationCheckbox.dispatchEvent(new Event("change"));
+            }
         })
     }
 
@@ -511,6 +514,14 @@ export class CharacterView {
                 this.viewModel.handleAttributeSaveCheckboxChange(targetType, target.checked);
             });
 
+            const checkboxButton = document.getElementById(value + "-checkbox-button") as HTMLInputElement | null;
+            checkboxButton?.addEventListener("click", (event) => {
+                if (checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.dispatchEvent(new Event("change"));
+                }
+            })
+
             const input = document.getElementById(value + "-input") as HTMLInputElement | null;
 
             input?.addEventListener("change", (event) => {
@@ -660,6 +671,19 @@ export class CharacterView {
             const spellsCastingTimeInput = document.getElementById(`spells-casting-time-input-${spellName}`) as HTMLInputElement;
             const spellsRangeInput = document.getElementById(`spells-range-input-${spellName}`) as HTMLInputElement;
             const spellsNotesInput = document.getElementById(`spells-notes-input-${spellName}`) as HTMLTextAreaElement;
+            const spellsConcentratingButton = document.getElementById(`spells-concentrating-button-${spellName}`) as HTMLButtonElement;
+            const spellsConcentratingCheckbox = document.getElementById(`spells-concentrating-checkbox-${spellName}`) as HTMLInputElement;
+
+            spellsConcentratingButton?.addEventListener("click", (event) => {
+                if (spellsConcentratingCheckbox) {
+                    spellsConcentratingCheckbox.click()
+                }
+            })
+
+            spellsConcentratingCheckbox?.addEventListener("click", (event) => {
+                const target = event.target as HTMLInputElement;
+                this.viewModel.handleSpellCheckboxChange(target.id, target.checked);
+            })
 
             addAdvancedEventListener(spellsLevelInput, (id, val) => this.viewModel.handleSpellInput(id, val));
             addAdvancedEventListener(spellsNameInput, (id, val) => this.viewModel.handleSpellInput(id, val));

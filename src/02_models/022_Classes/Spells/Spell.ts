@@ -3,6 +3,7 @@ import {ISpell} from "../../021_Interfaces/Spells/ISpell";
 export class Spell implements ISpell {
     casting_time: string;
     concentration: boolean;
+    concentrating: boolean;
     level: number;
     material: boolean;
     name: string;
@@ -16,6 +17,7 @@ export class Spell implements ISpell {
     ) {
         this.casting_time = data?.casting_time ?? "";
         this.concentration = data?.concentration ?? false;
+        this.concentrating = data?.concentrating ?? false;
         this.level = data?.level ?? 0;
         this.material = data?.material ?? false;
         this.name = data?.name ?? "";
