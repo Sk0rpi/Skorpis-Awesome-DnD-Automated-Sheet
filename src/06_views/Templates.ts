@@ -809,7 +809,7 @@ export function createCurrencyAndStatBanner({
     Object.entries(spell_slots).forEach(([spell_slot_type, spell_slot]) => {
         spell_slot_type = spell_slot_type === "NaN" ? "All" : spell_slot_type;
         innerHTML += `
-                        <div class="is-flex is-align-items-center">
+                        <div class="is-flex is-align-items-center is-flex is-justify-content-center is-flex-wrap-wrap" style="gap: 2rem 1rem;">
                             <span class="is-size-4 has-text-weight-bold has-text-black mr-4">${spell_slot_type}</span>
         `;
         let activeSlots = spell_slot.used;
