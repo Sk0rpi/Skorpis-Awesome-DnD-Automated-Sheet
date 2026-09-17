@@ -21672,4 +21672,8 @@ body > * {
   z-index: 2;
 }
 
+.select::after {
+  display: none !important;
+}
+
 /*# sourceMappingURL=style.css.map */

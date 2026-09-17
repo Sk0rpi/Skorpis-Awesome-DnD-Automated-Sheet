@@ -627,12 +627,15 @@ export class CharacterSheetViewModel {
                 break;
             case "spell-casting-concentrating-checkbox":
                 this._character.spell_casting.concentrating = !this._character.spell_casting.concentrating;
+                if (!this._character.spell_casting.concentrating) {
+                    Object.entries(this._character.spells).forEach(([key, value]) => {
+                        if(value.concentrating) value.concentrating = false; return;
+                    })
+                }
                 break;
         }
 
         this._character = this.processCalculations(this._character);
-
-        console.log(this._character);
 
         this.saveCharacterToCache();
 
@@ -816,6 +819,8 @@ export class CharacterSheetViewModel {
     ) {
         if (!this._character) return;
 
+        let concentrating = false;
+
         let namePlaceholder = name === "" ? "empty spell" : name;
 
         while (this._character.spells[namePlaceholder]) {
@@ -830,6 +835,7 @@ export class CharacterSheetViewModel {
             casting_time,
             range,
             concentration,
+            concentrating,
             verbal,
             somatic,
             material,
@@ -913,6 +919,21 @@ export class CharacterSheetViewModel {
                 break;
             case "spells-m-checkbox":
                 this._character.spells[spellName].material = checked;
+                break;
+            case "spells-concentrating-checkbox":
+                if(this._character.spells[spellName].concentrating) {
+                    this._character.spell_casting.concentrating = false;
+                }
+                else {
+                    if(this._character.spell_casting.concentrating) {
+                        Object.entries(this._character.spells).forEach(([key, value]) => {
+                            if(value.concentrating) value.concentrating = false; return;
+                        })
+                    }
+                    this._character.spell_casting.concentrating = true;
+                }
+
+                this._character.spells[spellName].concentrating = !this._character.spells[spellName].concentrating;
                 break;
         }
 

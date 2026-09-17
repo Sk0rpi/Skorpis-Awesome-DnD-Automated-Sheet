@@ -4,6 +4,7 @@ export interface ISpell{
     casting_time: string;
     range: string;
     concentration: boolean;
+    concentrating: boolean;
     notes: string;
     verbal: boolean;
     somatic: boolean;

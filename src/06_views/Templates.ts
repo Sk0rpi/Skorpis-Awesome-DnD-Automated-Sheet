@@ -23,9 +23,9 @@ import {ALL_WEAPON_PROPERTIES, WeaponPropertyType} from "../02_models/023_Types/
 
 export function createMenuSection(): string{
     let innerHTML = `
-        <div class="box columns p-0 m-0 is-desktop">
+        <div class="box columns p-0 m-0 is-mobile is-multiline">
             <input id="import-character-input" type="file" class="is-hidden" accept=".json">
-            <div class="column is-2">
+            <div class="column is-2-fullhd is-4-tablet is-12-mobile">
                 <a id="import-character-button" class="button is-success is-flex is-justify-content-center p-4" style="height: 100%">
                     <span class="icon mr-0">
                         <i class="fas fa-file-import"></i>
@@ -34,7 +34,7 @@ export function createMenuSection(): string{
                 </a>
             </div>
             
-            <div class="column is-2">
+            <div class="column is-2-fullhd is-4-tablet is-12-mobile">
                 <a id="export-character-button" class="button is-info is-flex is-justify-content-center p-4" style="height: 100%">
                     <span class="icon mr-0">
                         <i class="fas fa-file-export"></i>
@@ -43,7 +43,7 @@ export function createMenuSection(): string{
                 </a>
             </div>
             
-            <div class="column is-2">            
+            <div class="column is-2-fullhd is-4-tablet is-12-mobile">            
                 <a class="button is-love is-flex is-justify-content-center p-4" style="height: 100%" href="https://ko-fi.com/sk0rp1" target="_blank" rel="noopener noreferrer">
                     <span class="icon mr-0">
                         <i class="fas fa-hand-holding-heart"></i>
@@ -52,7 +52,7 @@ export function createMenuSection(): string{
                 </a>
             </div>
             
-            <div class="column is-2">            
+            <div class="column is-2-fullhd is-4-tablet is-12-mobile">            
                 <a class="button is-github is-flex is-justify-content-center p-4" style="height: 100%" href="https://github.com/Sk0rpi/Skorpis-Awesome-DnD-Automated-Sheet" target="_blank" rel="noopener noreferrer">
                     <span class="icon mr-0">
                         <i class="fa-brands fa-github"></i>
@@ -61,7 +61,7 @@ export function createMenuSection(): string{
                 </a>
             </div>
             
-            <div class="column is-2">            
+            <div class="column is-2-fullhd is-4-tablet is-12-mobile">            
                 <a id="create-character-button" class="button is-danger is-flex is-justify-content-center p-4" style="height: 100%">
                     <span class="icon mr-0">
                         <i class="fas fa-user-plus"></i>
@@ -261,7 +261,7 @@ export function createCharacterInfoSection({
 
     let innerHTML = `
         <div class="columns is-multiline has-text-centered is-justify-content-space-between">
-            <div class="column is-3-desktop is-12-mobile"">
+            <div class="column is-3-fullhd is-12-mobile"">
                 <div class="card p-4" style="height:100%">
                     <div class="card-body">
                         <input class="file-input is-hidden" type="file" id="image-import-input" accept=".png,.jpg,.jpeg,.gif">
@@ -280,10 +280,10 @@ export function createCharacterInfoSection({
                 </div>
             </div>
             
-            <div class="column is-9-desktop is-12-mobile">
+            <div class="column is-9-fullhd is-12-mobile">
                 <div class="columns is-multiline is-mobile">
                 
-                    <div class="column is-2-desktop is-6-mobile">
+                    <div class="column is-2-fullhd is-6-tablet is-6-mobile">
                         <div class="card p-4 has-text-centered" style="height:100%">
                             <label class="label is-size-4 has-text-weight-semibold pb-4 mb-0"><abbr title="Inspiration">Insp.</abbr></label>
                             <div class="card-body is-flex is-align-items-center is-justify-content-center">
@@ -294,7 +294,7 @@ export function createCharacterInfoSection({
                             </div>
                         </div>
                     </div>
-                    <div class="column is-2-desktop is-6-mobile">
+                    <div class="column is-2-fullhd is-6-tablet is-6-mobile">
                         <div class="card p-4 has-text-centered">
                             <label class="label is-size-4 has-text-weight-semibold">Level</label>
                             <div class="card-body">
@@ -302,7 +302,7 @@ export function createCharacterInfoSection({
                             </div>
                         </div>
                     </div>
-                    <div class="column is-4-desktop is-12-mobile">
+                    <div class="column is-4-fullhd is-12-tablet is-12-mobile">
                         <div class="card p-4 has-text-centered">
                             <label class="label is-size-4 has-text-weight-semibold">Name</label>
                             <div class="card-body">
@@ -310,7 +310,7 @@ export function createCharacterInfoSection({
                             </div>
                         </div>
                     </div>
-                    <div class="column is-4-desktop is-12-mobile">
+                    <div class="column is-4-fullhd is-12-tablet is-12-mobile">
                         <div class="card p-4 has-text-centered">
                             <label class="label is-size-4 has-text-weight-semibold">Background</label>
                             <div class="card-body">
@@ -320,7 +320,7 @@ export function createCharacterInfoSection({
                     </div>
                     
                     
-                    <div class="column is-3-desktop is-12-mobile">
+                    <div class="column is-3-fullhd is-6-tablet is-12-mobile">
                         <div class="card p-4 has-text-centered">
                             <label class="label is-size-4 has-text-weight-semibold">Species</label>
                             <div class="card-body">
@@ -328,7 +328,7 @@ export function createCharacterInfoSection({
                             </div>
                         </div>
                     </div>
-                    <div class="column is-3-desktop is-12-mobile">
+                    <div class="column is-3-fullhd is-6-tablet is-12-mobile">
                         <div class="card p-4 has-text-centered">
                             <label class="label is-size-4 has-text-weight-semibold">Alignment</label>
                             <div class="card-body">
@@ -336,7 +336,7 @@ export function createCharacterInfoSection({
                             </div>
                         </div>
                     </div>
-                    <div class="column is-6-desktop is-12-mobile">
+                    <div class="column is-6-fullhd is-12-tablet is-12-mobile">
                         <div class="card p-4 has-text-centered">
                             <label class="label is-size-4 has-text-weight-semibold">Class</label>
                             <div class="card-body">
@@ -353,7 +353,7 @@ export function createCharacterInfoSection({
                         </div>
                     </div>
                     
-                    <div class="column is-3-desktop is-6-mobile">
+                    <div class="column is-3-fullhd is-6-mobile">
                         <div class="card p-4 has-text-centered">
                             <label class="label is-size-4 has-text-weight-semibold">Age</label>
                             <div class="card-body">
@@ -361,7 +361,7 @@ export function createCharacterInfoSection({
                             </div>
                         </div>
                     </div>
-                    <div class="column is-3-desktop is-6-mobile">
+                    <div class="column is-3-fullhd is-6-mobile">
                         <div class="card p-4 has-text-centered">
                             <label class="label is-size-4 has-text-weight-semibold">Height</label>
                             <div class="card-body">
@@ -369,7 +369,7 @@ export function createCharacterInfoSection({
                             </div>
                         </div>
                     </div>
-                    <div class="column is-3-desktop is-6-mobile">
+                    <div class="column is-3-fullhd is-6-mobile">
                         <div class="card p-4 has-text-centered">
                             <label class="label is-size-4 has-text-weight-semibold">Weight</label>
                             <div class="card-body">
@@ -377,7 +377,7 @@ export function createCharacterInfoSection({
                             </div>
                         </div>
                     </div>
-                    <div class="column is-3-desktop is-6-mobile">
+                    <div class="column is-3-fullhd is-6-mobile">
                         <div class="card p-4 has-text-centered">
                             <label class="label is-size-4 has-text-weight-semibold">Size</label>
                             <div class="card-body">
@@ -389,8 +389,8 @@ export function createCharacterInfoSection({
             </div>
         </div>
         
-        <div class="columns has-text-centered">
-            <div class="column is-6-desktop is-12-mobile">
+        <div class="columns has-text-centered is-multiline">
+            <div class="column is-6-fullhd is-12-tablet is-12-mobile">
                 <div class="card is-flex is-flex-direction-column" style="height: 100%">
                     <label class="label is-size-4 has-text-weight-semibold mb-0 pt-4">Quick-Notes</label>
                     <div class="card-body p-4" style="height: 100%">
@@ -398,7 +398,7 @@ export function createCharacterInfoSection({
                     </div>
                 </div>
             </div>
-            <div class="column is-6-desktop is-12-mobile">
+            <div class="column is-6-fullhd is-12-tablet is-12-mobile">
                 <div class="card is-flex is-flex-direction-column" style="height: 100%">
                     <label class="label is-size-4 has-text-weight-semibold mb-0 pt-4">Active-Effects</label>
                     <div class="card-body p-4" style="height: 100%">
@@ -426,7 +426,7 @@ export function createCharacterStatusSection( {
     death_save_success: number
 }) :string {
     let innerHTML = `
-        <div class="columns is-mobile is-multiline">
+        <div class="columns is-mobile is-multiline is-justify-content-center">
     `;
 
     Object.entries(ALL_STATUS_TYPES).forEach(([key, value]) => {
@@ -452,7 +452,7 @@ export function createCharacterStatusSection( {
         }
 
         innerHTML += `
-            <div class="column is-one-fifth-desktop ${type === "Current-HP" ? " is-12-mobile" : "is-6-mobile"}" id="status">
+            <div class="column is-one-fifth-fullhd is-4-tablet ${type === "Current-HP" ? " is-12-mobile" : "is-6-mobile"}" id="status">
                 <div class="card p-4 is-flex is-flex-direction-column" style="height: 100%">
                     <div class="card-header is-justify-content-center">
                         <span class="title mt-4 pb-4 is-size-4 has-text-centered">${type}</span>
@@ -495,15 +495,15 @@ export function createCharacterStatusSection( {
             
             <div class="columns is-mobile is-vcentered is-variable is-2 m-0 is-mobile is-multiline">
                 
-                <div class="column is-2-desktop is-6-mobile">
-                    <span class="tag is-size-5 has-text-weight-bold is-primary has-text-centered is-flex is-justify-content-center w-100" style="height: 3rem; width: 100%;">Maximum Hit Die</span>
+                <div class="column is-2-fullhd is-6-tablet is-6-mobile">
+                    <span class="tag is-size-5 has-text-weight-bold is-primary has-text-centered is-flex is-justify-content-center w-100" style="height: 3rem; width: 100%; white-space: normal">Maximum Hit Die</span>
                 </div>
                 
-                <div class="column is-1-desktop is-6-mobile">
+                <div class="column is-1-fullhd is-6-tablet is-6-mobile">
                     <input id="maximum-hit-die-input" class="input is-size-5 has-text-weight-bold has-text-centered" style="height: 3rem;" type="text" placeholder="1d6" value="${maximum_hit_die}">
                 </div>
                 
-                <div class="column is-2-desktop is-4-mobile">
+                <div class="column is-2-fullhd is-4-tablet is-4-mobile">
                     <div class="tag is-danger is-flex is-justify-content-center" style="height: 3rem; width: 100%;">
                         <span class="icon is-medium mr-1">
                             <i class="fas fa-xl fa-skull has-text-white"></i>
@@ -521,13 +521,13 @@ export function createCharacterStatusSection( {
                     </div>              
                 </div>
                 
-                <div class="column is-2-desktop is-4-mobile">
+                <div class="column is-2-fullhd is-4-tablet is-4-mobile">
                     <div class="tag has-text-weight-bold is-primary is-flex is-justify-content-center" style="height: 3rem; width: 100%;">
                         <span class="subtitle is-block has-text-weight-bold has-text-centered" style="white-space: normal">Death Saves</span>
                     </div>
                 </div>
                 
-                <div class="column is-2-desktop is-4-mobile">
+                <div class="column is-2-fullhd is-4-tablet is-4-mobile">
                     <div class="tag is-success is-flex is-justify-content-center" style="height: 3rem; width: 100%;">
     `;
 
@@ -545,12 +545,12 @@ export function createCharacterStatusSection( {
                     </div>
                 </div>
                 
-                <div class="column is-1-desktop is-6-mobile">
+                <div class="column is-1-fullhd is-6-tablet is-6-mobile">
                     <input id="current-hit-die-input" class="input is-size-5 has-text-weight-bold has-text-centered" style="height: 3rem;" type="text" placeholder="1d6" value="${current_hit_die}">
                 </div>
                 
-                <div class="column is-2-desktop is-6-mobile">
-                    <span class="tag is-size-5 has-text-weight-bold is-primary has-text-centered is-flex is-justify-content-center" style="height: 3rem; width: 100%;">Current Hit Die</span>
+                <div class="column is-2-fullhd is-6-tablet is-6-mobile">
+                    <span class="tag is-size-5 has-text-weight-bold is-primary has-text-centered is-flex is-justify-content-center" style="height: 3rem; width: 100%; white-space: normal">Current Hit Die</span>
                 </div>
                 
             </div>
@@ -581,31 +581,44 @@ export function createAttributeSection(attributes: Record<AttributeType, IAttrib
         let save_mod = charAttr.save_mod ? charAttr.save_mod : 0;
 
         innerHTML += `
-            <div class="column is-2-desktop is-4-mobile" id="status">
+            <div class="column is-2-fullhd is-4-tablet is-4-mobile" id="status">
                 <div class="card p-4">
                     <div class="card-header is-justify-content-center">
                         <span class="title mt-4 pb-4 is-size-4">${type}</span>
                     </div>
                     <hr class="m-1" style="background: var(--bulma-card-background-color)">
                     <div class="card-content columns is-12-mobile is-multiline m-0 p-0">
-                        <div class="column is-6-desktop is-12-mobile is-align-content-center">
+                        <div class="column is-6-fullhd is-12-mobile is-align-content-center">
                             <span class="column is-12 is-size-5 has-text-weight-semibold is-block has-text-black has-text-centered m-0 p-0">Base</span>
                             <input id="${type}-base-input" class="column is-12 input is-size-5 has-text-weight-bold has-text-centered m-0 p-0" type="text" placeholder="0" value="${base}">
                         </div>
-                        <div class="column is-6-desktop is-12-mobile  is-align-content-center">
+                        <div class="column is-6-fullhd is-12-mobile  is-align-content-center">
                             <span class="column is-12 is-size-5 has-text-weight-semibold is-block has-text-black has-text-centered m-0 p-0">Effect</span>
                             <input id="${type}-effect-input" class="column is-12 input is-size-5 has-text-weight-bold has-text-centered m-0 p-0" type="text" placeholder="0" value="${effect}">
                         </div>
                         <div class="column is-12">
                             <hr class="my-0 py-1" style="background: var(--bulma-card-background-color)">
                         </div>
-                        <div class="column is-6-desktop is-12-mobile  is-align-content-center pt-0"   >
+                        <div class="column is-6-fullhd is-12-mobile  is-align-content-center pt-0"   >
                             <span class="column is-12 is-size-5 has-text-weight-semibold is-block has-text-black has-text-centered m-0 p-0">Total</span>
                             <span class="column is-12 tag is-primary is-size-4 has-text-weight-extrabold has-text-centered is-align-content-center m-0 p-0">${total}</span>
                         </div>
-                        <div class="column is-6-desktop is-12-mobile  is-align-content-center pt-0"   >
+                        <div class="column is-6-fullhd is-12-mobile  is-align-content-center pt-0"   >
                             <span class="column is-12 is-size-5 has-text-weight-semibold is-block has-text-black has-text-centered m-0 p-0"><abbr title="Modifier">Mod.</abbr></span>
                             <span class="column is-12 tag ${mod != 0 ? mod > 0 ? "is-success" : "is-danger" : "is-primary"} is-size-4 has-text-weight-extrabold has-text-centered is-align-content-center m-0 p-0">${mod > 0 ? "+" : ""}${mod}</span>
+                        </div>
+                        <div class="column is-12">
+                            <hr class="my-0 py-1" style="background: var(--bulma-card-background-color)">
+                        </div>
+                        <div class="column is-6-fullhd is-12-mobile  is-align-content-center pt-0"   >
+                            <span class="column is-12 is-size-5 has-text-weight-semibold is-block has-text-black has-text-centered m-0 p-0"><abbr title="Adds your proficiency bonus to saves (resisting spells/traps) with this attribute. Formula: d20 + ${save_mod} (the value on the right)">Save?</abbr></span>
+                            <div id="${type}-checkbox-button" class="column is-12 tag button is-flex is-justify-content-center is-size-4 has-text-weight-extrabold has-text-centered is-align-content-center m-0 p-0" style="${isSave ? "border-color: var(--bulma-link)" : ""}">
+                                <input type="checkbox" id="${type}-checkbox" ${isSave ? "checked" : ""} style="transform: scale(1.5)"/>
+                            </div>
+                        </div>
+                        <div class="column is-6-fullhd is-12-mobile  is-align-content-center pt-0"   >
+                            <span class="column is-12 is-size-5 has-text-weight-semibold is-block has-text-black has-text-centered m-0 p-0"><abbr title="Modifier">Mod.</abbr></span>
+                            <div class="column is-12 tag is-size-4 ${save_mod != 0 ? save_mod > 0 ? "is-success" : "is-danger" : "is-primary"} has-text-weight-extrabold has-text-centered is-align-content-center m-0 p-0" style="width: 100%">${save_mod > 0 ? "+" : ""}${save_mod}</div>
                         </div>
                     </div>
                 </div>
@@ -631,35 +644,14 @@ export function createCurrencyAndStatBanner({
     passivePerception: number;
     spell_casting: ISpellCasting;
 }): string {
+
+    let { concentrating, spell_slots, spell_mod_type, spell_mod, con_save, spell_save, spell_attack } = spell_casting;
+    let choice = ALL_ATTRIBUTE_TYPES.filter(attr => attr !== 'NONE');
+
     let innerHTML = `
-        <div class="box p-5">
-            <div class="columns is-desktop m-0">
-                
-                <div class="column is-4 pr-5">
- 
-                    <div class="columns is-mobile is-vcentered mb-3">
-                        <div class="column py-1">
-                            <p class="is-size-4 has-text-weight-bold">Proficiency Bonus</p>
-                        </div>
-                        <div class="column is-narrow py-1">
-                            <span class="tag is-primary is-size-4 has-text-weight-bold is-flex is-justify-content-center" style="min-width: 6rem; height: 2.5rem;">+${proficiencyBonus}</span>
-                        </div>
-                    </div>
-
-                    <div class="columns is-mobile is-vcentered mb-3">
-                        <div class="column py-1">
-                            <span class="is-size-4 has-text-weight-bold">Passive Perception</span>
-                        </div>
-                        <div class="column is-narrow py-1">
-                            <span class="tag is-primary is-size-4 has-text-weight-bold is-flex is-justify-content-center" style="min-width: 6rem; height: 2.5rem;">
-                                ${passivePerception}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="column is-4 px-5">
+                <div class="columns is-multiline p-0 mb-3">
     `;
+
 
     Object.entries(ALL_CURRENCY_TYPES).forEach(([currencyType, color]) => {
         let type = currencyType as CurrencyType;
@@ -669,139 +661,176 @@ export function createCurrencyAndStatBanner({
             amount = currencies[type].amount;
 
         innerHTML += `
-                    <div class="columns is-mobile is-vcentered mb-3">
-                        <div class="column py-1">
-                            <span class="is-size-4 has-text-weight-bold">${currencyType} Coins</span>
+                <div class="column is-12-mobile is-6-tablet is-3-fullhd">
+                    <div class="box px-4 py-2" style="border: 1px solid ${color}">
+                        <div class="columns is-mobile is-vcentered">
+                            <div class="column is-9-mobile is-9-tablet is-8-fullhd">
+                                <p class="is-size-4 is-capitalized has-text-weight-bold has-text-black">${currencyType} Coins</p>
+                            </div>
+                            <div class="column is-3-mobile is-3-tablet is-4-fullhd">
+                                <input id="currency-input-${currencyType}" class="input is-size-4 has-text-weight-bold has-text-centered has-text-white" style="width: 100%; height: 2.5rem; background: ${color}; border: none;" type="text" placeholder="0" value="${amount}">
+                            </div>
                         </div>
-                        <div class="column is-narrow py-1">
-                            <input id="currency-input-${currencyType}" class="input is-size-4 has-text-weight-bold has-text-centered has-text-white" style="min-width: 6rem; max-width: 6rem; height: 2.5rem; background: ${color}; border: none;" type="text" placeholder="0" value="${amount}">
-                        </div>
-                    </div>               
+                    </div>
+                </div>          
         `;
     });
 
-    let { concentrating, spell_slots, spell_mod_type, spell_mod, con_save, spell_save, spell_attack } = spell_casting;
-    let choice = ALL_ATTRIBUTE_TYPES.filter(attr => attr !== 'NONE');
-
-
     innerHTML += `
-                </div>
-                
-                <div class="column is-4 pl-5">
- 
-                    <div class="columns is-mobile is-vcentered mb-3">
-                        <div class="column py-1">
-                            <span class="is-size-4 has-text-weight-bold">Spell Save</span>
-                        </div>
-                        <div class="column is-narrow py-1">
-                            <span class="tag is-primary is-size-4 has-text-weight-bold is-flex is-justify-content-center" style="min-width: 6rem; height: 2.5rem;">
-                                ${spell_save}
-                            </span>
+                <div class="column is-12-mobile is-6-tablet is-4-fullhd">
+                    <div class="box px-4 py-2" style="border: 1px solid var(--bulma-primary)">
+                        <div class="columns is-mobile is-vcentered">
+                            <div class="column is-9">
+                                <p class="is-size-4 is-capitalized has-text-weight-bold has-text-black">Proficiency Bonus</p>
+                            </div>
+                            <div class="column is-3">
+                                <span class="tag is-primary is-size-4 has-text-weight-bold is-flex is-justify-content-center" style="width: 100%; height: 2.5rem;">+${proficiencyBonus}</span>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="columns is-mobile is-vcentered mb-3">
-                        <div class="column py-1">
-                            <span class="is-size-4 has-text-weight-bold">Spell Modifier</span>
+                </div>
+                
+                <div class="column is-12-mobile is-6-tablet is-4-fullhd">
+                    <div class="box px-4 py-2" style="border: 1px solid var(--bulma-primary)">
+                        <div class="columns is-mobile is-vcentered">
+                            <div class="column is-9">
+                                <p class="is-size-4 is-capitalized has-text-weight-bold has-text-black">Passive Perception</p>
+                            </div>
+                            <div class="column is-3">
+                                <span class="tag is-primary is-size-4 has-text-weight-bold is-flex is-justify-content-center" style="width: 100%; height: 2.5rem;">${passivePerception}</span>
+                            </div>
                         </div>
-                        <div class="column is-narrow py-1">
-                            <div class="field has-addons m-0">
-                                <div class="control">
-                                    <div class="select ${spell_mod != 0 ? spell_mod > 0 ? `is-success` : `is-danger` : `is-primary`}">
-                                        <select id="spell-casting-mod-type-input" class="has-text-weight-bold has-text-centered ${spell_mod != 0 ? spell_mod > 0 ? `is-success` : `is-danger` : `is-primary`}" style="height: 2.5rem; min-width: 4.5rem; border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                            ${choice.map(attributeType => `
-                                                <option value="${attributeType}" ${attributeType === spell_mod_type ? 'selected' : ''}>
-                                                    ${attributeType}
-                                                </option>
-                                            `).join('')}
-                                        </select>
-                                    </div>
+                    </div>
+                </div>
+                
+                <div class="column is-12-mobile is-6-tablet is-4-fullhd">
+                    <div class="box px-4 py-2" style="border: 1px solid var(--bulma-primary)">
+                        <div class="columns is-mobile is-vcentered">
+                            <div class="column is-9">
+                                <p class="is-size-4 is-capitalized has-text-weight-bold has-text-black">Spell Save</p>
+                            </div>
+                            <div class="column is-3">
+                                <span class="tag is-primary is-size-4 has-text-weight-bold is-flex is-justify-content-center" style="width: 100%; height: 2.5rem;">${spell_save}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    `;
+
+    innerHTML += `
+                
+                
+                <div class="column is-12-mobile is-6-tablet is-4-fullhd">
+                    <div class="box px-4 py-2" style="border: 1px solid var(${spell_mod != 0 ? spell_mod > 0 ? `--bulma-success` : `--bulma-danger` : `--bulma-primary`})">
+                        <div class="columns is-mobile is-multiline is-vcentered">
+                            <div class="column is-6-fullhd is-6-tablet is-6-mobile">
+                                <p class="is-size-4 is-capitalized has-text-weight-bold has-text-black">Spell Modifier</p>
+                            </div>
+                            <div class="column is-3-fullhd is-3-tablet is-3-mobile">
+                                <div class="select ${spell_mod != 0 ? spell_mod > 0 ? `is-success` : `is-danger` : `is-primary`}" style="width: 100%">
+                                    <select id="spell-casting-mod-type-input" class="has-text-weight-bold has-text-centered ${spell_mod != 0 ? spell_mod > 0 ? `is-success` : `is-danger` : `is-primary`} p-0" style="width: 100%; height: 2.5rem">
+                                        ${choice.map(attributeType => `
+                                            <option value="${attributeType}" ${attributeType === spell_mod_type ? 'selected' : ''}>
+                                                ${attributeType}
+                                            </option>
+                                        `).join('')}
+                                    </select>
                                 </div>
-                                <div class="control">
-                                    <span class="tag ${spell_mod != 0 ? spell_mod > 0 ? `is-success` : `is-danger` : `is-primary`} is-size-4 has-text-weight-bold is-flex is-justify-content-center" style="height: 2.5rem; min-width: 6rem; border-top-left-radius: 0; border-bottom-left-radius: 0;">
-                                        ${spell_mod > 0 ? "+" : ""}${spell_mod}
+                            </div>
+                            <div class="column is-3-fullhd is-3-tablet is-3-mobile">
+                                <span class="tag ${spell_mod != 0 ? spell_mod > 0 ? `is-success` : `is-danger` : `is-primary`} is-size-4 has-text-weight-bold is-flex is-justify-content-center" style="width: 100%; height: 2.5rem;">
+                                    ${spell_mod > 0 ? "+" : ""}${spell_mod}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="column is-12-mobile is-6-tablet is-4-fullhd">
+                    <div class="box px-4 py-2" style="border: 1px solid var(${spell_mod != 0 ? spell_mod > 0 ? `--bulma-success` : `--bulma-danger` : `--bulma-primary`})">
+                        <div class="columns is-mobile is-vcentered">
+                            <div class="column is-9">
+                                <p class="is-size-4 is-capitalized has-text-weight-bold has-text-black">Spell Attack</p>
+                            </div>
+                            <div class="column is-3">
+                                <span class="tag ${spell_attack != 0 ? spell_attack > 0 ? `is-success` : `is-danger` : `is-primary`} is-size-4 has-text-weight-bold is-flex is-justify-content-center" style="width: 100%; height: 2.5rem;">
+                                ${spell_attack > 0 ? "+" : ""}${spell_attack}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column is-12-mobile is-6-tablet is-4-fullhd">
+                    <div class="box px-4 py-2" style="border: 1px solid var(${spell_mod != 0 ? spell_mod > 0 ? `--bulma-success` : `--bulma-danger` : `--bulma-primary`})">
+                        <div class="columns is-mobile is-vcentered">
+                            <div class="column is-9">
+                                <p class="is-size-4 is-capitalized has-text-weight-bold has-text-black">Con Save</p>
+                            </div>
+                            <div class="column is-3">
+                                <span class="tag ${con_save != 0 ? con_save > 0 ? `is-success` : `is-danger` : `is-primary`} is-size-4 has-text-weight-bold is-flex is-justify-content-center" style="width: 100%; height: 2.5rem;">
+                                ${con_save > 0 ? "+" : ""}${con_save}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column is-12-mobile is-6-tablet is-4-fullhd">
+                    <div class="box px-4 py-2" style="border: 1px solid var(${concentrating ? "--bulma-link" : "--bulma-primary"})">
+                        <div class="columns is-mobile is-vcentered">
+                            <div class="column is-9">
+                                <p class="is-size-4 is-capitalized has-text-weight-bold has-text-black">Concentrating</p>
+                            </div>
+                            <div class="column is-3">
+                                <div id="spell-casting-concentrating-checkbox-button" class="column is-12 button is-size-4 has-text-weight-extrabold m-0 p-0" style="${concentrating ? "border-color: var(--bulma-link)" : ""}">
+                                    <input class="checkbox is-hidden" type="checkbox" id="spell-casting-concentrating-checkbox">
+                                    <span class="icon is-clickable m-0" id="">
+                                        ${concentrating ?
+                                            `<i class="fas fa-eye" style="color:var(--bulma-danger)"></i>`
+                                            :
+                                            `<i class="fa-regular fa-eye"></i>`
+                                        }
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="columns is-mobile is-vcentered mb-3">
-                        <div class="column py-1">
-                            <span class="is-size-4 has-text-weight-bold">Spell Attack</span>
-                        </div>
-                        <div class="column is-narrow py-1">
-                            <span class="tag ${spell_attack != 0 ? spell_attack > 0 ? `is-success` : `is-danger` : `is-primary`} is-size-4 has-text-weight-bold is-flex is-justify-content-center" style="min-width: 6rem; height: 2.5rem;">
-                                ${spell_attack > 0 ? "+" : ""}${spell_attack}
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="columns is-mobile is-vcentered mb-3">
-                        <div class="column py-1">
-                            <span class="is-size-4 has-text-weight-bold">Con Save</span>
-                        </div>
-                        <div class="column is-narrow py-1">
-                            <span class="tag ${con_save != 0 ? con_save > 0 ? `is-success` : `is-danger` : `is-primary`} is-size-4 has-text-weight-bold is-flex is-justify-content-center" style="min-width: 6rem; height: 2.5rem;">
-                                ${con_save > 0 ? "+" : ""}${con_save}
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="columns is-mobile is-vcentered mb-3">
-                        <div class="column py-1">
-                            <span class="is-size-4 has-text-weight-bold">Concentrating</span>
-                        </div>
-                        <input class="checkbox is-hidden" type="checkbox" id="spell-casting-concentrating-checkbox">
-                        <div class="column is-narrow py-1 is-flex is-justify-content-center" style="min-width: 6rem;">
-                            <span class="icon is-clickable is-flex is-justify-content-center" id="spell-casting-concentrating-trigger">
-                                ${concentrating ?
-                                `<i class="fas fa-2xl fa-eye" style="color:var(--bulma-danger)"></i>`
-                                :
-                                `<i class="fa-regular fa-xl fa-eye"></i>`
-                                }
-                            </span>
-                        </div>
-                    </div>
                 </div>
-            </div>
 
-            <div class="columns m-0">
-                <div class="column is-12 p-0">
-                    <hr class="has-background-grey-light my-3"/>
+                <div class="column is-12-mobile is-12-tablet is-12-fullhd">
+                    <span class="column card px-4 py-2 is-12 title is-size-4 is-block m-0 has-text-black has-text-centered">Spell Slots</span>
                 </div>
-            </div>
-
-            <div class="columns is-multiline m-0 px-2">
-                <span class="column title is-size-4 is-12 mb-0">Spell Slots</span>
+                <div class="column is-12-mobile is-12-tablet is-12-fullhd">
+                    <div class="card px-4 py-3 is-flex is-justify-content-center is-flex-wrap-wrap" style="gap: 2rem 1rem;">
+                    ${Object.keys(spell_slots).length === 0 ? `<span class="is-size-5 has-text-weight-bold has-text-dark mr-4">You don't have any spell slots (yet?)`: ""}
     `;
 
     Object.entries(spell_slots).forEach(([spell_slot_type, spell_slot]) => {
         spell_slot_type = spell_slot_type === "NaN" ? "All" : spell_slot_type;
         innerHTML += `
-                <div class="column is-flex is-align-items-center">
-                    <span class="is-size-5 has-text-weight-bold mr-3">${spell_slot_type}</span>
+                        <div class="is-flex is-align-items-center">
+                            <span class="is-size-4 has-text-weight-bold has-text-black mr-4">${spell_slot_type}</span>
         `;
         let activeSlots = spell_slot.used;
         for(let i = 0; i < spell_slot.max; i++) {
-            innerHTML += `
-                    <input class="checkbox mr-2" type="checkbox" id="info-spell-slot-${spell_slot_type}-checkbox-${i}" ${activeSlots > 0 ? "checked" : ""} style="transform: scale(1.3);">
+            innerHTML += `    
+                            <input class="checkbox mr-4" type="checkbox" id="info-spell-slot-${spell_slot_type}-checkbox-${i}" ${activeSlots > 0 ? "checked" : ""} style="transform: scale(2); cursor: pointer;">
             `;
             activeSlots--;
         }
-
         innerHTML += `
-                </div>
+                        </div>
         `;
     });
 
     innerHTML += `
+                    </div>
+                </div>
             </div>
-        </div>
-    `;
+`;
     return innerHTML;
 }
-
 
 export function createWeaponSection({
                                         weapons,
@@ -821,7 +850,7 @@ export function createWeaponSection({
     Object.entries(weapons).forEach(([weaponName, weapon]) => {
         let weapon_property_choice = ALL_WEAPON_PROPERTIES.filter(prop => !(prop in weapon.properties));
         innerHTML += `
-                    <div class="column is-12 is-6-desktop is-4-widescreen">
+                    <div class="column is-12 is-6-fullhd is-4-widescreen">
                         <div class="box mb-0" style="border: 1px solid var(--bulma-primary); height: 100%;">
                             <div class="is-flex is-justify-content-between is-align-items-center mb-3">
                                 <input id="weapons-name-input-${weaponName}" class="input has-text-weight-bold mr-2" value="${weapon.name}" placeholder="Weapon name...">
@@ -871,7 +900,7 @@ export function createWeaponSection({
 
                             <div class="field mb-3">
                                 <label class="label is-size-5 has-text-weight-bold  mb-1">Damage Dice</label>
-                                <textarea id="weapons-damage-dice-input-${weaponName}" class="textarea" rows="3">${weapon.damage_dice}</textarea>
+                                <textarea id="weapons-damage-dice-input-${weaponName}" class="textarea" rows="${weapon.damage_dice.split(/\r\n|\r|\n/).length + 1}">${weapon.damage_dice}</textarea>
                             </div>
 
                             <div class="field">
@@ -901,7 +930,7 @@ export function createWeaponSection({
 
     let weapon_property_choice_new = ALL_WEAPON_PROPERTIES.filter(prop => !tempProperties.includes(prop));
     innerHTML += `
-                    <div class="column is-12 is-6-desktop is-4-widescreen">
+                    <div class="column is-12 is-6-fullhd is-4-widescreen">
                         <div class="box mb-0" style="background: var(--bulma-card-background-color); border: 2px dashed var(--bulma-success); height: 100%;">
                             <h4 class="title is-6 mb-3">Add New Weapon</h4>
                             <input id="weapons-name-input-new" class="input mb-3" placeholder="Weapon name (e.g. Dagger)...">
@@ -1012,9 +1041,19 @@ export function createSpellSection(spells: Record<string, ISpell>): string {
 
         groupedSpells[level].forEach(([spellName, spell]) => {
             innerHTML += `
-                    <div class="column is-12 is-6-desktop is-4-widescreen">
+                    <div class="column is-12 is-6-fullhd is-4-widescreen">
                         <div class="box mb-0" style="border: 1px solid var(--bulma-primary); height: 100%;">
                             <div class="is-flex is-justify-content-between is-align-items-center mb-3">
+                                <div id="spells-concentrating-button-${spellName}" class="${spell.concentration ? "" : "is-hidden"} button is-size-4 has-text-weight-extrabold m-0 p-0" style="${spell.concentrating ? "border-color: var(--bulma-link)" : ""}">
+                                    <input class="checkbox is-hidden" type="checkbox" id="spells-concentrating-checkbox-${spellName}">
+                                    <span class="icon m-0" id="">
+                                        ${spell.concentrating ?
+                                            `<i class="fas fa-eye" style="color:var(--bulma-danger)"></i>`
+                                            :
+                                            `<i class="fa-regular fa-eye"></i>`
+                                        }
+                                    </span>
+                                </div>
                                 <input id="spells-name-input-${spellName}" class="input has-text-weight-bold mr-2" value="${spell.name}" placeholder="Spell name...">
                                 <button id="spells-remove-${spellName}" class="button is-danger" type="button">
                                     <i class="fa-solid fa-xmark"></i>
@@ -1065,7 +1104,7 @@ export function createSpellSection(spells: Record<string, ISpell>): string {
 
                             <div class="field">
                                 <label class="label is-size-5 has-text-weight-bold mb-1">Notes</label>
-                                <textarea spellcheck="false" id="spells-notes-input-${spellName}" class="textarea" rows="6" placeholder="Spell details...">${spell.notes}</textarea>
+                                <textarea spellcheck="false" id="spells-notes-input-${spellName}" class="textarea" rows="${spell.notes.split(/\r\n|\r|\n/).length + 3}" placeholder="Spell details...">${spell.notes}</textarea>
                             </div>
                         </div>
                     </div>
@@ -1083,7 +1122,7 @@ export function createSpellSection(spells: Record<string, ISpell>): string {
                 </div>
                 <hr class="mt-1 mb-4" style="background-color: var(--bulma-success); height: 2px; border: none;">
                 <div class="columns is-multiline">
-                    <div class="column is-12 is-6-desktop is-4-widescreen">
+                    <div class="column is-12 is-6-fullhd is-4-widescreen">
                         <div class="box mb-0" style="background: var(--bulma-card-background-color); border: 2px dashed var(--bulma-success); height: 100%;">
                             <h4 class="title is-6 mb-3">Add New Spell</h4>
                             <input id="spells-name-input-new" class="input mb-3" placeholder="Spell name (e.g. Create Bonfire)...">
@@ -1157,7 +1196,7 @@ export function createEntitySection(entities: Record<string, IEntity>): string {
 
     Object.entries(entities).forEach(([entityName, entity]) => {
         innerHTML += `
-                    <div class="column is-12 is-6-desktop is-4-widescreen">
+                    <div class="column is-12 is-6-fullhd is-4-widescreen">
                         <div class="box mb-0" style="border: 1px solid var(--bulma-primary); height: 100%;">
                             <div class="is-flex is-justify-content-between is-align-items-center mb-3">
                                 <input id="entities-name-input-${entityName}" class="input has-text-weight-bold mr-2" value="${entity.name}" placeholder="Wheelbarrow">
@@ -1195,12 +1234,12 @@ export function createEntitySection(entities: Record<string, IEntity>): string {
 
                             <div class="field mb-3">
                                 <label class="label is-size-5 has-text-weight-bold mb-1">Notes</label>
-                                <textarea spellcheck="false" id="entities-notes-input-${entityName}" class="textarea" rows="3" placeholder="Behavior, active effects, or companion traits...">${entity.notes}</textarea>
+                                <textarea spellcheck="false" id="entities-notes-input-${entityName}" class="textarea" rows="${entity.notes.split(/\r\n|\r|\n/).length + 3}" placeholder="Behavior, active effects, or companion traits...">${entity.notes}</textarea>
                             </div>
 
                             <div class="field">
                                 <label class="label is-size-5 has-text-weight-bold mb-1">Inventory</label>
-                                <textarea spellcheck="false" id="entities-inventory-input-${entityName}" class="textarea" rows="3" placeholder="Barding, saddlebags, cargo, or equipped gear...">${entity.inventory}</textarea>
+                                <textarea spellcheck="false" id="entities-inventory-input-${entityName}" class="textarea" rows="${entity.inventory.split(/\r\n|\r|\n/).length + 3}" placeholder="Barding, saddlebags, cargo, or equipped gear...">${entity.inventory}</textarea>
                             </div>
                         </div>
                     </div>
@@ -1208,7 +1247,7 @@ export function createEntitySection(entities: Record<string, IEntity>): string {
     })
 
     innerHTML += `
-                    <div class="column is-12 is-6-desktop is-4-widescreen">
+                    <div class="column is-12 is-6-fullhd is-4-widescreen">
                         <div class="box mb-0" style="background: var(--bulma-card-background-color); border: 2px dashed var(--bulma-success); height: 100%;">
                             <h4 class="title is-6 mb-3">Add New Entity</h4>
                             <input id="entities-name-input-new" class="input mb-3" placeholder="Entity name (e.g. Wheelbarrow)...">
@@ -1264,62 +1303,59 @@ export function createEntitySection(entities: Record<string, IEntity>): string {
 }
 
 export function createProficientSkillsSection(proficiencies: Record<string, IProficiency>): string {
-    let innerHTML = `
-    `;
+    let innerHTML = `<div class="columns is-multiline m-0">`;
 
     for (let i = 0; i < ALL_PROFICIENCIES.length; i++) {
-        innerHTML +=`
-                <div class="column is-3-desktop columns is-multiline mb-1">
-                    <div class="column is-12 box">
-                        <div class="column is-12">
-                            <div class="tag is-link is-flex is-align-items-center p-4">
-                                <span class="icon">
-                                    <i class="fas fa-lg ${ALL_PROFICIENCIES_ICONS[i]}"></i>
-                                </span>
-                                <span class="has-text-weight-bold is-size-5">${ALL_PROFICIENCIES[i]}</span>
-                            </div>
-                        </div>
-                    `
+        innerHTML += `
+            <div class="column is-3-fullhd is-6-tablet mb-4">
+                <div class="box p-0 pb-2" style="height: 100%">
+                    <div class="tag is-link is-flex is-align-items-center p-4" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0; width: 100%;">
+                        <span class="icon">
+                            <i class="fas fa-lg ${ALL_PROFICIENCIES_ICONS[i]}"></i>
+                        </span>
+                        <span class="has-text-weight-bold is-size-5">${ALL_PROFICIENCIES[i]}</span>
+                    </div>
+                    <div class="px-2 py-1">
+        `;
 
         let sortedProficiencies = Object.entries(proficiencies).sort();
 
         sortedProficiencies.forEach(([proficiencyName, proficiency]) => {
-            if(proficiency.proficient <= 0) return;
-            if(proficiency.type !== ALL_PROFICIENCIES[i]) return;
+            if (proficiency.proficient <= 0) return;
+            if (proficiency.type !== ALL_PROFICIENCIES[i]) return;
 
-            let color =
-                proficiency.mod != 0 ?
-                    proficiency.proficient == 1 ?
-                        proficiency.mod > 0 ? "is-success" : "is-warning"
-                        : proficiency.mod > 0 ? "is-info"
-                    : "is-danger"
-                : "is-primary"
-            ;
+            let color = proficiency.mod != 0 ?
+                (proficiency.proficient == 1 ?
+                    (proficiency.mod > 0 ? "is-success" : "is-warning")
+                    : (proficiency.mod > 0 ? "is-info" : "is-danger"))
+                : "is-primary";
 
             innerHTML += `
-                        <div class="columns column is-12 p-0 m-0">
-                            <div class="column is-12 tags has-addons is-flex is-align-items-stretch py-1">
-                                <span class="tag is-capitalized ${color} column is-size-5 is-7 has-text-weight-semibold is-flex is-justify-content-start py-1" style="white-space: normal; height: auto !important;">${proficiencyName}</span>
-                                <span class="tag ${color} column is-size-5 is-3 has-text-weight-semibold is-flex is-justify-content-start py-1" style="height: auto !important;">${proficiency.mod_type != "NONE" ? proficiency.mod_type : ""}</span>
-                                <span class="tag ${color} column is-size-5 is-2 has-text-weight-semibold is-flex is-justify-content-end py-1" style="height: auto !important;">${proficiency.mod_type != "NONE" ? proficiency.mod > 0 ? "+" + proficiency.mod : proficiency.mod  : ""}</span>
-                            </div>
-                        </div>
-            `
-        })
+                <div class="tag ${color} is-flex is-align-items-center py-1 my-1" style="width: 100%; height: auto;">
+                    <span class="is-size-5 has-text-weight-semibold is-capitalized mr-auto" style="white-space: normal; text-align: left;">
+                        ${proficiencyName}
+                    </span>
+                    <span class="is-size-5 has-text-weight-semibold px-2">
+                        ${proficiency.mod_type !== "NONE" ? proficiency.mod_type : ""}
+                    </span>
+                    <span class="is-size-5 has-text-weight-semibold">
+                        ${proficiency.mod_type !== "NONE" ? (proficiency.mod > 0 ? "+" + proficiency.mod : proficiency.mod) : ""}
+                    </span>
+                </div>
+            `;
+        });
 
-        innerHTML +=`
+        innerHTML += `
                     </div>
                 </div>
             </div>
-    `;
+        `;
     }
 
-    innerHTML +=`
-        </div>
-    `;
-
+    innerHTML += `</div>`;
     return innerHTML;
 }
+
 
 export function createProficiencySection({
                                              proficiency,
@@ -1372,31 +1408,29 @@ export function createProficiencySection({
                 }
 
                 innerHTML += `
-                <div class="column is-12-mobile is-6-tablet is-4-desktop">
+                <div class="column is-12-mobile is-6-tablet is-4-fullhd">
                     <div class="card px-4 py-2">
                         <div class="columns is-mobile is-vcentered">
 
-                            <div class="column is-narrow">
+                            <div class="column is-2">
                                 <div class="is-flex" style="gap: 1rem;">
                                     <input type="checkbox" id="${std_proficiency}-checkbox-1" ${proficiency_level >= 1 ? "checked" : ""} class="checkbox" style="transform: scale(1.4)"/>
                                     <input type="checkbox" id="${std_proficiency}-checkbox-2" ${proficiency_level >= 2 ? "checked" : ""} class="checkbox" style="transform: scale(1.4)"/>
                                 </div>
                             </div>
                             
-                            <div class="column">
+                            <div class="column is-5">
                                 <p class="is-size-5 is-capitalized has-text-weight-semibold has-text-dark">${std_proficiency}</p>
                             </div>
                             
                             ${isOnlyNone ? "" : `
-                            <div class="column is-narrow">
-                                <div class="tags has-addons are-medium mb-0">
-                                    <span class="tag is-info is-size-6 has-text-weight-medium px-3">
-                                        ${attribute}
-                                    </span>
-                                    <span class="tag is-size-6 has-text-weight-bold px-3 ${mod > 0 ? "is-success" : mod < 0 ? "is-danger" : "is-primary"}">
-                                        ${mod > 0 ? `+${mod}` : mod}
-                                    </span>
-                                </div>
+                            <div class="column is-5 is-flex is-justify-content-end" style="gap: 0.5rem">
+                                <span class="tag is-info is-size-6 has-text-weight-medium px-3" style="width: 4rem">
+                                    ${attribute}
+                                </span>
+                                <span class="tag is-size-6 has-text-weight-bold px-3 ${mod > 0 ? "is-success" : mod < 0 ? "is-danger" : "is-primary"}" style="width: 4rem">
+                                    ${mod > 0 ? `+${mod}` : mod}
+                                </span>
                             </div>
                             `}
 
